@@ -19,6 +19,15 @@ This assignment is due on October 10th.
 
     <img src="pch.png", style="margin:0px auto;display:block" width="500">
 
+Here is the code for creating the PCH Plot
+```{r}
+x <- 1:25
+y <- rep(1,25)
+e <- c(1,"",3,"",5,"",7,"",9,"",11,"",13,"",15,"",17,"",19,"",21,"",23,"",25)
+plot(x, y, pch=x, xlab="PCH value", main="PCH Symbols", ylab="", grid(nx=26, ny=1, col="grey", lty="solid"), axes=F)
+axis(side=1, at=seq(1,25,1), label=x)
+```
+
 
 2.  Using the `germfree.nmds.axes` data file available in this respositry, generate a plot that looks like this. The points are connected in the order they were sampled with the circle representing the beginning ad the square the end of the time course:
 
