@@ -23,7 +23,7 @@ Here is the code for creating the PCH Plot and the plot output.
 ```{r}
 x <- 1:25
 y <- rep(1,25)
-plot(x, y, pch=x, xlab="PCH value", main="PCH Symbols", ylab="", grid(nx=26, ny=1, col="grey", lty="solid"), axes=F)
+plot(x, y, pch=x, xlab="PCH value", main="PCH Symbols", ylab="", grid(nx=26, ny=1, col="grey", lty="solid"), axes=F, cex=1.5)
 axis(side=1, at=seq(1,25,1), label=x)
 ```
 
