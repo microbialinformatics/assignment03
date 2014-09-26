@@ -19,10 +19,14 @@ This assignment is due on October 10th.
 
     <img src="pch.png", style="margin:0px auto;display:block" width="500">
 ```{r}
+xaxis<-seq(1:25)
+yaxis<-rep(c(1),25)
 #creating plot with PCH types by their number
-plot(xaxis,yaxis, pch=c(1:25), ylab=" ", main="PCH Symbols", xlab="PCH Value ", yaxt="n", xaxt="n")
+plot(xaxis,yaxis, pch=c(1:25),col="black", main="PCH Symbols", ylab=" ", xlab="PCH Value", axes=F)
 #formatting axis
-axis(1, at= seq(1,25, by= 1), las=1, tck=1)
+axis(1, at= seq(1,25, by= 1), las=1, tck=1,col="grey", ylab="n")
+
+
 ```
 
 
