@@ -7,7 +7,7 @@ output:
     keep_md: yes
 ---
 
-Complete the exercises listed below and submit as a pull request to the [Assignment 3 repository](http://www.github.com/microbialinformatics/assignment03).  Format this document approapriately using R markdown and knitr. For those cases where there are multiple outputs, make it clear in how you format the text and interweave the solution, what the solution is.
+Complete the exercises listed below and submit as a pull request to the [Assignment 3 repository](http://www.github.com/microbialinformatics/assignment03).  Format this document appropriately using R markdown and knitr. For those cases where there are multiple outputs, make it clear in how you format the text and interweave the solution, what the solution is.
 
 Your pull request should only include your *.Rmd and *.md files. You may work with a partner, but you must submit your own assignment and give credit to anyone that worked with you on the assignment and to any websites that you used along your way. You should not use any packages beyond the base R system and knitr.
 
@@ -15,10 +15,23 @@ This assignment is due on October 10th.
 
 ------
 
-1.  Generate a plot that contains the different pch symbols. Investigate the knitr code chunk options to see whether you can have a pdf version of the image produced so you can print it off for yoru reference. It should look like this:
+1.  Generate a plot that contains the different pch symbols. Investigate the knitr code chunk options to see whether you can have a pdf version of the image produced so you can print it off for your reference. It should look like this:
 
     <img src="pch.png", style="margin:0px auto;display:block" width="500">
+```{r}
+pchvalues <- 1:25
+pdf('rplot.pdf')
+plot1 <- plot(x=1, y=1, pch= pchvalues[1], xlim = c(1,25), xlab = "PCH Values", main = "PCH Symbols", yaxt='n', ylab="")
+i = 1
+repeat
+{
+i = i +1 
+points(x=i, y=1, pch= pchvalues[i])
+if (i > 25)
+break;
+}
 
+```
 
 2.  Using the `germfree.nmds.axes` data file available in this respositry, generate a plot that looks like this. The points are connected in the order they were sampled with the circle representing the beginning ad the square the end of the time course:
 
