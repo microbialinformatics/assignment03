@@ -20,8 +20,9 @@ This assignment is due on October 10th.
     <img src="pch.png", style="margin:0px auto;display:block" width="500">
 ```{r}
 #creating plot with PCH types by their number
-plot(xaxis,yaxis, pch=c(1:25), ylab=" ", main="PCH Types", xlab=" ", tck=1, yaxt="n")
-
+plot(xaxis,yaxis, pch=c(1:25), ylab=" ", main="PCH Symbols", xlab="PCH Value ", yaxt="n", xaxt="n")
+#formatting axis
+axis(1, at= seq(1,25, by= 1), las=1, tck=1)
 ```
 
 
