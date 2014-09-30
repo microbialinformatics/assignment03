@@ -55,7 +55,10 @@ germfree<- read.table(file="germfree.nmds.axes", header=T)
 #check that germfree has all values and variables
 germfree
 #creating plot
-plot(germfree$axis2~germfree$axis1, type="l", xlim = c(-.2,.6), ylim =c(min(germfree[ ,]), max(germfree[ ,-.6])), ylab= "NMDS Axis 2", xlab="NMDS Axis 1", lines(germfree$mouse, col=c("black", "blue","red","green","brown")))
+plot(germfree$axis2~germfree$axis1, type="l", xlim = c(-.2,.6), ylim =c(-.4,0.4), ylab= "NMDS Axis 2", xlab="NMDS Axis 1" , par(mar=c(7,5,1.5,1)), asp=1.9)  
+lines(germfree$Day)
+
+lines(germfree$day,germfree$mouse, col=c("red", "blue", "red", "green", "brown"))
 ```
 
 3.  On pg. 57 there is a formula for the probability of making x observations after n trials when there is a probability p of the observation.  For this exercise, assume x=2, n=10, and p=0.5.  Using R, calculate the probability of x using this formula and the appropriate built in function. Compare it to the results we obtained in class when discussing the sex ratios of mice.
