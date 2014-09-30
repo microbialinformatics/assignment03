@@ -1,5 +1,5 @@
 # Assignment 3
-Patrick D. Schloss  
+Marian L Schmidt  
 September 26, 2014  
 
 Complete the exercises listed below and submit as a pull request to the [Assignment 3 repository](http://www.github.com/microbialinformatics/assignment03).  Format this document approapriately using R markdown and knitr. For those cases where there are multiple outputs, make it clear in how you format the text and interweave the solution, what the solution is.
@@ -13,6 +13,25 @@ This assignment is due on October 10th.
 1.  Generate a plot that contains the different pch symbols. Investigate the knitr code chunk options to see whether you can have a pdf version of the image produced so you can print it off for yoru reference. It should look like this:
 
     <img src="pch.png", style="margin:0px auto;display:block" width="500">
+
+
+
+```r
+symbol <- c(1:25)
+y <- rep(1, 25)
+plot(symbol, y, type = "n", xlab = "PCH value", xlim=c(0,25), frame = F, yaxt = "n", xaxt="n", ylab="", main="PCH Symbols")
+axis(side=1, at=1:25)# abs=c(seq(1, 25, 2))side = 1, 1:25
+     #lab=c("1", "", "3", "", "5", "", "7", "", "9", "", "11", "", "13", "", "15", "", "17", "", "19", "", "21", "", "23", "", "25")) 
+abline(v=seq(1:25), b=0, col = "gray")
+points(symbol,y, pch = c(1:25), cex=2)
+```
+
+![plot of chunk unnamed-chunk-1](./README_files/figure-html/unnamed-chunk-1.png) 
+
+For frame = F:  http://stackoverflow.com/questions/4946491/removing-the-frame-from-the-boxplot-function-in-r
+Axes: http://www.statmethods.net/advgraphs/axes.html
+
+
 
 
 2.  Using the `germfree.nmds.axes` data file available in this respositry, generate a plot that looks like this. The points are connected in the order they were sampled with the circle representing the beginning ad the square the end of the time course:
