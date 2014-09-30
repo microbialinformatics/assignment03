@@ -14,6 +14,28 @@ This assignment is due on October 10th.
 
     <img src="pch.png", style="margin:0px auto;display:block" width="500">
 
+```r
+#creating vectors for PCH value positioning.
+xaxis<-seq(1:25)
+yaxis<-rep(c(1),25)
+#creating plot with PCH types by their number
+symbol.sheet<-plot(xaxis,yaxis, pch=c(1:25),col="black", lwd=.7, main="PCH Symbols", ylab=" ", xlab="PCH Value", axes=F)
+#formatting axis
+axis(1, at= seq(1,25, by= 1), las=1, tck=1,col="grey", ylab="n")
+#adding darker x axis
+axis(side=1, lwd=2)
+```
+
+![plot of chunk unnamed-chunk-1](./README_files/figure-html/unnamed-chunk-1.png) 
+
+```r
+symbol.sheet
+```
+
+```
+## NULL
+```
+
 
 2.  Using the `germfree.nmds.axes` data file available in this respositry, generate a plot that looks like this. The points are connected in the order they were sampled with the circle representing the beginning ad the square the end of the time course:
 

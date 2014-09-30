@@ -27,10 +27,14 @@ yaxis<-rep(c(1),25)
 #creating plot with PCH types by their number
 symbol.sheet<-plot(xaxis,yaxis, pch=c(1:25),col="black", lwd=.7, main="PCH Symbols", ylab=" ", xlab="PCH Value", axes=F)
 #formatting axis
-axis(1, at= seq(1,25, by= 1), las=1, tck=1,col="grey", ylab="n")
+axis(1, at= seq(1,25, by= 1), las=1, tck=.7,col="grey", ylab="n", ps=12)
 #adding darker x axis
-axis(side=1, lwd=2)
-symbol.sheet
+axis(side=1,lwd=1)
+#THERE IS A BUG IN MY X AXIS NEED TO FIX!!
+
+
+
+
 
 
 
@@ -45,6 +49,14 @@ symbol.sheet
 
     <img src="beta.png", style="margin:0px auto;display:block" width="700">
 
+```{r}
+#making germfree file a variable.
+germfree<- read.table(file="germfree.nmds.axes", header=T)
+#check that germfree has all values and variables
+germfree
+#creating plot
+plot(germfree$axis2~germfree$axis1, type="l", xlim = c(-.2,.6), ylim =c(min(germfree[ ,]), max(germfree[ ,-.6])), ylab= "NMDS Axis 2", xlab="NMDS Axis 1", lines(germfree$mouse, col=c("black", "blue","red","green","brown")))
+```
 
 3.  On pg. 57 there is a formula for the probability of making x observations after n trials when there is a probability p of the observation.  For this exercise, assume x=2, n=10, and p=0.5.  Using R, calculate the probability of x using this formula and the appropriate built in function. Compare it to the results we obtained in class when discussing the sex ratios of mice.
 
