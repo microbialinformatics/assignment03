@@ -17,19 +17,18 @@ This assignment is due on October 10th.
 ```r
 #creating vectors for PCH value positioning.
 xaxis<-seq(1:25)
-yaxis<-rep(c(1),25)
+yaxis<-rep(c(.5),25)
 #creating plot with PCH types by their number
-symbol.sheet<-plot(xaxis,yaxis, pch=c(1:25),col="black", lwd=.7, main="PCH Symbols", ylab=" ", xlab="PCH Value", axes=F)
+symbol.sheet<-plot(xaxis,yaxis, pch=c(1:25),col="black", lwd=1, main="PCH Symbols", ylab=" ", xlab="PCH Value", axes=F, pin=c(1,4))
 #formatting axis
-axis(1, at= seq(1,25, by= 1), las=1, tck=.7,col="grey", ylab="n", ps=12)
-#adding darker x axis
-axis(side=1,lwd=1)
+axis(1, at= seq(1,25, by= 1), las=1, tck=.7,col="grey", ylab="n", ps=12,)
+axis(1, at=seq(1,25, by=1), col="black")
 ```
 
 ![plot of chunk unnamed-chunk-1](./README_files/figure-html/unnamed-chunk-1.png) 
 
 ```r
-#THERE IS A BUG IN MY X AXIS NEED TO FIX!!
+#adding darker x axis
 ```
 
 
@@ -177,10 +176,34 @@ factorial(10)/factorial(2)
 ```
 ## [1] 0.02222
 ```
-
-
 4.  On pg. 59 there is a formula for the probability of observing a value, x, when there is a mean, mu, and standard deviation, sigma.  For this exercise, assume x=10.3, mu=5, and sigma=3.  Using R, calculate the probability of x using this formula and the appropriate built in function
 
+
+
+```r
+#fraction part
+rt<- sqrt(2*pi)
+three.rt<-3*rt
+check.fx<-((1/three.rt)*exp(-((10.3-5)^2/(2*3^2))))
+check.fx
+```
+
+```
+## [1] 0.02793
+```
+
+```r
+#second part of the question using the built in function for the normal distribution.
+builtin<-dnorm(x = 10.3, mean = 5, sd = 3)
+builtin
+```
+
+```
+## [1] 0.02793
+```
+Answer: the probability is 0.0279
+
+Using the built in function dnorm, the probability is 0.0279 
 
 5.  One of my previous students, Joe Zackular, obtained stool samples from 89 people that underwent colonoscopies.  30 of these individuals had no signs of disease, 30 had non-cancerous ademonas, and 29 had cancer.  It was previously suggested that the bacterium *Fusobacterium nucleatum* was associated with cancer.  In these three pools of subjects, Joe determined that 4, 1, and 14 individuals harbored *F. nucleatum*, respectively. Create a matrix table to represent the number of individuals with and without _F. nucleatum_ as a function of disease state.  Then do the following:
 
@@ -190,25 +213,203 @@ factorial(10)/factorial(2)
 #creating matrix
 cancer<- matrix(c(26,29,15,4,1,14), nrow=2, ncol=3, byrow=T)
 #adding row and column names
-colnames(cancer)<-c("no disease", "cancerous ademonas", "cancer")
+colnames(cancer)<-c("no disease", "cancerous adenomas", "cancer")
 rownames(cancer)<-c("no F. nucleatum", "F. nucleatum")
 cancer
 ```
 
 ```
-##                 no disease cancerous ademonas cancer
+##                 no disease cancerous adenomas cancer
 ## no F. nucleatum         26                 29     15
 ## F. nucleatum             4                  1     14
 ```
-The matrix: 26, 4, 29, 1, 15, 14
+Answer: 26, 4, 29, 1, 15, 14
 
     * Run the three tests of proportions you learned about in class using built in R  functions to the 2x2 study design where normals and adenomas are pooled and compared to carcinomas.
-    * Without using the built in chi-squared test function, replicate the 2x2 study design in the last problem for the Chi-Squared Test...
-      * Calculate the expected count matrix and calculate the Chi-Squared test statistics. Figure out how to get your test statistic to match Rs default statistic.
-      *	Generate a Chi-Squared distributions with approporiate degrees of freedom by the method that was discussed in class (hint: you may consider using the `replicate` command)
+
+
+```r
+#creating pooled table for normals + adenomas vs carcinomas
+pooled<- matrix(c(55,5,15,14), nrow=2, ncol=2)
+#adding row and column names
+#want to compare colonization status  by cancer status
+colnames(pooled)<-c("no cancer", "cancer")
+rownames(pooled)<-c("no F.nucleatum", "F.nucleatum")
+pooled
+```
+
+```
+##                no cancer cancer
+## no F.nucleatum        55     15
+## F.nucleatum            5     14
+```
+
+```r
+#generating test output
+proportion.test<-prop.test(pooled)
+proportion.test
+```
+
+```
+## 
+## 	2-sample test for equality of proportions with continuity
+## 	correction
+## 
+## data:  pooled
+## X-squared = 16.27, df = 1, p-value = 5.482e-05
+## alternative hypothesis: two.sided
+## 95 percent confidence interval:
+##  0.2690 0.7761
+## sample estimates:
+## prop 1 prop 2 
+## 0.7857 0.2632
+```
+
+```r
+fisher.test<-fisher.test(pooled)
+fisher.test
+```
+
+```
+## 
+## 	Fisher's Exact Test for Count Data
+## 
+## data:  pooled
+## p-value = 4.094e-05
+## alternative hypothesis: true odds ratio is not equal to 1
+## 95 percent confidence interval:
+##   2.832 41.155
+## sample estimates:
+## odds ratio 
+##      9.926
+```
+
+```r
+chisquare.test<-chisq.test(pooled)
+chisquare.test
+```
+
+```
+## 
+## 	Pearson's Chi-squared test with Yates' continuity correction
+## 
+## data:  pooled
+## X-squared = 16.27, df = 1, p-value = 5.482e-05
+```
+Answer: With all three tests there appears to be a significant difference in the proportion of patients who with *F. nucleatum* by cancer status.  
+
+     * Without using the built in chi-squared test function, replicate the 2x2 study design in the last problem for the Chi-Squared Test...
+
+
+```r
+#generating the observed r by c table:
+pooled
+```
+
+```
+##                no cancer cancer
+## no F.nucleatum        55     15
+## F.nucleatum            5     14
+```
+
+```r
+#generating the expected table
+colonization.sums<- margin.table(pooled,1)
+colonization.sums
+```
+
+```
+## no F.nucleatum    F.nucleatum 
+##             70             19
+```
+
+```r
+fract.fnuc<-colonization.sums["F.nucleatum"]/sum(colonization.sums)
+fract.nofnuc<- 1-fract.fnuc
+fract.bac<-c(noFnuc= fract.nofnuc, Fnuc = fract.fnuc)
+fract.bac
+```
+
+```
+## noFnuc.F.nucleatum   Fnuc.F.nucleatum 
+##             0.7865             0.2135
+```
+
+```r
+cancer.sums<-margin.table(pooled,2)
+cancer.sums
+```
+
+```
+## no cancer    cancer 
+##        60        29
+```
+
+```r
+fract.nocancer<-cancer.sums["no cancer"]/sum(cancer.sums)
+fract.cancer<-1-fract.nocancer
+fract.disease<-c(healthy= fract.nocancer, cancer= fract.cancer)
+fract.disease
+```
+
+```
+## healthy.no cancer  cancer.no cancer 
+##            0.6742            0.3258
+```
+
+```r
+expected<-fract.bac %*% t(fract.disease)
+expected<-expected*sum(pooled)
+expected
+```
+
+```
+##      healthy.no cancer cancer.no cancer
+## [1,]             47.19           22.809
+## [2,]             12.81            6.191
+```
+
+```r
+#chisquare test to match r
+regchisq<- sum((expected-pooled)^2/expected)
+regchisq
+```
+
+```
+## [1] 18.58
+```
+
+```r
+correct<-(abs(expected-pooled)-.5)
+mychi.sq<- (correct/expected)
+correctedchisq<-sum(mychi.sq)
+correctedchisq
+```
+
+```
+## [1] 2.227
+```
+     * Calculate the expected count matrix and calculate the Chi-Squared test statistics. Figure out how to get your test statistic to match Rs default statistic.
+      
+Answer: without the continuity correction, my chi suqare test statistic was 18.5763 ,  After deleting the correction for continuity, my chi square value is 2.2265 , this is identical to r's default parameter chisquare test statistic.
+ 
+      *	Generate a Chi-Squared distribution with approporiate degrees of freedom by the method that was discussed in class (hint: you may consider using the `replicate` command)
+      
+
+```r
+df<-(nrow(pooled)-1)*(ncol(pooled)-1)
+plot(seq(0, 20, 0.05), dchisq(seq(0, 20, 0.05), df = df), type = "l", xlab = "ChiSquared Statistic", ylab = "Probability with 1 degree of freedom")
+#add continuity correction
+arrows(x0= correctedchisq, x1=correctedchisq, y0=0.4, y1=0.05, lwd=2, col="blue")
+#without continuity correction
+arrows(x0= regchisq, x1=regchisq, y0=0.4, y1=0.05, lwd=2, col="red")
+```
+
+![plot of chunk unnamed-chunk-8](./README_files/figure-html/unnamed-chunk-8.png) 
       * Compare your Chi-Squared distributions to what you might get from the appropriate built in R functions
       * Based on your distribution calculate p-values
       * How does your p-value compare to what you saw using the built in functions? Explain your observations.
+
 
 
 6\.  Get a bag of Skittles or M&Ms.  Are the candies evenly distributed amongst the different colors?  Justify your conclusion.
