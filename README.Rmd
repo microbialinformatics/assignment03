@@ -69,18 +69,28 @@ factorial(10)/factorial(2)
 
 4.  On pg. 59 there is a formula for the probability of observing a value, x, when there is a mean, mu, and standard deviation, sigma.  For this exercise, assume x=10.3, mu=5, and sigma=3.  Using R, calculate the probability of x using this formula and the appropriate built in function
 
-Answer: using the formula the answer is `r fx` 
+Answer: using the formula the answer is `r fx`. According to the Z score table, the probability is between .02 and .03.
+
+Using the built in function dnorm, the probability is `r builtin` 
+
 
 ```{r}
 #fraction part
 fract<-1/(sqrt(2*pi*3))
 #second part
-top<-((10-5)^2)
-denom<- 2*3^2
-second<- -(top/denom)
-expsecond<- exp(second)
-fx<- fract*expsecond
+exfract<-(((10.3-5)^2)/(2*3^2))
+fx<- fract*exp(-exfract)
 fx
+#double checking math for order of operations errors
+check.fx<-1/sqrt((2*pi*3))*exp(-(10.3-5)^2/(2*3^2))
+check.fx
+#they agree
+
+#second part of the question using the built in function for the normal distribution.
+builtin<-dnorm(10.3, 5, 3)
+builtin
+
+
 ```
 
 
