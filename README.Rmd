@@ -158,12 +158,6 @@ correct<-(abs(expected-pooled)-.5)
 mychi.sq<- (correct/expected)
 correctedchisq<-sum(mychi.sq)
 correctedchisq
-
-
-
-df<-(nrow(pooled)-1)*(ncol(pooled)-1)
-plot(seq(0,20,0.05), dchisq(seq(0,20,0.05), df=df) type=l, xlab= chise)
-
 ```
      
       * Calculate the expected count matrix and calculate the Chi-Squared test statistics. 
@@ -174,7 +168,17 @@ Answer: Answer: the expected table is `r expected`
       
 Answer: without the continuity correction, my chi suqare test statistic was `r regchisq`,  After deleting the correction for continuity, my chi square value is `r correctedchisq`, this agrees with r's chisquare which was `r chisquare.test`
  
-      *	Generate a Chi-Squared distributions with approporiate degrees of freedom by the method that was discussed in class (hint: you may consider using the `replicate` command)
+      *	Generate a Chi-Squared distribution with approporiate degrees of freedom by the method that was discussed in class (hint: you may consider using the `replicate` command)
+      
+```{r}
+df<-(nrow(pooled)-1)*(ncol(pooled)-1)
+plot(seq(0, 20, 0.05), dchisq(seq(0, 20, 0.05), df = df), type = "l", xlab = "ChiSquared Statistic", ylab = "Probability with 1 degree of freedom")
+#add continuity correction
+arrows(x0= correctedchisq, x1=correctedchisq, y0=0.4, y1=0.05, lwd=2, col="blue")
+#without continuity correction
+arrows(x0= regchisq, x1=regchisq, y0=0.4, y1=0.05, lwd=2, col="red")
+```
+
       * Compare your Chi-Squared distributions to what you might get from the appropriate built in R functions
       * Based on your distribution calculate p-values
       * How does your p-value compare to what you saw using the built in functions? Explain your observations.
