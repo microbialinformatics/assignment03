@@ -10,7 +10,7 @@ This assignment is due on October 10th.
 
 ------
 
-1.  Generate a plot that contains the different pch symbols. Investigate the knitr code chunk options to see whether you can have a pdf version of the image produced so you can print it off for yoru reference. It should look like this:
+1.  Generate a plot that contains the different pch symbols. Investigate the knitr code chunk options to see whether you can have a pdf version of the image produced so you can print it off for your reference. It should look like this:
 
     <img src="pch.png", style="margin:0px auto;display:block" width="500">
 
@@ -19,7 +19,7 @@ This assignment is due on October 10th.
 xaxis<-seq(1:25)
 yaxis<-rep(c(.5),25)
 #creating plot with PCH types by their number
-symbol.sheet<-plot(xaxis,yaxis, pch=c(1:25),col="black", lwd=1, main="PCH Symbols", ylab=" ", xlab="PCH Value", axes=F, pin=c(1,4))
+plot(xaxis,yaxis, pch=c(1:25),col="black", lwd=1, main="PCH Symbols", ylab=" ", xlab="PCH Value", axes=F, pin=c(1,4))
 #formatting axis
 axis(1, at= seq(1,25, by= 1), las=1, tck=.7,col="grey", ylab="n", ps=12,)
 axis(1, at=seq(1,25, by=1), col="black")
@@ -30,7 +30,6 @@ axis(1, at=seq(1,25, by=1), col="black")
 ```r
 #adding darker x axis
 ```
-
 
 2.  Using the `germfree.nmds.axes` data file available in this respositry, generate a plot that looks like this. The points are connected in the order they were sampled with the circle representing the beginning ad the square the end of the time course:
 
