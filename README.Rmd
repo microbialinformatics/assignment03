@@ -133,7 +133,24 @@ Chisquare test: `r chisquare.test`
      * Without using the built in chi-squared test function, replicate the 2x2 study design in the last problem for the Chi-Squared Test...
 
 ```{r}
-#generating 
+#generating the observed r by c table:
+pooled
+#generating the expected table
+colonization.sums<- margin.table(pooled,1)
+colonization.sums
+fract.fnuc<-colonization.sums["F.nucleatum"]/sum(colonization.sums)
+fract.nofnuc<- 1-fract.fnuc
+fract.bac<-c(noFnuc= fract.nofnuc, Fnuc = fract.fnuc)
+fract.bac
+cancer.sums<-margin.table(pooled,2)
+cancer.sums
+fract.nocancer<-cancer.sums["no cancer"]/sum(cancer.sums)
+fract.cancer<-1-fract.nocancer
+fract.disease<-c(healthy= fract.nocancer, cancer= fract.cancer)
+fract.disease
+expected<-fract.bac %*% t(fract.disease)
+expected<-expected*sum(pooled)
+expected
 ```
 
      
