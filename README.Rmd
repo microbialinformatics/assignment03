@@ -151,10 +151,29 @@ fract.disease
 expected<-fract.bac %*% t(fract.disease)
 expected<-expected*sum(pooled)
 expected
-```
+#chisquare test to match r
+regchisq<- sum((expected-pooled)^2/expected)
+regchisq
+correct<-(abs(expected-pooled)-.5)
+mychi.sq<- (correct/expected)
+correctedchisq<-sum(mychi.sq)
+correctedchisq
 
+
+
+df<-(nrow(pooled)-1)*(ncol(pooled)-1)
+plot(seq(0,20,0.05), dchisq(seq(0,20,0.05), df=df) type=l, xlab= chise)
+
+```
      
-      * Calculate the expected count matrix and calculate the Chi-Squared test statistics. Figure out how to get your test statistic to match Rs default statistic.
+      * Calculate the expected count matrix and calculate the Chi-Squared test statistics. 
+      
+Answer: Answer: the expected table is `r expected`
+
+      Figure out how to get your test statistic to match       Rs default statistic.
+      
+Answer: without the continuity correction, my chi suqare test statistic was `r regchisq`,  After deleting the correction for continuity, my chi square value is `r correctedchisq`, this agrees with r's chisquare which was `r chisquare.test`
+ 
       *	Generate a Chi-Squared distributions with approporiate degrees of freedom by the method that was discussed in class (hint: you may consider using the `replicate` command)
       * Compare your Chi-Squared distributions to what you might get from the appropriate built in R functions
       * Based on your distribution calculate p-values
