@@ -20,7 +20,7 @@ This assignment is due on October 10th.
     <img src="pch.png", style="margin:0px auto;display:block" width="500">
 
 
-```{r}
+```{r, fig.width=6, fig.height=3, fig.align= "center"}
 symbol <- c(1:25)
 y <- rep(1, 25)
 plot(symbol, y, type = "n", xlab = "PCH value", xlim=c(0,25), frame = F, yaxt = "n", xaxt="n", ylab="", main="PCH Symbols")

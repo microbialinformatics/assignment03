@@ -26,7 +26,7 @@ abline(v=seq(1:25), b=0, col = "gray")
 points(symbol,y, pch = c(1:25), cex=2)
 ```
 
-![plot of chunk unnamed-chunk-1](./README_files/figure-html/unnamed-chunk-1.png) 
+<img src="./README_files/figure-html/unnamed-chunk-1.png" title="plot of chunk unnamed-chunk-1" alt="plot of chunk unnamed-chunk-1" style="display: block; margin: auto;" />
 
 For frame = F:  http://stackoverflow.com/questions/4946491/removing-the-frame-from-the-boxplot-function-in-r
 Axes: http://www.statmethods.net/advgraphs/axes.html
