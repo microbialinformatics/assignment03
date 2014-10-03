@@ -1,6 +1,6 @@
 # Assignment 3
-Patrick D. Schloss  
-September 26, 2014  
+Edna Chiang
+October 1, 2014  
 
 Complete the exercises listed below and submit as a pull request to the [Assignment 3 repository](http://www.github.com/microbialinformatics/assignment03).  Format this document approapriately using R markdown and knitr. For those cases where there are multiple outputs, make it clear in how you format the text and interweave the solution, what the solution is.
 
@@ -20,7 +20,24 @@ This assignment is due on October 10th.
     <img src="beta.png", style="margin:0px auto;display:block" width="700">
 
 
-3.  On pg. 57 there is a formula for the probability of making x observations after n trials when there is a probability p of the observation.  For this exercise, assume x=2, n=10, and p=0.5.  Using R, calculate the probability of x using this formula and the appropriate built in function. Compare it to the results we obtained in class when discussing the sex ratios of mice.
+3.  On pg. 57 there is a formula for the probability of making x observations after n trials when there is a probability p of the observation.  For this exercise, assume x=2, n=10, and p=0.5.  Using R, calculate the probability of x using this formula and the appropriate built in function. Compare it to the results we obtained in class when discussing the sex ratios of mice.pc
+
+
+**Answer:**
+
+```r
+x <- 2
+n <- 10
+p <- 0.5
+
+choose(n,x) * p^x * (1-p)^(n-x)
+
+OR
+
+dbinom(2,10,0.5)
+```
+
+
 
 
 4.  On pg. 59 there is a formula for the probability of observing a value, x, when there is a mean, mu, and standard deviation, sigma.  For this exercise, assume x=10.3, mu=5, and sigma=3.  Using R, calculate the probability of x using this formula and the appropriate built in function
