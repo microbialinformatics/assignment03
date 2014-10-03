@@ -43,9 +43,6 @@ dbinom(2,10,0.5)
 
 4.  On pg. 59 there is a formula for the probability of observing a value, x, when there is a mean, mu, and standard deviation, sigma.  For this exercise, assume x=10.3, mu=5, and sigma=3.  Using R, calculate the probability of x using this formula and the appropriate built in function
 
-mu = mean
-sigma = standard deviation
-
 **Answer:**
 
 
