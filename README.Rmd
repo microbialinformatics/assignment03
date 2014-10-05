@@ -62,18 +62,18 @@ points(mouse387$axis1, mouse387$axis2, type="l", col="green", lwd=2)
 points(mouse389$axis1, mouse389$axis2, type="l", col="darkred", lwd=2)
 
 #Time to add the circles to represent the beginning of the time course
-points(mouse337$axis1[1], mouse337$axis2[1], type = "p", col = "black", pch=19, cex=1.5)
-points(mouse361$axis1[1], mouse361$axis2[1], type = "p", col = "red", pch=19, cex=1.5)
-points(mouse343$axis1[1], mouse343$axis2[1], type = "p", col = "blue", pch=19, cex=1.5)
-points(mouse387$axis1[1], mouse387$axis2[1], type = "p", col = "green", pch=19, cex=1.5)
-points(mouse389$axis1[1], mouse389$axis2[1], type = "p", col = "darkred", pch=19, cex=1.5)
+points(mouse337$axis1[1], mouse337$axis2[1], type = "p", col = "black", pch=19, cex=2)
+points(mouse361$axis1[1], mouse361$axis2[1], type = "p", col = "red", pch=19, cex=2)
+points(mouse343$axis1[1], mouse343$axis2[1], type = "p", col = "blue", pch=19, cex=2)
+points(mouse387$axis1[1], mouse387$axis2[1], type = "p", col = "green", pch=19, cex=2)
+points(mouse389$axis1[1], mouse389$axis2[1], type = "p", col = "darkred", pch=19, cex=2)
 
 #Add squares to represent the end of the time course
-points(mouse337$axis1[20], mouse337$axis2[20], type = "p", col = "black", pch=15, cex=1.5)
-points(mouse361$axis1[20], mouse361$axis2[20], type = "p", col = "red", pch=15, cex=1.5)
-points(mouse343$axis1[21], mouse343$axis2[21], type = "p", col = "blue", pch=15, cex=1.5)
-points(mouse387$axis1[21], mouse387$axis2[21], type = "p", col = "green", pch=15, cex=1.5)
-points(mouse389$axis1[21], mouse389$axis2[21], type = "p", col = "darkred", pch=15, cex=1.5)
+points(mouse337$axis1[20], mouse337$axis2[20], type = "p", col = "black", pch=15, cex=2)
+points(mouse343$axis1[21], mouse343$axis2[21], type = "p", col = "blue", pch=15, cex=2)
+points(mouse361$axis1[20], mouse361$axis2[20], type = "p", col = "red", pch=15, cex=2)
+points(mouse387$axis1[21], mouse387$axis2[21], type = "p", col = "green", pch=15, cex=2)
+points(mouse389$axis1[21], mouse389$axis2[21], type = "p", col = "darkred", pch=15, cex=2)
 
 #Finally, let's add the legend
 legend(x=-0.02, y=-0.18, 
