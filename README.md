@@ -46,7 +46,32 @@ Axes: http://www.statmethods.net/advgraphs/axes.html
 3.  On pg. 57 there is a formula for the probability of making x observations after n trials when there is a probability p of the observation.  For this exercise, assume x=2, n=10, and p=0.5.  Using R, calculate the probability of x using this formula and the appropriate built in function. Compare it to the results we obtained in class when discussing the sex ratios of mice.
 
 
+
+
+```r
+n_trials <- 10
+prob <- 0.5
+x_observ <- 2
+woot <- dbinom(x = x_observ, size = n_trials, prob = prob)
+hist(woot, breaks = seq(-0.5, 10.5, 1))
+```
+
+![plot of chunk unnamed-chunk-3](./README_files/figure-html/unnamed-chunk-3.png) 
+
+```r
+percent <- woot*100
+```
+
+***Here, we performed 10 breedings of mice but only observed 2 of the breedings.  The probability of getting a male mouse versus a female mouse was 50/50.  This calculation was the same as what we did in class, with a point probability of 0.0439.  This means that 4.3945% of the time we will get either 2 females or 2 males from our 2 observations.***
+
+
 4.  On pg. 59 there is a formula for the probability of observing a value, x, when there is a mean, mu, and standard deviation, sigma.  For this exercise, assume x=10.3, mu=5, and sigma=3.  Using R, calculate the probability of x using this formula and the appropriate built in function
+
+
+
+```r
+#woot <- rnorm(x=2, n=10, p = 0.5)
+```
 
 
 5.  One of my previous students, Joe Zackular, obtained stool samples from 89 people that underwent colonoscopies.  30 of these individuals had no signs of disease, 30 had non-cancerous ademonas, and 29 had cancer.  It was previously suggested that the bacterium *Fusobacterium nucleatum* was associated with cancer.  In these three pools of subjects, Joe determined that 4, 1, and 14 individuals harbored *F. nucleatum*, respectively. Create a matrix table to represent the number of individuals with and without _F. nucleatum_ as a function of disease state.  Then do the following:
