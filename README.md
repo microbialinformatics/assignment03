@@ -19,15 +19,11 @@ This assignment is due on October 10th.
 xaxis<-seq(1:25)
 yaxis<-rep(c(.5),25)
 #creating plot with PCH types by their number
+pdf("PCHplot.PDF")
 plot(xaxis,yaxis, pch=c(1:25),col="black", lwd=1, main="PCH Symbols", ylab=" ", xlab="PCH Value", axes=F, pin=c(1,4))
 #formatting axis
 axis(1, at= seq(1,25, by= 1), las=1, tck=.7,col="grey", ylab="n", ps=12,)
 axis(1, at=seq(1,25, by=1), col="black")
-```
-
-![plot of chunk unnamed-chunk-1](./README_files/figure-html/unnamed-chunk-1.png) 
-
-```r
 #adding darker x axis
 ```
 
