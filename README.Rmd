@@ -37,11 +37,7 @@ axis(1, at= seq(1,25, by= 1), las=1, tck=.7,col="grey", ylab="n", ps=12,)
 axis(1, at=seq(1,25, by=1), col="black")
 ```
 
-
-
-
 ```
-
 2.  Using the `germfree.nmds.axes` data file available in this respositry, generate a plot that looks like this. The points are connected in the order they were sampled with the circle representing the beginning ad the square the end of the time course:
 
     <img src="beta.png", style="margin:0px auto;display:block" width="700">
@@ -51,17 +47,43 @@ axis(1, at=seq(1,25, by=1), col="black")
 germfree<- read.table(file="germfree.nmds.axes", header=T)
 #check that germfree has all values and variables
 germfree
+#sorting by mouse and then day
+attach(germfree)
+sortedgermfree<-germfree[order(mouse,day),]
+detach(germfree)
+#making mouse a factor
+mousefactor<-as.factor(sortedgermfree$mouse)
+mousefactor
+sortedgermfree$new.col<-mousefactor
+sortedgermfree
 #creating plot
-plot(germfree$axis2~germfree$axis1, type="l", xlim = c(-.2,.6), ylim =c(-.4,0.4), ylab= "NMDS Axis 2", xlab="NMDS Axis 1" , par(mar=c(7,5,1.5,1)), asp=1.9)  
-lines(germfree$day,germfree$mouse, col=c("red", "blue", "red", "green", "brown"))
+plot((sortedgermfree$axis2~sortedgermfree$axis1), type="l", xlim = c(-.2,.6), ylim =c(-.4,0.4), ylab= "NMDS Axis 2", xlab="NMDS Axis 1" , par(mar=c(7,5,1.5,1)), asp=2) 
+lines(sortedgermfree$new.col=="337", col="red")
+
+lines(sortedgermfree$mouse=="337", col="black")
+lines(sortedgermfree$mouse=="343", col="blue")
+lines(sortedgermfree$mouse=="361", col="red")
+lines(sortedgermfree$mouse=="387", col="green")
+lines(sortedgermfree$mouse=="389", col="brown")
+
 ```
 
 3.  On pg. 57 there is a formula for the probability of making x observations after n trials when there is a probability p of the observation.  For this exercise, assume x=2, n=10, and p=0.5.  Using R, calculate the probability of x using this formula and the appropriate built in function. Compare it to the results we obtained in class when discussing the sex ratios of mice.
 ```{r}
-factorial(10)/factorial(2)
-1/choose(10,2)
+#by hand
+n<-factorial(10)
+x<-(factorial(2)*factorial(8))
+book<-n/x*(.5)^2*(1-.5)^8
+book
+#with r
+withrdbinom<-dbinom(2, 10,.5)
+withrdbinom
+
+
 
 ```
+Answer: with the formula on pg 57, the probability was `r book`, with the dbinom function in r the probability was also `r withrdbinom`. When we discussed sex ratios in mice in class, we also calculated this exact probability.
+
 4.  On pg. 59 there is a formula for the probability of observing a value, x, when there is a mean, mu, and standard deviation, sigma.  For this exercise, assume x=10.3, mu=5, and sigma=3.  Using R, calculate the probability of x using this formula and the appropriate built in function
 
 
