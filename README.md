@@ -27,6 +27,21 @@ axis(1, at=seq(1,25, by=1), col="black")
 #adding darker x axis
 ```
 
+```r
+# repeating my code so that I can produce a visible graph on this assignment
+plot(xaxis,yaxis, pch=c(1:25),col="black", lwd=1, main="PCH Symbols", ylab=" ", xlab="PCH Value", axes=F, pin=c(1,4))
+#formatting axis
+axis(1, at= seq(1,25, by= 1), las=1, tck=.7,col="grey", ylab="n", ps=12,)
+axis(1, at=seq(1,25, by=1), col="black")
+```
+
+![plot of chunk unnamed-chunk-2](./README_files/figure-html/unnamed-chunk-2.png) 
+
+
+
+
+```
+
 2.  Using the `germfree.nmds.axes` data file available in this respositry, generate a plot that looks like this. The points are connected in the order they were sampled with the circle representing the beginning ad the square the end of the time course:
 
     <img src="beta.png", style="margin:0px auto;display:block" width="700">
@@ -152,7 +167,7 @@ plot(germfree$axis2~germfree$axis1, type="l", xlim = c(-.2,.6), ylim =c(-.4,0.4)
 lines(germfree$day,germfree$mouse, col=c("red", "blue", "red", "green", "brown"))
 ```
 
-![plot of chunk unnamed-chunk-2](./README_files/figure-html/unnamed-chunk-2.png) 
+![plot of chunk unnamed-chunk-3](./README_files/figure-html/unnamed-chunk-3.png) 
 
 3.  On pg. 57 there is a formula for the probability of making x observations after n trials when there is a probability p of the observation.  For this exercise, assume x=2, n=10, and p=0.5.  Using R, calculate the probability of x using this formula and the appropriate built in function. Compare it to the results we obtained in class when discussing the sex ratios of mice.
 
@@ -400,7 +415,7 @@ arrows(x0= correctedchisq, x1=correctedchisq, y0=0.4, y1=0.05, lwd=2, col="blue"
 arrows(x0= regchisq, x1=regchisq, y0=0.4, y1=0.05, lwd=2, col="red")
 ```
 
-![plot of chunk unnamed-chunk-8](./README_files/figure-html/unnamed-chunk-8.png) 
+![plot of chunk unnamed-chunk-9](./README_files/figure-html/unnamed-chunk-9.png) 
       * Compare your Chi-Squared distributions to what you might get from the appropriate built in R functions
       * Based on your distribution calculate p-values
       * How does your p-value compare to what you saw using the built in functions? Explain your observations.
