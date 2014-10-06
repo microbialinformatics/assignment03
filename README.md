@@ -18,7 +18,7 @@ This assignment is due on October 10th.
 #creating vectors for PCH value positioning.
 xaxis<-seq(1:25)
 yaxis<-rep(c(.5),25)
-#creating plot with PCH types by their number
+#creating plot with PCH types by their number. This PDF statement makes a PDF file of the plot.
 pdf("PCHplot.PDF")
 plot(xaxis,yaxis, pch=c(1:25),col="black", lwd=1, main="PCH Symbols", ylab=" ", xlab="PCH Value", axes=F, pin=c(1,4))
 #formatting axis
@@ -37,11 +37,7 @@ axis(1, at=seq(1,25, by=1), col="black")
 
 ![plot of chunk unnamed-chunk-2](./README_files/figure-html/unnamed-chunk-2.png) 
 
-
-
-
 ```
-
 2.  Using the `germfree.nmds.axes` data file available in this respositry, generate a plot that looks like this. The points are connected in the order they were sampled with the circle representing the beginning ad the square the end of the time course:
 
     <img src="beta.png", style="margin:0px auto;display:block" width="700">
@@ -162,9 +158,148 @@ germfree
 ```
 
 ```r
+#sorting by mouse and then day
+attach(germfree)
+sortedgermfree<-germfree[order(mouse,day),]
+detach(germfree)
+#making mouse a factor
+mousefactor<-as.factor(sortedgermfree$mouse)
+mousefactor
+```
+
+```
+##   [1] 337 337 337 337 337 337 337 337 337 337 337 337 337 337 337 337 337
+##  [18] 337 337 337 343 343 343 343 343 343 343 343 343 343 343 343 343 343
+##  [35] 343 343 343 343 343 343 343 361 361 361 361 361 361 361 361 361 361
+##  [52] 361 361 361 361 361 361 361 361 361 361 387 387 387 387 387 387 387
+##  [69] 387 387 387 387 387 387 387 387 387 387 387 387 387 387 389 389 389
+##  [86] 389 389 389 389 389 389 389 389 389 389 389 389 389 389 389 389 389
+## [103] 389
+## Levels: 337 343 361 387 389
+```
+
+```r
+sortedgermfree$new.col<-mousefactor
+sortedgermfree
+```
+
+```
+##     mouse day     axis1     axis2 new.col
+## 1     337   1  0.477973 -0.364076     337
+## 2     337   2  0.441820 -0.376019     337
+## 3     337   3  0.240472 -0.016919     337
+## 4     337   4  0.035907  0.148944     337
+## 5     337   5  0.001148  0.169266     337
+## 6     337   6  0.060294  0.146779     337
+## 7     337   7  0.034812  0.258245     337
+## 8     337   8 -0.106733  0.194308     337
+## 9     337   9 -0.076234  0.129926     337
+## 10    337  10 -0.105765  0.131460     337
+## 11    337  11 -0.064406  0.109985     337
+## 12    337  12 -0.076967 -0.008170     337
+## 13    337  13 -0.083959  0.019575     337
+## 14    337  14 -0.054133 -0.045761     337
+## 15    337  15 -0.020664 -0.081768     337
+## 16    337  16 -0.088294 -0.114602     337
+## 17    337  17 -0.068480 -0.146309     337
+## 18    337  18 -0.202989 -0.184626     337
+## 19    337  19 -0.316568 -0.257749     337
+## 20    337  20 -0.281808 -0.283736     337
+## 21    343   1  0.500614 -0.313138     343
+## 22    343   2  0.234031 -0.105074     343
+## 23    343   3  0.686308  0.390601     343
+## 24    343   4  0.231436  0.185242     343
+## 25    343   5 -0.000129  0.213364     343
+## 26    343   6 -0.010586  0.213188     343
+## 27    343   7  0.008319  0.197056     343
+## 28    343   8 -0.055556  0.225044     343
+## 29    343   9 -0.068226  0.218873     343
+## 30    343  10 -0.097248  0.211134     343
+## 31    343  11 -0.056036  0.154331     343
+## 32    343  12 -0.166009  0.213856     343
+## 33    343  13 -0.136185  0.241734     343
+## 34    343  14 -0.060781  0.103322     343
+## 35    343  15 -0.024760  0.031184     343
+## 36    343  16 -0.114855 -0.011415     343
+## 37    343  17 -0.051336 -0.159101     343
+## 38    343  18 -0.229925 -0.210989     343
+## 39    343  19 -0.249601 -0.312992     343
+## 40    343  20 -0.261964 -0.248252     343
+## 41    343  21 -0.160445 -0.173750     343
+## 42    361   1  0.492443 -0.288620     361
+## 43    361   2  0.409547 -0.277205     361
+## 44    361   3  0.426351  0.102073     361
+## 45    361   4  0.083652  0.018309     361
+## 46    361   5  0.070610  0.201763     361
+## 47    361   6  0.005623  0.249888     361
+## 48    361   7  0.002963  0.192454     361
+## 49    361   8 -0.144754  0.274811     361
+## 50    361   9 -0.193524  0.251376     361
+## 51    361  10 -0.180832  0.168392     361
+## 52    361  11 -0.092199  0.044566     361
+## 53    361  12 -0.131652  0.002556     361
+## 54    361  14 -0.049513  0.014129     361
+## 55    361  15 -0.046198 -0.057112     361
+## 56    361  16 -0.101780 -0.089272     361
+## 57    361  17 -0.097417 -0.095140     361
+## 58    361  18 -0.171424 -0.186522     361
+## 59    361  19 -0.258013 -0.271911     361
+## 60    361  20 -0.239837 -0.267637     361
+## 61    361  21 -0.140312 -0.179001     361
+## 62    387   1  0.576080 -0.345484     387
+## 63    387   2  0.615570 -0.323921     387
+## 64    387   3  0.700632 -0.111734     387
+## 65    387   4  0.388111  0.208005     387
+## 66    387   5  0.042856  0.244308     387
+## 67    387   6  0.156916  0.253384     387
+## 68    387   7  0.054116  0.347638     387
+## 69    387   8 -0.044162  0.188470     387
+## 70    387   9 -0.080200  0.263068     387
+## 71    387  10 -0.121073  0.178870     387
+## 72    387  11 -0.101629  0.120854     387
+## 73    387  12 -0.096233  0.107505     387
+## 74    387  13 -0.117344  0.061644     387
+## 75    387  14 -0.262439  0.121708     387
+## 76    387  15  0.018423 -0.034276     387
+## 77    387  16 -0.061813 -0.059084     387
+## 78    387  17 -0.053700 -0.109535     387
+## 79    387  18 -0.116989 -0.129478     387
+## 80    387  19 -0.179320 -0.549998     387
+## 81    387  20 -0.297947 -0.269588     387
+## 82    387  21 -0.212042 -0.233758     387
+## 83    389   1  0.333411 -0.175003     389
+## 84    389   2  0.352974 -0.276592     389
+## 85    389   3  0.222567 -0.001889     389
+## 86    389   4  0.295203  0.188232     389
+## 87    389   5  0.038725  0.206953     389
+## 88    389   6  0.002329  0.152992     389
+## 89    389   7  0.009097  0.173503     389
+## 90    389   8 -0.064849  0.202872     389
+## 91    389   9 -0.037609  0.126207     389
+## 92    389  10 -0.109734  0.167615     389
+## 93    389  11 -0.044272  0.133182     389
+## 94    389  12 -0.119429  0.239419     389
+## 95    389  13  0.002219  0.094769     389
+## 96    389  14 -0.098458 -0.058467     389
+## 97    389  15 -0.010906 -0.142936     389
+## 98    389  16 -0.020310 -0.129824     389
+## 99    389  17 -0.060223 -0.163624     389
+## 100   389  18 -0.139415 -0.191099     389
+## 101   389  19 -0.179398 -0.245192     389
+## 102   389  20 -0.219536 -0.309335     389
+## 103   389  21 -0.266423 -0.221247     389
+```
+
+```r
 #creating plot
-plot(germfree$axis2~germfree$axis1, type="l", xlim = c(-.2,.6), ylim =c(-.4,0.4), ylab= "NMDS Axis 2", xlab="NMDS Axis 1" , par(mar=c(7,5,1.5,1)), asp=1.9)  
-lines(germfree$day,germfree$mouse, col=c("red", "blue", "red", "green", "brown"))
+plot((sortedgermfree$axis2~sortedgermfree$axis1), type="l", xlim = c(-.2,.6), ylim =c(-.4,0.4), ylab= "NMDS Axis 2", xlab="NMDS Axis 1" , par(mar=c(7,5,1.5,1)), asp=2) 
+lines(sortedgermfree$new.col=="337", col="red")
+
+lines(sortedgermfree$mouse=="337", col="black")
+lines(sortedgermfree$mouse=="343", col="blue")
+lines(sortedgermfree$mouse=="361", col="red")
+lines(sortedgermfree$mouse=="387", col="green")
+lines(sortedgermfree$mouse=="389", col="brown")
 ```
 
 ![plot of chunk unnamed-chunk-3](./README_files/figure-html/unnamed-chunk-3.png) 
@@ -172,20 +307,28 @@ lines(germfree$day,germfree$mouse, col=c("red", "blue", "red", "green", "brown")
 3.  On pg. 57 there is a formula for the probability of making x observations after n trials when there is a probability p of the observation.  For this exercise, assume x=2, n=10, and p=0.5.  Using R, calculate the probability of x using this formula and the appropriate built in function. Compare it to the results we obtained in class when discussing the sex ratios of mice.
 
 ```r
-factorial(10)/factorial(2)
+#by hand
+n<-factorial(10)
+x<-(factorial(2)*factorial(8))
+book<-n/x*(.5)^2*(1-.5)^8
+book
 ```
 
 ```
-## [1] 1814400
+## [1] 0.04395
 ```
 
 ```r
-1/choose(10,2)
+#with r
+withrdbinom<-dbinom(2, 10,.5)
+withrdbinom
 ```
 
 ```
-## [1] 0.02222
+## [1] 0.04395
 ```
+Answer: with the formula on pg 57, the probability was 0.0439, with the dbinom function in r the probability was also 0.0439. When we discussed sex ratios in mice in class, we also calculated this exact probability, as we had the same parameters as in this question (2 males in a litter of 10 mice, with a probability of male = 0.5.)
+
 4.  On pg. 59 there is a formula for the probability of observing a value, x, when there is a mean, mu, and standard deviation, sigma.  For this exercise, assume x=10.3, mu=5, and sigma=3.  Using R, calculate the probability of x using this formula and the appropriate built in function
 
 
@@ -418,7 +561,14 @@ arrows(x0= regchisq, x1=regchisq, y0=0.4, y1=0.05, lwd=2, col="red")
 ![plot of chunk unnamed-chunk-9](./README_files/figure-html/unnamed-chunk-9.png) 
       * Compare your Chi-Squared distributions to what you might get from the appropriate built in R functions
       * Based on your distribution calculate p-values
+ 
+
+
+      
       * How does your p-value compare to what you saw using the built in functions? Explain your observations.
+  
+Answer: With the built in chisquared test with yates continuity correction, the p-value was 5.482e-05, without the yates continuity correction, p-value was 1.632e-05. 
+      
 
 
 

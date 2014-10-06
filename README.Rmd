@@ -156,14 +156,12 @@ expected
 #chisquare test to match r
 regchisq<- sum((expected-pooled)^2/expected)
 regchisq
-correct<-(abs(expected-pooled)-.5)
-mychi.sq<- (correct/expected)
-correctedchisq<-sum(mychi.sq)
-correctedchisq
+uncorrected<-sum((abs(expected-pooled)-0.5)^2/(expected))
+uncorrected
 ```
      * Calculate the expected count matrix and calculate the Chi-Squared test statistics. Figure out how to get your test statistic to match Rs default statistic.
       
-Answer: without the continuity correction, my chi suqare test statistic was `r regchisq` ,  After deleting the correction for continuity, my chi square value is `r correctedchisq` , this is identical to r's default parameter chisquare test statistic.
+Answer: without the continuity correction, my chi suqare test statistic was `r regchisq` ,  After deleting the correction for continuity, my chi square value is `r uncorrected`, this is identical to r's default parameter chisquare test statistic.
  
       *	Generate a Chi-Squared distribution with approporiate degrees of freedom by the method that was discussed in class (hint: you may consider using the `replicate` command)
       
@@ -177,7 +175,16 @@ arrows(x0= regchisq, x1=regchisq, y0=0.4, y1=0.05, lwd=2, col="red")
 ```
       * Compare your Chi-Squared distributions to what you might get from the appropriate built in R functions
       * Based on your distribution calculate p-values
+ 
+```{r}
+
+```
+
+      
       * How does your p-value compare to what you saw using the built in functions? Explain your observations.
+  
+Answer: With the built in chisquared test with yates continuity correction, the p-value was 5.482e-05, without the yates continuity correction, p-value was 1.632e-05. 
+      
 ```{r}
 
 ```
