@@ -17,10 +17,15 @@ This assignment is due on October 10th.
 
 ####1.  
 **Generate a plot that contains the different pch symbols. Investigate the knitr code chunk options to see whether you can have a pdf version of the image produced so you can print it off for yoru reference. It should look like this:**
+ <img src="pch.png", style="margin:0px auto;display:block" width="500">
 
-    <img src="pch.png", style="margin:0px auto;display:block" width="500">
-    
-    
+```{r}
+plot(x=1:25,y=rep(1,25), pch = 1:25, cex=1.5, yaxt='n', ann=FALSE, bty='n', xaxt='n', panel.first=c(abline(v=1:25, col="light gray",lty=1)))
+axis(1,at=c(1,3,5,7,9,11,13,15,17,19,21,23,25), lty=1)
+title(main="PCH Symbol",xlab="PCH Value")
+```
+
+   
     
 
 
