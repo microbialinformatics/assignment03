@@ -523,7 +523,7 @@ expected
 ```
 
 ```r
-#chisquare test to match r
+#chisquare test to match r, add yates continuity correction
 regchisq<- sum((expected-pooled)^2/expected)
 regchisq
 ```
@@ -540,7 +540,7 @@ uncorrected
 ```
 ## [1] 16.27
 ```
-     * Calculate the expected count matrix and calculate the Chi-Squared test statistics. Figure out how to get your test statistic to match Rs default statistic.
+     * Calculate the expected count matrix and calculate the Chi-Squared test statistics. Figure out how to get your test statistic to match Rs default statistic.     
       
 Answer: without the continuity correction, my chi suqare test statistic was 18.5763 ,  After deleting the correction for continuity, my chi square value is 16.2736, this is identical to r's default parameter chisquare test statistic.
  
@@ -549,11 +549,18 @@ Answer: without the continuity correction, my chi suqare test statistic was 18.5
 
 ```r
 df<-(nrow(pooled)-1)*(ncol(pooled)-1)
-plot(seq(0, 20, 0.05), dchisq(seq(0, 20, 0.05), df = df), type = "l", xlab = "ChiSquared Statistic", ylab = "Probability with 1 degree of freedom")
-#add continuity correction
-arrows(x0= correctedchisq, x1=correctedchisq, y0=0.4, y1=0.05, lwd=2, col="blue")
-#without continuity correction
-arrows(x0= regchisq, x1=regchisq, y0=0.4, y1=0.05, lwd=2, col="red")
+my.chi.sq<-uncorrected
+my.chi.sq
+```
+
+```
+## [1] 16.27
+```
+
+```r
+plot(seq(0,20,0.05), dchisq(seq(0,20,0.05), df=df), type="l", xlab="chisquared test statistic", ylab="probability with 1 defree of freedom")
+#adding arrows for my chi square test statistic
+arrows(x0=my.chi.sq, x1=my.chi.sq, y0=0.4, y1=0.05, lwd=2, col="red")
 ```
 
 ![plot of chunk unnamed-chunk-9](./README_files/figure-html/unnamed-chunk-9.png) 
@@ -561,14 +568,26 @@ arrows(x0= regchisq, x1=regchisq, y0=0.4, y1=0.05, lwd=2, col="red")
       * Based on your distribution calculate p-values
  
 
+```r
+p<-replicate(1000, dchisq(pooled, df))
+sum(p<0.05)/1000
+```
+
+```
+## [1] 4
+```
+
+```r
+repPval<-summary(p)
+```
 
       
       * How does your p-value compare to what you saw using the built in functions? Explain your observations.
   
-Answer: With the built in chisquared test with yates continuity correction, the p-value was 5.482e-05, without the yates continuity correction, p-value was 1.632e-05. 
+Answer: With the built in chisquared test with yates continuity correction, the p-value was 5.482e-05, without the yates continuity correction, p-value was 1.632e-05. When I replicated the density using dchisq, the p values I achieved were similar to those achieved by the built in r functions:
+6.13 &times; 10<sup>-14</sup>, 4.27 &times; 10<sup>-5</sup>, 7.71 &times; 10<sup>-5</sup>, 0.0037, 0.0037, 0.0146 
       
 
 
 
 6\.  Get a bag of Skittles or M&Ms.  Are the candies evenly distributed amongst the different colors?  Justify your conclusion.
-
