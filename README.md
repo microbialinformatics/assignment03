@@ -567,7 +567,7 @@ larger<-which(repchisqplot>16.2738)
  
 * Compare your Chi-Squared distributions to what you might get      from the appropriate built in R functions
 
-Answer: there are no  instances where a test statistic drawn from the chi squared df=1 distribution were larger than the test statistic that I calculated with the built in functions.
+Answer: there are no instances where a test statistic drawn from the chi squared df=1 distribution were larger than the test statistic that I calculated with the built in functions.
 
  * Based on your distribution calculate p-values
  
@@ -604,7 +604,7 @@ hist(pnorm(repchisqplot), main="p-values obvserved,Chisquared df=1", xlab="p val
 
       * How does your p-value compare to what you saw using the built in functions? Explain your observations.
   
-Answer: With the built in chisquared test with yates continuity correction, the p-values were highly significant at 5.482e-05, and without the yates continuity correction, 1.632e-05. This indicates that on repeat sampling, there is a very very small chance that these differences between groups would be ovserved by change or random variation alone. When I replicated choosing 1000 samples from the chisquared distribution with DF=1, the Chisquare values I sampled were all smaller than the chisquared test statistic I calculated with r's built in functions. The corresponding p values I observed were in no,  , instances equal to or smaller than the built in function p values or 0.05. This failure to detect significance on repeat sampling makes sense given the highly significant p values calculated from the data with the built in r functions. 
+Answer: With the built in chisquared test with yates continuity correction, the p-values were highly significant at 5.482e-05, and without the yates continuity correction, 1.632e-05. This indicates that on repeat sampling, there is a very very small chance that these differences between groups would be ovserved by change or random variation alone. When I replicated choosing 1000 samples from the chisquared distribution with DF=1, the Chisquare values I sampled were all smaller than the chisquared test statistic I calculated with r's built in functions. The corresponding p values I observed were in no, instances equal to or smaller than the built in function p values or 0.05. This failure to detect significance on repeat sampling makes sense given the highly significant p values calculated from the data with the built in r functions. 
       
 
 
@@ -612,6 +612,191 @@ Answer: With the built in chisquared test with yates continuity correction, the 
 6\.  Get a bag of Skittles or M&Ms.  Are the candies evenly distributed amongst the different colors?  Justify your conclusion.
 
 ```r
-#creating matrix with my 
+#creating matrix with my peanut m&m data
+peanut<-matrix(c(3,8,2,8,5,12), nrow=1)
+colnames(peanut)<-c("brown", "green","red","blue","yellow","orange")
+#calculating proportion of each color observed
+propPeanut<-(peanut/38)
+propPeanut
 ```
 
+```
+##        brown  green     red   blue yellow orange
+## [1,] 0.07895 0.2105 0.05263 0.2105 0.1316 0.3158
+```
+
+```r
+#calculating expected null proportions if the colors were distributed evenly
+expectedprop<-6/38
+expectedprop
+```
+
+```
+## [1] 0.1579
+```
+
+```r
+peanutexp<-matrix(c(0.1578947,0.1578947,0.1578947,0.1578947,0.1578947,0.1578947), nrow=1)
+colnames(peanutexp)<-c("brown", "green","red","blue","yellow","orange")
+#plotting both observed and expected distributions
+barplot((propPeanut), ylab= "color frequency", xlab="M&M color")
+```
+
+![plot of chunk unnamed-chunk-12](./README_files/figure-html/unnamed-chunk-121.png) 
+
+```r
+barplot((peanutexp),col="gray",ylab= " Expected color frequency", xlab="M&M color")
+```
+
+![plot of chunk unnamed-chunk-12](./README_files/figure-html/unnamed-chunk-122.png) 
+
+```r
+#now my question is if these proportions differ significantly from 0.1578947
+#I am gong to do multiple binomial tests to see if each individual color could come from the binomial distribution with .1578947 probability
+#brown
+brown<-binom.test(3,38,0.1578947)
+brown
+```
+
+```
+## 
+## 	Exact binomial test
+## 
+## data:  3 and 38
+## number of successes = 3, number of trials = 38, p-value = 0.2634
+## alternative hypothesis: true probability of success is not equal to 0.1579
+## 95 percent confidence interval:
+##  0.01659 0.21377
+## sample estimates:
+## probability of success 
+##                0.07895
+```
+
+```r
+green<-binom.test(8,38,0.1578947)
+green
+```
+
+```
+## 
+## 	Exact binomial test
+## 
+## data:  8 and 38
+## number of successes = 8, number of trials = 38, p-value = 0.3723
+## alternative hypothesis: true probability of success is not equal to 0.1579
+## 95 percent confidence interval:
+##  0.09554 0.37319
+## sample estimates:
+## probability of success 
+##                 0.2105
+```
+
+```r
+red<-binom.test(2,38,0.1578947)
+red
+```
+
+```
+## 
+## 	Exact binomial test
+## 
+## data:  2 and 38
+## number of successes = 2, number of trials = 38, p-value = 0.07714
+## alternative hypothesis: true probability of success is not equal to 0.1579
+## 95 percent confidence interval:
+##  0.006439 0.177491
+## sample estimates:
+## probability of success 
+##                0.05263
+```
+
+```r
+blue<-binom.test(8,38,0.1578947)
+blue
+```
+
+```
+## 
+## 	Exact binomial test
+## 
+## data:  8 and 38
+## number of successes = 8, number of trials = 38, p-value = 0.3723
+## alternative hypothesis: true probability of success is not equal to 0.1579
+## 95 percent confidence interval:
+##  0.09554 0.37319
+## sample estimates:
+## probability of success 
+##                 0.2105
+```
+
+```r
+yellow<-binom.test(8,38,0.1578947)
+yellow
+```
+
+```
+## 
+## 	Exact binomial test
+## 
+## data:  8 and 38
+## number of successes = 8, number of trials = 38, p-value = 0.3723
+## alternative hypothesis: true probability of success is not equal to 0.1579
+## 95 percent confidence interval:
+##  0.09554 0.37319
+## sample estimates:
+## probability of success 
+##                 0.2105
+```
+
+```r
+orange<-binom.test(12, 38, 0.1578947)
+orange
+```
+
+```
+## 
+## 	Exact binomial test
+## 
+## data:  12 and 38
+## number of successes = 12, number of trials = 38, p-value = 0.01303
+## alternative hypothesis: true probability of success is not equal to 0.1579
+## 95 percent confidence interval:
+##  0.1750 0.4865
+## sample estimates:
+## probability of success 
+##                 0.3158
+```
+
+```r
+# these tests are a mixture of significant and non significant
+chisqpeanut<-chisq.test(peanut)
+chisqpeanut
+```
+
+```
+## 
+## 	Chi-squared test for given probabilities
+## 
+## data:  peanut
+## X-squared = 10.95, df = 5, p-value = 0.05243
+```
+
+```r
+answerpeanut<-chisqpeanut$statistic
+pvaluepeanut<-chisqpeanut$p.value
+```
+Answer: 
+The null hypothesis of this test is that all colors are evenly distributed and that their proportion is .1578947 in the bag of M&Ms.
+
+The alternative hypothesis is that one of the color proportions is different. 
+
+My tests failed to reject the null hypothesis.
+the chisquared test was 10.9474  with a p value of 0.0524
+
+this test was not significant at the .05 level of significance. However, it was close to significance so I performed other tests.
+
+Graphic comparison of the poportions of each color in the bag with a uniform distribution of colors suggests that the distributions could be uneven.  
+
+I also did binomial tests for each color against the uniform distribution. Some colors were significantly different from the unifrom distribution, however some were not. 
+
+Therefore I am going to say that the colors are not distributed significantly differently from the uniform distirubtion in this sample. 

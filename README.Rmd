@@ -239,7 +239,23 @@ yellow
 orange<-binom.test(12, 38, 0.1578947)
 orange
 # these tests are a mixture of significant and non significant
-margin<-margin.table(peanut)
-
+chisqpeanut<-chisq.test(peanut)
+chisqpeanut
+answerpeanut<-chisqpeanut$statistic
+pvaluepeanut<-chisqpeanut$p.value
 ```
-Answer: The candies are not evenly distributed amongst the colors. Graphic comparison of the poportions of each color in the bag with a uniform distribution of colors suggests that the distributions are uneven.  The binomial tests for each color against the uniform distribution are all significantly with p<.05. 
+Answer: 
+The null hypothesis of this test is that all colors are evenly distributed and that their proportion is .1578947 in the bag of M&Ms.
+
+The alternative hypothesis is that one of the color proportions is different. 
+
+My tests failed to reject the null hypothesis.
+the chisquared test was `r answerpeanut`  with a p value of `r pvaluepeanut`
+
+This test is not significant at the 0.05 level of significance. However, it is close to 0.05 so I performed other tests.
+
+Graphic comparison of the poportions of each color in the bag with a uniform distribution of colors suggests that the distributions could be uneven.  
+
+I also did binomial tests for each color against the uniform distribution. Some colors were significantly different from the unifrom distribution, however some were not. So these individual binomial tests were inconclusive.
+
+Since the other tests were inconclusive, and the chisquare test gave boarderline non-significance, I am going to go with the chisquared results and say that the colors are not distributed significantly differently from the uniform distirubtion in this sample. 
