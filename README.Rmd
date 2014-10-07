@@ -226,36 +226,38 @@ barplot((peanutexp),col="gray",ylab= " Expected color frequency", xlab="M&M colo
 #now my question is if these proportions differ significantly from 0.1578947
 #I am gong to do multiple binomial tests to see if each individual color could come from the binomial distribution with .1578947 probability
 #brown
-brown<-binom.test(3,38,0.1578947)
+brown<-binom.test(3,38,0.16)
 brown
-green<-binom.test(8,38,0.1578947)
+green<-binom.test(8,38,0.16)
 green
-red<-binom.test(2,38,0.1578947)
+red<-binom.test(2,38,0.16)
 red
-blue<-binom.test(8,38,0.1578947)
+blue<-binom.test(8,38,0.16)
 blue
-yellow<-binom.test(8,38,0.1578947)
+yellow<-binom.test(8,38,0.16)
 yellow
-orange<-binom.test(12, 38, 0.1578947)
+orange<-binom.test(12, 38, 0.16)
 orange
 # these tests are a mixture of significant and non significant
 chisqpeanut<-chisq.test(peanut)
 chisqpeanut
 answerpeanut<-chisqpeanut$statistic
 pvaluepeanut<-chisqpeanut$p.value
+
 ```
 Answer: 
-The null hypothesis of this test is that all colors are evenly distributed and that their proportion is .1578947 in the bag of M&Ms.
+The null hypothesis of this test is that all colors are evenly distributed in this bag of M&Ms and that the proportion of all colors is .1578947 (observed) or 1/6th of the sample (population).
 
 The alternative hypothesis is that one of the color proportions is different. 
 
 My tests failed to reject the null hypothesis.
 the chisquared test was `r answerpeanut`  with a p value of `r pvaluepeanut`
 
-This test is not significant at the 0.05 level of significance. However, it is close to 0.05 so I performed other tests.
+This test is not significant at the 0.05 level of significance. However, it is close to 0.05.  
 
 Graphic comparison of the poportions of each color in the bag with a uniform distribution of colors suggests that the distributions could be uneven.  
 
-I also did binomial tests for each color against the uniform distribution. Some colors were significantly different from the unifrom distribution, however some were not. So these individual binomial tests were inconclusive.
+I also did binomial tests for each color against the uniform distribution. Only orange was significantly different from the expected porportion. If there was 10 orange instead of 12, this would not have been significant.
 
-Since the other tests were inconclusive, and the chisquare test gave boarderline non-significance, I am going to go with the chisquared results and say that the colors are not distributed significantly differently from the uniform distirubtion in this sample. 
+Since there is a trend towards nonsignificant in the bionomial tests, and the chisquare test gave non-significance, I am going to go with the chisquared results and say that the colors are not distributed significantly differently from the uniform distirubtion in this sample. 
+
