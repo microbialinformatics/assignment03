@@ -209,6 +209,37 @@ Answer: With the built in chisquared test with yates continuity correction, the 
 
 6\.  Get a bag of Skittles or M&Ms.  Are the candies evenly distributed amongst the different colors?  Justify your conclusion.
 ```{r}
-#creating matrix with my 
-```
+#creating matrix with my peanut m&m data
+peanut<-matrix(c(3,8,2,8,5,12), nrow=1)
+colnames(peanut)<-c("brown", "green","red","blue","yellow","orange")
+#calculating proportion of each color observed
+propPeanut<-(peanut/38)
+propPeanut
+#calculating expected null proportions if the colors were distributed evenly
+expectedprop<-6/38
+expectedprop
+peanutexp<-matrix(c(0.1578947,0.1578947,0.1578947,0.1578947,0.1578947,0.1578947), nrow=1)
+colnames(peanutexp)<-c("brown", "green","red","blue","yellow","orange")
+#plotting both observed and expected distributions
+barplot((propPeanut), ylab= "color frequency", xlab="M&M color")
+barplot((peanutexp),col="gray",ylab= " Expected color frequency", xlab="M&M color")
+#now my question is if these proportions differ significantly from 0.1578947
+#I am gong to do multiple binomial tests to see if each individual color could come from the binomial distribution with .1578947 probability
+#brown
+brown<-binom.test(3,38,0.1578947)
+brown
+green<-binom.test(8,38,0.1578947)
+green
+red<-binom.test(2,38,0.1578947)
+red
+blue<-binom.test(8,38,0.1578947)
+blue
+yellow<-binom.test(8,38,0.1578947)
+yellow
+orange<-binom.test(12, 38, 0.1578947)
+orange
+# these tests are a mixture of significant and non significant
+margin<-margin.table(peanut)
 
+```
+Answer: The candies are not evenly distributed amongst the colors. Graphic comparison of the poportions of each color in the bag with a uniform distribution of colors suggests that the distributions are uneven.  The binomial tests for each color against the uniform distribution are all significantly with p<.05. 
