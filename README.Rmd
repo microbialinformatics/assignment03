@@ -3,9 +3,9 @@ title: "Assignment 3"
 author: "Patrick D. Schloss"
 date: "September 26, 2014"
 output:
-  pdf_document: default
   html_document:
     keep_md: yes
+  pdf_document: default
 ---
 
 Complete the exercises listed below and submit as a pull request to the [Assignment 3 repository](http://www.github.com/microbialinformatics/assignment03).  Format this document approapriately using R markdown and knitr. For those cases where there are multiple outputs, make it clear in how you format the text and interweave the solution, what the solution is.
@@ -32,6 +32,12 @@ abline(v=1:25,col="grey")
 
     <img src="beta.png", style="margin:0px auto;display:block" width="700">
 
+```r
+germfree<-read.table(file="germfree.nmds.axes",header=T)
+plot(mouse337$axis1,mouse337$axis2,type="l",ylim=c(-0.5,0.4),xlim=c(-0.3,0.7),xlab="NMDS Axis 1",ylab="NMDS Axis 2")
+lines(mouse343$axis1,mouse343$axis2,type="l",col="blue")
+
+```
 
 3.  On pg. 57 there is a formula for the probability of making x observations after n trials when there is a probability p of the observation.  For this exercise, assume x=2, n=10, and p=0.5.  Using R, calculate the probability of x using this formula and the appropriate built in function. Compare it to the results we obtained in class when discussing the sex ratios of mice.
 
