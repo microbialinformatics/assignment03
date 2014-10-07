@@ -564,8 +564,8 @@ arrows(x0=my.chi.sq, x1=my.chi.sq, y0=0.4, y1=0.05, lwd=2, col="red")
 ```
 
 ![plot of chunk unnamed-chunk-9](./README_files/figure-html/unnamed-chunk-9.png) 
-      * Compare your Chi-Squared distributions to what you might get from the appropriate built in R functions
-      * Based on your distribution calculate p-values
+* Compare your Chi-Squared distributions to what you might get      from the appropriate built in R functions
+ * Based on your distribution calculate p-values
  
 
 ```r
@@ -579,13 +579,15 @@ sum(p<0.05)/1000
 
 ```r
 repPval<-summary(p)
+mp<-mean(p)
 ```
 
-      
       * How does your p-value compare to what you saw using the built in functions? Explain your observations.
   
-Answer: With the built in chisquared test with yates continuity correction, the p-value was 5.482e-05, without the yates continuity correction, p-value was 1.632e-05. When I replicated the density using dchisq, the p values I achieved were similar to those achieved by the built in r functions:
-6.13 &times; 10<sup>-14</sup>, 4.27 &times; 10<sup>-5</sup>, 7.71 &times; 10<sup>-5</sup>, 0.0037, 0.0037, 0.0146 
+Answer: With the built in chisquared test with yates continuity correction, the p-value was 5.482e-05, without the yates continuity correction, p-value was 1.632e-05. When I replicated the density using dchisq, the p values I achieved were both smaller and larger than those achieved by the built in r functions:
+6.13 &times; 10<sup>-14</sup>, 4.27 &times; 10<sup>-5</sup>, 7.71 &times; 10<sup>-5</sup>, 0.0037, 0.0037, 0.0146 The mean p value of these functions was 0.0037.
+
+We expect there to be variation in the p values because these probabilities are sampled from the chi squared distribution with 1 degree of freedom and the chi square test examines if the relationship we see between colonization by cancer status is due to random variation or chance alone. However, all p values observed were <0.05, further indicating that we can reject the null hypothesis of no association.  
       
 
 
