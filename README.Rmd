@@ -38,7 +38,7 @@ axis(1, at=seq(1,25, by=1), col="black")
 ```
 
 ```
-2.  Using the `germfree.nmds.axes` data file available in this respositry, generate a plot that looks like this. The points are connected in the order they were sampled with the circle representing the beginning ad the square the end of the time course:
+2.  Using the `germfree.nmds.axes` data file available in this respositry, generate a plot that looks like this. The points are connected in the order they were sampled with the circle representing the beginning and the square the end of the time course:
 
     <img src="beta.png", style="margin:0px auto;display:block" width="700">
 
@@ -57,9 +57,8 @@ mousefactor
 sortedgermfree$new.col<-mousefactor
 sortedgermfree
 #creating plot
-plot((sortedgermfree$axis2~sortedgermfree$axis1), type="l", xlim = c(-.2,.6), ylim =c(-.4,0.4), ylab= "NMDS Axis 2", xlab="NMDS Axis 1" , par(mar=c(7,5,1.5,1)), asp=2) 
-lines(sortedgermfree$new.col=="337", col="red")
-
+plot((sortedgermfree$axis2~sortedgermfree$axis1), type="l", xlim = c(-.2,.6), ylim =c(-.4,0.4), ylab= "NMDS Axis 2", xlab="NMDS Axis 1" , par(mar=c(8,8,1,6)))
+legend(0,0,c("Mouse 337","Mouse 343","Mouse 361","Mouse 387","Mouse 389"), lty=1, col=c("black","blue", "red","green","brown"))
 lines(sortedgermfree$mouse=="337", col="black")
 lines(sortedgermfree$mouse=="343", col="blue")
 lines(sortedgermfree$mouse=="361", col="red")
@@ -130,7 +129,7 @@ fisher.test
 chisquare.test<-chisq.test(pooled)
 chisquare.test
 ```
-Answer: With all three tests there appears to be a significant difference in the proportion of patients who with *F. nucleatum* by cancer status.  
+Answer: With all three tests there appears to be a significant difference in the proportion of patients with *F. nucleatum* by cancer status.  
 
      * Without using the built in chi-squared test function, replicate the 2x2 study design in the last problem for the Chi-Squared Test...
 

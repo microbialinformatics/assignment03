@@ -654,7 +654,7 @@ barplot((peanutexp),col="gray",ylab= " Expected color frequency", xlab="M&M colo
 #now my question is if these proportions differ significantly from 0.1578947
 #I am gong to do multiple binomial tests to see if each individual color could come from the binomial distribution with .1578947 probability
 #brown
-brown<-binom.test(3,38,0.1578947)
+brown<-binom.test(3,38,0.16)
 brown
 ```
 
@@ -663,8 +663,8 @@ brown
 ## 	Exact binomial test
 ## 
 ## data:  3 and 38
-## number of successes = 3, number of trials = 38, p-value = 0.2634
-## alternative hypothesis: true probability of success is not equal to 0.1579
+## number of successes = 3, number of trials = 38, p-value = 0.2648
+## alternative hypothesis: true probability of success is not equal to 0.16
 ## 95 percent confidence interval:
 ##  0.01659 0.21377
 ## sample estimates:
@@ -673,7 +673,7 @@ brown
 ```
 
 ```r
-green<-binom.test(8,38,0.1578947)
+green<-binom.test(8,38,0.16)
 green
 ```
 
@@ -682,8 +682,8 @@ green
 ## 	Exact binomial test
 ## 
 ## data:  8 and 38
-## number of successes = 8, number of trials = 38, p-value = 0.3723
-## alternative hypothesis: true probability of success is not equal to 0.1579
+## number of successes = 8, number of trials = 38, p-value = 0.3771
+## alternative hypothesis: true probability of success is not equal to 0.16
 ## 95 percent confidence interval:
 ##  0.09554 0.37319
 ## sample estimates:
@@ -692,7 +692,7 @@ green
 ```
 
 ```r
-red<-binom.test(2,38,0.1578947)
+red<-binom.test(2,38,0.16)
 red
 ```
 
@@ -701,8 +701,8 @@ red
 ## 	Exact binomial test
 ## 
 ## data:  2 and 38
-## number of successes = 2, number of trials = 38, p-value = 0.07714
-## alternative hypothesis: true probability of success is not equal to 0.1579
+## number of successes = 2, number of trials = 38, p-value = 0.07667
+## alternative hypothesis: true probability of success is not equal to 0.16
 ## 95 percent confidence interval:
 ##  0.006439 0.177491
 ## sample estimates:
@@ -711,7 +711,7 @@ red
 ```
 
 ```r
-blue<-binom.test(8,38,0.1578947)
+blue<-binom.test(8,38,0.16)
 blue
 ```
 
@@ -720,8 +720,8 @@ blue
 ## 	Exact binomial test
 ## 
 ## data:  8 and 38
-## number of successes = 8, number of trials = 38, p-value = 0.3723
-## alternative hypothesis: true probability of success is not equal to 0.1579
+## number of successes = 8, number of trials = 38, p-value = 0.3771
+## alternative hypothesis: true probability of success is not equal to 0.16
 ## 95 percent confidence interval:
 ##  0.09554 0.37319
 ## sample estimates:
@@ -730,7 +730,7 @@ blue
 ```
 
 ```r
-yellow<-binom.test(8,38,0.1578947)
+yellow<-binom.test(8,38,0.16)
 yellow
 ```
 
@@ -739,8 +739,8 @@ yellow
 ## 	Exact binomial test
 ## 
 ## data:  8 and 38
-## number of successes = 8, number of trials = 38, p-value = 0.3723
-## alternative hypothesis: true probability of success is not equal to 0.1579
+## number of successes = 8, number of trials = 38, p-value = 0.3771
+## alternative hypothesis: true probability of success is not equal to 0.16
 ## 95 percent confidence interval:
 ##  0.09554 0.37319
 ## sample estimates:
@@ -749,7 +749,7 @@ yellow
 ```
 
 ```r
-orange<-binom.test(12, 38, 0.1578947)
+orange<-binom.test(12, 38, 0.16)
 orange
 ```
 
@@ -758,8 +758,8 @@ orange
 ## 	Exact binomial test
 ## 
 ## data:  12 and 38
-## number of successes = 12, number of trials = 38, p-value = 0.01303
-## alternative hypothesis: true probability of success is not equal to 0.1579
+## number of successes = 12, number of trials = 38, p-value = 0.01414
+## alternative hypothesis: true probability of success is not equal to 0.16
 ## 95 percent confidence interval:
 ##  0.1750 0.4865
 ## sample estimates:
@@ -786,17 +786,18 @@ answerpeanut<-chisqpeanut$statistic
 pvaluepeanut<-chisqpeanut$p.value
 ```
 Answer: 
-The null hypothesis of this test is that all colors are evenly distributed and that their proportion is .1578947 in the bag of M&Ms.
+The null hypothesis of this test is that all colors are evenly distributed in this bag of M&Ms and that the proportion of all colors is .1578947 (observed) or 1/6th of the sample (population).
 
 The alternative hypothesis is that one of the color proportions is different. 
 
 My tests failed to reject the null hypothesis.
 the chisquared test was 10.9474  with a p value of 0.0524
 
-this test was not significant at the .05 level of significance. However, it was close to significance so I performed other tests.
+This test is not significant at the 0.05 level of significance. However, it is close to 0.05.  
 
 Graphic comparison of the poportions of each color in the bag with a uniform distribution of colors suggests that the distributions could be uneven.  
 
-I also did binomial tests for each color against the uniform distribution. Some colors were significantly different from the unifrom distribution, however some were not. 
+I also did binomial tests for each color against the uniform distribution. Only orange was significantly different from the expected porportion. If there was 10 orange instead of 12, this would not have been significant.
 
-Therefore I am going to say that the colors are not distributed significantly differently from the uniform distirubtion in this sample. 
+Since there is a trend towards nonsignificant in the bionomial tests, and the chisquare test gave non-significance, I am going to go with the chisquared results and say that the colors are not distributed significantly differently from the uniform distirubtion in this sample. 
+
