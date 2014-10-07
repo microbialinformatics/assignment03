@@ -548,6 +548,31 @@ Answer: without the continuity correction, my chi suqare test statistic was 18.5
       
 
 ```r
+#pick k=df=1 random variable from the normal dist
+#replicate this 1000 times
+repchisqplot<-replicate(1000,(sum(rnorm(1))^2))
+summary(repchisqplot)
+```
+
+```
+##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##   0.000   0.098   0.402   0.976   1.190  10.900
+```
+
+```r
+#find numbers that are greater than our test statistic
+larger<-which(repchisqplot>16.2738)
+#there are no instances where we sampled values greater than the test statistic.
+```
+ 
+* Compare your Chi-Squared distributions to what you might get      from the appropriate built in R functions
+
+Answer: there are no  instances where a test statistic drawn from the chi squared df=1 distribution were larger than the test statistic that I calculated with the built in functions.
+
+ * Based on your distribution calculate p-values
+ 
+
+```r
 df<-(nrow(pooled)-1)*(ncol(pooled)-1)
 my.chi.sq<-uncorrected
 my.chi.sq
@@ -563,33 +588,30 @@ plot(seq(0,20,0.05), dchisq(seq(0,20,0.05), df=df), type="l", xlab="chisquared t
 arrows(x0=my.chi.sq, x1=my.chi.sq, y0=0.4, y1=0.05, lwd=2, col="red")
 ```
 
-![plot of chunk unnamed-chunk-9](./README_files/figure-html/unnamed-chunk-9.png) 
-* Compare your Chi-Squared distributions to what you might get      from the appropriate built in R functions
- * Based on your distribution calculate p-values
- 
+![plot of chunk unnamed-chunk-10](./README_files/figure-html/unnamed-chunk-101.png) 
 
 ```r
-p<-replicate(1000, dchisq(pooled, df))
-sum(p<0.05)/1000
+#calculate p values based on my distribution
+pvalchisq<-pnorm(repchisqplot)
+#compare to p value from r chi squared calculations
+many<-which(pvalchisq<5.482e-05)
+manyone<-which(pvalchisq<0.05)
+#plot p values to observe their distribution
+hist(pnorm(repchisqplot), main="p-values obvserved,Chisquared df=1", xlab="p value")
 ```
 
-```
-## [1] 4
-```
-
-```r
-repPval<-summary(p)
-mp<-mean(p)
-```
+![plot of chunk unnamed-chunk-10](./README_files/figure-html/unnamed-chunk-102.png) 
 
       * How does your p-value compare to what you saw using the built in functions? Explain your observations.
   
-Answer: With the built in chisquared test with yates continuity correction, the p-value was 5.482e-05, without the yates continuity correction, p-value was 1.632e-05. When I replicated the density using dchisq, the p values I achieved were both smaller and larger than those achieved by the built in r functions:
-6.13 &times; 10<sup>-14</sup>, 4.27 &times; 10<sup>-5</sup>, 7.71 &times; 10<sup>-5</sup>, 0.0037, 0.0037, 0.0146 The mean p value of these functions was 0.0037.
-
-We expect there to be variation in the p values because these probabilities are sampled from the chi squared distribution with 1 degree of freedom and the chi square test examines if the relationship we see between colonization by cancer status is due to random variation or chance alone. However, all p values observed were <0.05, further indicating that we can reject the null hypothesis of no association.  
+Answer: With the built in chisquared test with yates continuity correction, the p-values were highly significant at 5.482e-05, and without the yates continuity correction, 1.632e-05. This indicates that on repeat sampling, there is a very very small chance that these differences between groups would be ovserved by change or random variation alone. When I replicated choosing 1000 samples from the chisquared distribution with DF=1, the Chisquare values I sampled were all smaller than the chisquared test statistic I calculated with r's built in functions. The corresponding p values I observed were in no,  , instances equal to or smaller than the built in function p values or 0.05. This failure to detect significance on repeat sampling makes sense given the highly significant p values calculated from the data with the built in r functions. 
       
 
 
 
 6\.  Get a bag of Skittles or M&Ms.  Are the candies evenly distributed amongst the different colors?  Justify your conclusion.
+
+```r
+#creating matrix with my 
+```
+

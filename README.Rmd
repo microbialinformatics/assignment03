@@ -172,7 +172,6 @@ repchisqplot<-replicate(1000,(sum(rnorm(1))^2))
 summary(repchisqplot)
 #find numbers that are greater than our test statistic
 larger<-which(repchisqplot>16.2738)
-larger
 #there are no instances where we sampled values greater than the test statistic.
 ```
  
@@ -193,8 +192,8 @@ arrows(x0=my.chi.sq, x1=my.chi.sq, y0=0.4, y1=0.05, lwd=2, col="red")
 #calculate p values based on my distribution
 pvalchisq<-pnorm(repchisqplot)
 #compare to p value from r chi squared calculations
-which(pvalchisq<5.482e-05)
-which(pvalchisq<0.05)
+many<-which(pvalchisq<5.482e-05)
+manyone<-which(pvalchisq<0.05)
 #plot p values to observe their distribution
 hist(pnorm(repchisqplot), main="p-values obvserved,Chisquared df=1", xlab="p value")
 
@@ -202,7 +201,7 @@ hist(pnorm(repchisqplot), main="p-values obvserved,Chisquared df=1", xlab="p val
 
       * How does your p-value compare to what you saw using the built in functions? Explain your observations.
   
-Answer: With the built in chisquared test with yates continuity correction, the p-values were highly significant at 5.482e-05, and without the yates continuity correction, 1.632e-05. This indicates that on repeat sampling, there is a very very small chance that these differences between groups would be ovserved by change or random variation alone. When I replicated choosing 1000 samples from the chisquared distribution with DF=1, the Chisquare values I sampled were all smaller than the chisquared test statistic I calculated with r's built in functions. The corresponding p values I observed were in no instances equal to or smaller than the built in function p values or 0.05. This failure to detect significance on repeat sampling makes sense given the highly significant p values calculated from the data with the built in r functions. 
+Answer: With the built in chisquared test with yates continuity correction, the p-values were highly significant at 5.482e-05, and without the yates continuity correction, 1.632e-05. This indicates that on repeat sampling, there is a very very small chance that these differences between groups would be ovserved by change or random variation alone. When I replicated choosing 1000 samples from the chisquared distribution with DF=1, the Chisquare values I sampled were all smaller than the chisquared test statistic I calculated with r's built in functions. The corresponding p values I observed were in no, instances equal to or smaller than the built in function p values or 0.05. This failure to detect significance on repeat sampling makes sense given the highly significant p values calculated from the data with the built in r functions. 
       
 ```{r}
 ```
