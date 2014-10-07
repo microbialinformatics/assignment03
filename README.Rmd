@@ -45,6 +45,11 @@ lines(mouse343$axis1,mouse343$axis2,type="l",col="blue")
 lines(mouse361$axis1,mouse361$axis2,type="l",col="red")
 lines(mouse387$axis1,mouse387$axis2,type="l",col="green")
 lines(mouse389$axis1,mouse389$axis2,type="l",col="brown")
+init337<-head(mouse337,n=1)
+end337<-tail(mouse337,n=1)
+points(init337$axis1,init337$axis2,pch=16,col="black")
+points(end337$axis1,end337$axis2,pch=15,col="black")
+
 ```
 
 3.  On pg. 57 there is a formula for the probability of making x observations after n trials when there is a probability p of the observation.  For this exercise, assume x=2, n=10, and p=0.5.  Using R, calculate the probability of x using this formula and the appropriate built in function. Compare it to the results we obtained in class when discussing the sex ratios of mice.
