@@ -172,23 +172,21 @@ my.chi.sq
 plot(seq(0,20,0.05), dchisq(seq(0,20,0.05), df=df), type="l", xlab="chisquared test statistic", ylab="probability with 1 defree of freedom")
 #adding arrows for my chi square test statistic
 arrows(x0=my.chi.sq, x1=my.chi.sq, y0=0.4, y1=0.05, lwd=2, col="red")
-
-
-
-  
-
 ```
       * Compare your Chi-Squared distributions to what you might get from the appropriate built in R functions
       * Based on your distribution calculate p-values
  
 ```{r}
-
+p<-replicate(1000, dchisq(pooled, df))
+p
+sum(p<0.05)/1000
+repPval<-summary(p)
 ```
 
       
       * How does your p-value compare to what you saw using the built in functions? Explain your observations.
   
-Answer: With the built in chisquared test with yates continuity correction, the p-value was 5.482e-05, without the yates continuity correction, p-value was 1.632e-05. 
+Answer: With the built in chisquared test with yates continuity correction, the p-value was 5.482e-05, without the yates continuity correction, p-value was 1.632e-05. When I replicated the density using dchisq, the p values I achieved were similar to those achieved by the built in r functions: `r repPval` 
       
 ```{r}
 
