@@ -175,9 +175,11 @@ larger<-which(repchisqplot>16.2738)
 larger
 #there are no instances where we sampled values greater than the test statistic.
 ```
-Answer: there ar eno instances where a test statistic drawn from the chi squared df=1 distribution were larger than the test statistic that I calculated. 
-
+ 
 * Compare your Chi-Squared distributions to what you might get      from the appropriate built in R functions
+
+Answer: there are no instances where a test statistic drawn from the chi squared df=1 distribution were larger than the test statistic that I calculated with the built in functions.
+
  * Based on your distribution calculate p-values
  
 ```{r}
@@ -187,19 +189,20 @@ my.chi.sq
 plot(seq(0,20,0.05), dchisq(seq(0,20,0.05), df=df), type="l", xlab="chisquared test statistic", ylab="probability with 1 defree of freedom")
 #adding arrows for my chi square test statistic
 arrows(x0=my.chi.sq, x1=my.chi.sq, y0=0.4, y1=0.05, lwd=2, col="red")
-# not sure if I need this code below
-p<-replicate(1000, dchisq(pooled, df))
-sum(p<0.05)/1000
-repPval<-summary(p)
-mp<-mean(p)
+
+#calculate p values based on my distribution
+pvalchisq<-pnorm(repchisqplot)
+#compare to p value from r chi squared calculations
+which(pvalchisq<5.482e-05)
+which(pvalchisq<0.05)
+#plot p values to observe their distribution
+hist(pnorm(repchisqplot), main="p-values obvserved,Chisquared df=1", xlab="p value")
+
 ```
 
       * How does your p-value compare to what you saw using the built in functions? Explain your observations.
   
-Answer: With the built in chisquared test with yates continuity correction, the p-value was 5.482e-05, without the yates continuity correction, p-value was 1.632e-05. When I replicated the density using dchisq, the p values I achieved were both smaller and larger than those achieved by the built in r functions:
-`r repPval` The mean p value of these functions was `r mp`.
-
-We expect there to be variation in the p values because these probabilities are sampled from the chi squared distribution with 1 degree of freedom and the chi square test examines if the relationship we see between colonization by cancer status is due to random variation or chance alone. However, all p values observed were <0.05, further indicating that we can reject the null hypothesis of no association.  
+Answer: With the built in chisquared test with yates continuity correction, the p-values were highly significant at 5.482e-05, and without the yates continuity correction, 1.632e-05. This indicates that on repeat sampling, there is a very very small chance that these differences between groups would be ovserved by change or random variation alone. When I replicated choosing 1000 samples from the chisquared distribution with DF=1, the Chisquare values I sampled were all smaller than the chisquared test statistic I calculated with r's built in functions. The corresponding p values I observed were in no instances equal to or smaller than the built in function p values or 0.05. This failure to detect significance on repeat sampling makes sense given the highly significant p values calculated from the data with the built in r functions. 
       
 ```{r}
 ```
