@@ -36,10 +36,26 @@ title(main="PCH Symbol",xlab="PCH Value")
 
 ```r
 germfree<-read.table(file="germfree.nmds.axes", header=T)
-plot(germfree$axis2~germfree$axis1, xlab="NMDS Axis 1", ylab="NMDS Axis 2")
+plot(germfree$axis2~germfree$axis1, xlab="NMDS Axis 1", ylab="NMDS Axis 2", lty=2, type='n')
+
+points((germfree[germfree$mouse==337 & germfree$day==1,][3]), (germfree[germfree$mouse==337 & germfree$day==1,][4]), pch=16, col="black", cex=1.5)
+points((germfree[germfree$mouse==337 & germfree$day==20,][3]), (germfree[germfree$mouse==337 & germfree$day==20,][4]), pch=15, col="black", cex=1.5)
+m337 <- as.matrix(germfree[germfree$mouse==337,])
+lines((m337[,3]), (m337[,4]), col="black", lwd=2)
+
+points((germfree[germfree$mouse==343 & germfree$day==1,][3]), (germfree[germfree$mouse==343 & germfree$day==1,][4]), pch=16, col="blue", cex=1.5)
+points((germfree[germfree$mouse==343 & germfree$day==21,][3]), (germfree[germfree$mouse==343 & germfree$day==21,][4]), pch=15, col="blue", cex=1.5)
+m343 <- as.matrix(germfree[germfree$mouse==343,])
+lines((m343[,3]), (m343[,4]), col="blue", lwd=2)
+
+points((germfree[germfree$mouse==361 & germfree$day==1,][3]), (germfree[germfree$mouse==361 & germfree$day==1,][4]), pch=16, col="red", cex=1.5)
+points((germfree[germfree$mouse==361 & germfree$day==21,][3]), (germfree[germfree$mouse==361 & germfree$day==21,][4]), pch=15, col="red", cex=1.5)
+m361 <- as.matrix(germfree[germfree$mouse==361,])
+lines((m361[,3]), (m361[,4]), col="red", lwd=2)
 ```
 
 ![plot of chunk unnamed-chunk-2](./README_files/figure-html/unnamed-chunk-2.png) 
+
 
 
 ####3.  
