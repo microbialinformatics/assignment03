@@ -35,35 +35,38 @@ title(main="PCH Symbol",xlab="PCH Value")
     <img src="beta.png", style="margin:0px auto;display:block" width="700">
     
     
-```{r}
+```{r, echo=FALSE, fig.width=9, fig.height=9}
 germfree<-read.table(file="germfree.nmds.axes", header=T)
 plot(germfree$axis2~germfree$axis1, xlab="NMDS Axis 1", ylab="NMDS Axis 2", lty=2, type='n')
 
-points((germfree[germfree$mouse==337 & germfree$day==1,][3]), (germfree[germfree$mouse==337 & germfree$day==1,][4]), pch=16, col="black", cex=1.5)
-points((germfree[germfree$mouse==337 & germfree$day==20,][3]), (germfree[germfree$mouse==337 & germfree$day==20,][4]), pch=15, col="black", cex=1.5)
+points((germfree[germfree$mouse==337 & germfree$day==1,][3]), (germfree[germfree$mouse==337 & germfree$day==1,][4]), pch=16, col="black", cex=2)
+points((germfree[germfree$mouse==337 & germfree$day==20,][3]), (germfree[germfree$mouse==337 & germfree$day==20,][4]), pch=15, col="black", cex=2)
 m337 <- as.matrix(germfree[germfree$mouse==337,])
 lines((m337[,3]), (m337[,4]), col="black", lwd=2)
 
-points((germfree[germfree$mouse==343 & germfree$day==1,][3]), (germfree[germfree$mouse==343 & germfree$day==1,][4]), pch=16, col="blue", cex=1.5)
-points((germfree[germfree$mouse==343 & germfree$day==21,][3]), (germfree[germfree$mouse==343 & germfree$day==21,][4]), pch=15, col="blue", cex=1.5)
+points((germfree[germfree$mouse==343 & germfree$day==1,][3]), (germfree[germfree$mouse==343 & germfree$day==1,][4]), pch=16, col="blue", cex=2)
+points((germfree[germfree$mouse==343 & germfree$day==21,][3]), (germfree[germfree$mouse==343 & germfree$day==21,][4]), pch=15, col="blue", cex=2)
 m343 <- as.matrix(germfree[germfree$mouse==343,])
 lines((m343[,3]), (m343[,4]), col="blue", lwd=2)
 
-points((germfree[germfree$mouse==361 & germfree$day==1,][3]), (germfree[germfree$mouse==361 & germfree$day==1,][4]), pch=16, col="red", cex=1.5)
-points((germfree[germfree$mouse==361 & germfree$day==21,][3]), (germfree[germfree$mouse==361 & germfree$day==21,][4]), pch=15, col="red", cex=1.5)
+points((germfree[germfree$mouse==361 & germfree$day==1,][3]), (germfree[germfree$mouse==361 & germfree$day==1,][4]), pch=16, col="red", cex=2)
+points((germfree[germfree$mouse==361 & germfree$day==21,][3]), (germfree[germfree$mouse==361 & germfree$day==21,][4]), pch=15, col="red", cex=2)
 m361 <- as.matrix(germfree[germfree$mouse==361,])
 lines((m361[,3]), (m361[,4]), col="red", lwd=2)
 
 
-points((germfree[germfree$mouse==387 & germfree$day==1,][3]), (germfree[germfree$mouse==387 & germfree$day==1,][4]), pch=16, col="green", cex=1.5)
-points((germfree[germfree$mouse==387 & germfree$day==21,][3]), (germfree[germfree$mouse==387 & germfree$day==21,][4]), pch=15, col="green", cex=1.5)
+points((germfree[germfree$mouse==387 & germfree$day==1,][3]), (germfree[germfree$mouse==387 & germfree$day==1,][4]), pch=16, col="green", cex=2)
+points((germfree[germfree$mouse==387 & germfree$day==21,][3]), (germfree[germfree$mouse==387 & germfree$day==21,][4]), pch=15, col="green", cex=2)
 m387 <- as.matrix(germfree[germfree$mouse==387,])
 lines((m387[,3]), (m387[,4]), col="green", lwd=2)
 
-points((germfree[germfree$mouse==389 & germfree$day==1,][3]), (germfree[germfree$mouse==389 & germfree$day==1,][4]), pch=16, col="brown", cex=1.5)
-points((germfree[germfree$mouse==389 & germfree$day==21,][3]), (germfree[germfree$mouse==389 & germfree$day==21,][4]), pch=15, col="brown", cex=1.5)
+points((germfree[germfree$mouse==389 & germfree$day==1,][3]), (germfree[germfree$mouse==389 & germfree$day==1,][4]), pch=16, col="brown", cex=2)
+points((germfree[germfree$mouse==389 & germfree$day==21,][3]), (germfree[germfree$mouse==389 & germfree$day==21,][4]), pch=15, col="brown", cex=2)
 m389 <- as.matrix(germfree[germfree$mouse==389,])
-lines((m389[,3]), (m389[,4]), col="brown", lwd=2)
+lines((m389[,3]), (m389[,4]), col="brown", lwd=2, lty=1)
+
+legend(0.009816558,-0.169702, c("Mouse 337", "Mouse 343", "Mouse 361", "Mouse 387", "Mouse 389"), col=c("black", "blue", "red", "green", "brown"), lty=1, lwd=3)
+
 
 ```
 
