@@ -52,6 +52,17 @@ points((germfree[germfree$mouse==361 & germfree$day==1,][3]), (germfree[germfree
 points((germfree[germfree$mouse==361 & germfree$day==21,][3]), (germfree[germfree$mouse==361 & germfree$day==21,][4]), pch=15, col="red", cex=1.5)
 m361 <- as.matrix(germfree[germfree$mouse==361,])
 lines((m361[,3]), (m361[,4]), col="red", lwd=2)
+
+
+points((germfree[germfree$mouse==387 & germfree$day==1,][3]), (germfree[germfree$mouse==387 & germfree$day==1,][4]), pch=16, col="green", cex=1.5)
+points((germfree[germfree$mouse==387 & germfree$day==21,][3]), (germfree[germfree$mouse==387 & germfree$day==21,][4]), pch=15, col="green", cex=1.5)
+m387 <- as.matrix(germfree[germfree$mouse==387,])
+lines((m387[,3]), (m387[,4]), col="green", lwd=2)
+
+points((germfree[germfree$mouse==389 & germfree$day==1,][3]), (germfree[germfree$mouse==389 & germfree$day==1,][4]), pch=16, col="brown", cex=1.5)
+points((germfree[germfree$mouse==389 & germfree$day==21,][3]), (germfree[germfree$mouse==389 & germfree$day==21,][4]), pch=15, col="brown", cex=1.5)
+m389 <- as.matrix(germfree[germfree$mouse==389,])
+lines((m389[,3]), (m389[,4]), col="brown", lwd=2)
 ```
 
 ![plot of chunk unnamed-chunk-2](./README_files/figure-html/unnamed-chunk-2.png) 
