@@ -533,18 +533,16 @@ regchisq
 ```
 
 ```r
-correct<-(abs(expected-pooled)-.5)
-mychi.sq<- (correct/expected)
-correctedchisq<-sum(mychi.sq)
-correctedchisq
+uncorrected<-sum((abs(expected-pooled)-0.5)^2/(expected))
+uncorrected
 ```
 
 ```
-## [1] 2.227
+## [1] 16.27
 ```
      * Calculate the expected count matrix and calculate the Chi-Squared test statistics. Figure out how to get your test statistic to match Rs default statistic.
       
-Answer: without the continuity correction, my chi suqare test statistic was 18.5763 ,  After deleting the correction for continuity, my chi square value is 2.2265 , this is identical to r's default parameter chisquare test statistic.
+Answer: without the continuity correction, my chi suqare test statistic was 18.5763 ,  After deleting the correction for continuity, my chi square value is 16.2736, this is identical to r's default parameter chisquare test statistic.
  
       *	Generate a Chi-Squared distribution with approporiate degrees of freedom by the method that was discussed in class (hint: you may consider using the `replicate` command)
       
