@@ -57,7 +57,7 @@ points(x=e$axis1[1],y=e$axis2[1],type="p",pch=16,col="sienna",cex=2)
 points(x=a$axis1[20],y=a$axis2[20],type="p",pch=15,col="black",cex=2)
 points(x=b$axis1[21],y=b$axis2[21],type="p",pch=15,col="blue",cex=2)
 points(x=c$axis1[20],y=c$axis2[20],type="p",pch=15,col="red",cex=2)
-points(x=d$axis1[20],y=d$axis2[20],type="p",pch=15,col="green",cex=2)
+points(x=d$axis1[21],y=d$axis2[21],type="p",pch=15,col="green",cex=2)
 points(x=e$axis1[21],y=e$axis2[21],type="p",pch=15,col="sienna",cex=2)
 ```
 
