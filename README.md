@@ -38,7 +38,7 @@ axis(1, at=seq(1,25, by=1), col="black")
 ![plot of chunk unnamed-chunk-2](./README_files/figure-html/unnamed-chunk-2.png) 
 
 ```
-2.  Using the `germfree.nmds.axes` data file available in this respositry, generate a plot that looks like this. The points are connected in the order they were sampled with the circle representing the beginning ad the square the end of the time course:
+2.  Using the `germfree.nmds.axes` data file available in this respositry, generate a plot that looks like this. The points are connected in the order they were sampled with the circle representing the beginning and the square the end of the time course:
 
     <img src="beta.png", style="margin:0px auto;display:block" width="700">
 
@@ -291,15 +291,35 @@ sortedgermfree
 ```
 
 ```r
+#renaming factor mouse name
+names(sortedgermfree)<-c("mouse","day","axis1","axis2","mouse.f")
 #creating plot
-plot((sortedgermfree$axis2~sortedgermfree$axis1), type="l", xlim = c(-.2,.6), ylim =c(-.4,0.4), ylab= "NMDS Axis 2", xlab="NMDS Axis 1" , par(mar=c(7,5,1.5,1)), asp=2) 
-lines(sortedgermfree$new.col=="337", col="red")
-
-lines(sortedgermfree$mouse=="337", col="black")
-lines(sortedgermfree$mouse=="343", col="blue")
-lines(sortedgermfree$mouse=="361", col="red")
-lines(sortedgermfree$mouse=="387", col="green")
-lines(sortedgermfree$mouse=="389", col="brown")
+plot(sortedgermfree[sortedgermfree$mouse.f=="337", "axis2"]~sortedgermfree[sortedgermfree$mouse.f=="337", "axis1"], type="l", col="black", xlim = c(-.2,.6), ylim =c(-.4,0.4), ylab= "NMDS Axis 2", xlab="NMDS Axis 1", par(mar=c(4,4,1,1)))
+#adding mouse 343
+lines(sortedgermfree[sortedgermfree$mouse.f=="343", "axis2"]~sortedgermfree[sortedgermfree$mouse.f=="343", "axis1"], type="l", col="blue")
+#adding mouse 361
+lines(sortedgermfree[sortedgermfree$mouse.f=="361", "axis2"]~sortedgermfree[sortedgermfree$mouse.f=="361", "axis1"], type="l", col="red")
+#adding mouse 387
+lines(sortedgermfree[sortedgermfree$mouse.f=="387", "axis2"]~sortedgermfree[sortedgermfree$mouse.f=="387", "axis1"], type="l", col="green")
+#adding mouse 389
+lines(sortedgermfree[sortedgermfree$mouse.f=="389", "axis2"]~sortedgermfree[sortedgermfree$mouse.f=="389", "axis1"], type="l", col="brown")
+#adding points 337
+points(-0.364076,0.477973, col="black", pch=15)
+points(-0.281808,-0.283736, col="black", pch=16)
+#adding points 343
+points(-0.313138,0.500614, col="blue", pch=15)
+points(-0.173750,-0.160445, col="blue", pch=16)
+#adding points 361
+points(-0.288620,0.492443, col="red", pch=15)
+points(-0.179001,-0.140312, col="red", pch=16)
+#adding points 387
+points(-0.233758 ,0.333411, col="green", pch=15)
+points(-0.233758,-0.212042, col="green", pch=16)
+#adding points 389
+points(-0.175003,0.333411, col="brown", pch=15)
+points(-0.221247,-0.266423, col="brown", pch=16)
+#adding legend
+legend(0,0,c("Mouse 337","Mouse 343","Mouse 361","Mouse 387","Mouse 389"), lty=1, col=c("black","blue", "red","green","brown"))
 ```
 
 ![plot of chunk unnamed-chunk-3](./README_files/figure-html/unnamed-chunk-3.png) 
@@ -449,7 +469,7 @@ chisquare.test
 ## data:  pooled
 ## X-squared = 16.27, df = 1, p-value = 5.482e-05
 ```
-Answer: With all three tests there appears to be a significant difference in the proportion of patients who with *F. nucleatum* by cancer status.  
+Answer: With all three tests there appears to be a significant difference in the proportion of patients with *F. nucleatum* by cancer status.  
 
      * Without using the built in chi-squared test function, replicate the 2x2 study design in the last problem for the Chi-Squared Test...
 
@@ -556,7 +576,7 @@ summary(repchisqplot)
 
 ```
 ##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-##   0.000   0.098   0.402   0.976   1.190  10.900
+##   0.000   0.127   0.484   1.000   1.310   9.220
 ```
 
 ```r
@@ -793,11 +813,17 @@ The alternative hypothesis is that one of the color proportions is different.
 My tests failed to reject the null hypothesis.
 the chisquared test was 10.9474  with a p value of 0.0524
 
-This test is not significant at the 0.05 level of significance. However, it is close to 0.05.  
+This test is not significant at the 0.05 level of significance. However, it is close to 0.05. 
 
 Graphic comparison of the poportions of each color in the bag with a uniform distribution of colors suggests that the distributions could be uneven.  
 
-I also did binomial tests for each color against the uniform distribution. Only orange was significantly different from the expected porportion. If there was 10 orange instead of 12, this would not have been significant.
+I also did binomial tests for each color against the uniform distribution. Orange was significantly different from the expected porportion. This means that I would reject the null hypothesis in favor of the alternative by this testing method. If there was 10 orange instead of 12, this would not have been significant.
+
+The conclusions of my tests disagree; chi square I failed to reject the null, binomial, I rejected the null. This is an example of how you can misuse multiple tests to get the answer you want. 
 
 Since there is a trend towards nonsignificant in the bionomial tests, and the chisquare test gave non-significance, I am going to go with the chisquared results and say that the colors are not distributed significantly differently from the uniform distirubtion in this sample. 
 
+
+sources:
+[prob 2](https://stat.ethz.ch/pipermail/r-help/2007-September/141332.html)
+[prob 2](http://www.statmethods.net/management/variables.html)

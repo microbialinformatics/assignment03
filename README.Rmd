@@ -56,17 +56,36 @@ mousefactor<-as.factor(sortedgermfree$mouse)
 mousefactor
 sortedgermfree$new.col<-mousefactor
 sortedgermfree
+#renaming factor mouse name
+names(sortedgermfree)<-c("mouse","day","axis1","axis2","mouse.f")
 #creating plot
-plot((sortedgermfree$axis2~sortedgermfree$axis1), type="l", xlim = c(-.2,.6), ylim =c(-.4,0.4), ylab= "NMDS Axis 2", xlab="NMDS Axis 1" , par(mar=c(8,8,1,6)))
+plot(sortedgermfree[sortedgermfree$mouse.f=="337", "axis2"]~sortedgermfree[sortedgermfree$mouse.f=="337", "axis1"], type="l", col="black", xlim = c(-.2,.6), ylim =c(-.4,0.4), ylab= "NMDS Axis 2", xlab="NMDS Axis 1", par(mar=c(4,4,1,1)))
+#adding mouse 343
+lines(sortedgermfree[sortedgermfree$mouse.f=="343", "axis2"]~sortedgermfree[sortedgermfree$mouse.f=="343", "axis1"], type="l", col="blue")
+#adding mouse 361
+lines(sortedgermfree[sortedgermfree$mouse.f=="361", "axis2"]~sortedgermfree[sortedgermfree$mouse.f=="361", "axis1"], type="l", col="red")
+#adding mouse 387
+lines(sortedgermfree[sortedgermfree$mouse.f=="387", "axis2"]~sortedgermfree[sortedgermfree$mouse.f=="387", "axis1"], type="l", col="green")
+#adding mouse 389
+lines(sortedgermfree[sortedgermfree$mouse.f=="389", "axis2"]~sortedgermfree[sortedgermfree$mouse.f=="389", "axis1"], type="l", col="brown")
+#adding points 337
+points(-0.364076,0.477973, col="black", pch=15)
+points(-0.281808,-0.283736, col="black", pch=16)
+#adding points 343
+points(-0.313138,0.500614, col="blue", pch=15)
+points(-0.173750,-0.160445, col="blue", pch=16)
+#adding points 361
+points(-0.288620,0.492443, col="red", pch=15)
+points(-0.179001,-0.140312, col="red", pch=16)
+#adding points 387
+points(-0.233758 ,0.333411, col="green", pch=15)
+points(-0.233758,-0.212042, col="green", pch=16)
+#adding points 389
+points(-0.175003,0.333411, col="brown", pch=15)
+points(-0.221247,-0.266423, col="brown", pch=16)
+#adding legend
 legend(0,0,c("Mouse 337","Mouse 343","Mouse 361","Mouse 387","Mouse 389"), lty=1, col=c("black","blue", "red","green","brown"))
-points(sortedgermfree$day==, sortedgermfree$axis1==0.477973, col="black", pch=15)
-points(sortedgermfree$mouse=="343", sortedgermfree$axis1==0.500614, col="blue", pch=15)
-points(sortedgermfree$mouse=="337", sortedgermfree$axis1==0.477973, col="black", pch=15)
-points(sortedgermfree$mouse=="337", sortedgermfree$axis1==0.477973, col="black", pch=15)
-lines(sortedgermfree$mouse=="343", col="blue")
-lines(sortedgermfree$mouse=="361", col="red")
-lines(sortedgermfree$mouse=="387", col="green")
-lines(sortedgermfree$mouse=="389", col="brown")
+
 
 ```
 
@@ -255,14 +274,17 @@ The alternative hypothesis is that one of the color proportions is different.
 My tests failed to reject the null hypothesis.
 the chisquared test was `r answerpeanut`  with a p value of `r pvaluepeanut`
 
-This test is not significant at the 0.05 level of significance. However, it is close to 0.05.  
+This test is not significant at the 0.05 level of significance. However, it is close to 0.05. 
 
 Graphic comparison of the poportions of each color in the bag with a uniform distribution of colors suggests that the distributions could be uneven.  
 
-I also did binomial tests for each color against the uniform distribution. Only orange was significantly different from the expected porportion. If there was 10 orange instead of 12, this would not have been significant.
+I also did binomial tests for each color against the uniform distribution. Orange was significantly different from the expected porportion. This means that I would reject the null hypothesis in favor of the alternative by this testing method. If there was 10 orange instead of 12, this would not have been significant.
+
+The conclusions of my tests disagree; chi square I failed to reject the null, binomial, I rejected the null. This is an example of how you can misuse multiple tests to get the answer you want. 
 
 Since there is a trend towards nonsignificant in the bionomial tests, and the chisquare test gave non-significance, I am going to go with the chisquared results and say that the colors are not distributed significantly differently from the uniform distirubtion in this sample. 
 
 
 sources:
 [prob 2](https://stat.ethz.ch/pipermail/r-help/2007-September/141332.html)
+[prob 2](http://www.statmethods.net/management/variables.html)
