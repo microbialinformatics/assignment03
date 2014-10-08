@@ -13,7 +13,21 @@ This assignment is due on October 10th.
 1.  Generate a plot that contains the different pch symbols. Investigate the knitr code chunk options to see whether you can have a pdf version of the image produced so you can print it off for yoru reference. It should look like this:
 
     <img src="pch.png", style="margin:0px auto;display:block" width="500">
+    
 
+```r
+x <- 1:25
+y <- rep(1,25)
+pdf("PCHSymbols.pdf")
+plot(x,y,pch=1:25, main="PCH Symbols", xlab="PCH Value", ylab="", axes=F)
+
+#Add x-axis
+axis(side=1,at=1:25)
+
+#Add y-axis
+axis(side=1, at=1:25, col="grey", label=F, tck=1)
+
+```
 
 2.  Using the `germfree.nmds.axes` data file available in this respositry, generate a plot that looks like this. The points are connected in the order they were sampled with the circle representing the beginning ad the square the end of the time course:
 
