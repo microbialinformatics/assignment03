@@ -59,7 +59,10 @@ sortedgermfree
 #creating plot
 plot((sortedgermfree$axis2~sortedgermfree$axis1), type="l", xlim = c(-.2,.6), ylim =c(-.4,0.4), ylab= "NMDS Axis 2", xlab="NMDS Axis 1" , par(mar=c(8,8,1,6)))
 legend(0,0,c("Mouse 337","Mouse 343","Mouse 361","Mouse 387","Mouse 389"), lty=1, col=c("black","blue", "red","green","brown"))
-lines(sortedgermfree$mouse=="337", col="black")
+points(sortedgermfree$day==, sortedgermfree$axis1==0.477973, col="black", pch=15)
+points(sortedgermfree$mouse=="343", sortedgermfree$axis1==0.500614, col="blue", pch=15)
+points(sortedgermfree$mouse=="337", sortedgermfree$axis1==0.477973, col="black", pch=15)
+points(sortedgermfree$mouse=="337", sortedgermfree$axis1==0.477973, col="black", pch=15)
 lines(sortedgermfree$mouse=="343", col="blue")
 lines(sortedgermfree$mouse=="361", col="red")
 lines(sortedgermfree$mouse=="387", col="green")
@@ -260,3 +263,6 @@ I also did binomial tests for each color against the uniform distribution. Only 
 
 Since there is a trend towards nonsignificant in the bionomial tests, and the chisquare test gave non-significance, I am going to go with the chisquared results and say that the colors are not distributed significantly differently from the uniform distirubtion in this sample. 
 
+
+sources:
+[prob 2](https://stat.ethz.ch/pipermail/r-help/2007-September/141332.html)
