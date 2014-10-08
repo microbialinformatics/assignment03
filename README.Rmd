@@ -222,7 +222,7 @@ hist(pnorm(repchisqplot), main="p-values obvserved,Chisquared df=1", xlab="p val
 
       * How does your p-value compare to what you saw using the built in functions? Explain your observations.
   
-Answer: With the built in chisquared test with yates continuity correction, the p-values were highly significant at 5.482e-05, and without the yates continuity correction, 1.632e-05. This indicates that on repeat sampling, there is a very very small chance that these differences between groups would be ovserved by change or random variation alone. When I replicated choosing 1000 samples from the chisquared distribution with DF=1, the Chisquare values I sampled were all smaller than the chisquared test statistic I calculated with r's built in functions. The corresponding p values I observed were in no, instances equal to or smaller than the built in function p values or 0.05. This failure to detect significance on repeat sampling makes sense given the highly significant p values calculated from the data with the built in r functions. 
+Answer: With the built in chisquared test with yates continuity correction, the p-values were highly significant at 5.482e-05, and without the yates continuity correction, 1.632e-05. This indicates that on repeat sampling, there is a very very small chance that these differences between groups would be ovserved by change or random variation alone. When I replicated choosing 1000 samples from the chisquared distribution with DF=1, the Chisquare values I sampled were all smaller than the chisquared test statistic I calculated with r's built in functions. The corresponding p values I observed were in no instances equal to or smaller than the built in function p values or 0.05. This failure to detect significance on repeat sampling makes sense given the highly significant p values calculated from the data with the built in r functions. 
       
 ```{r}
 ```
@@ -282,7 +282,7 @@ I also did binomial tests for each color against the uniform distribution. Orang
 
 The conclusions of my tests disagree; chi square I failed to reject the null, binomial, I rejected the null. This is an example of how you can misuse multiple tests to get the answer you want. 
 
-Since there is a trend towards nonsignificant in the bionomial tests, and the chisquare test gave non-significance, I am going to go with the chisquared results and say that the colors are not distributed significantly differently from the uniform distirubtion in this sample. 
+Since there is a trend towards nonsignificant in the bionomial tests, and the chisquare test gave non-significance, and I have to answer the question for the assignment, I am going to go with the chisquared results and say that the colors are not distributed significantly differently from the uniform distirubtion in this sample... but if this were real life, I would want to eat more M&Ms to increase my power, and repeat the tests.
 
 
 sources:
