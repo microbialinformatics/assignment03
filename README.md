@@ -23,9 +23,6 @@ This assignment is due on October 10th.
 3.  On pg. 57 there is a formula for the probability of making x observations after n trials when there is a probability p of the observation.  For this exercise, assume x=2, n=10, and p=0.5.  Using R, calculate the probability of x using this formula and the appropriate built in function. Compare it to the results we obtained in class when discussing the sex ratios of mice.pc
 
 
-**Answer:**
-
-
 ```r
 x <- 2
 n <- 10
@@ -39,11 +36,12 @@ dbinom(2,10,0.5)
 ```
 
 
+**Answer:** The probability is 0.0439
+
+
 
 
 4.  On pg. 59 there is a formula for the probability of observing a value, x, when there is a mean, mu, and standard deviation, sigma.  For this exercise, assume x=10.3, mu=5, and sigma=3.  Using R, calculate the probability of x using this formula and the appropriate built in function
-
-**Answer:**
 
 
 ```r
@@ -59,6 +57,7 @@ dnorm(x,m,sd)
 ```
 
 
+**Answer:** The probability is 0.0279
 
 
 5.  One of my previous students, Joe Zackular, obtained stool samples from 89 people that underwent colonoscopies.  30 of these individuals had no signs of disease, 30 had non-cancerous ademonas, and 29 had cancer.  It was previously suggested that the bacterium *Fusobacterium nucleatum* was associated with cancer.  In these three pools of subjects, Joe determined that 4, 1, and 14 individuals harbored *F. nucleatum*, respectively. Create a matrix table to represent the number of individuals with and without _F. nucleatum_ as a function of disease state.  Then do the following:
