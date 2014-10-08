@@ -71,6 +71,9 @@ axis(side=1, at=1:25, col="grey", label=F, tck=1)
     lines(x=mouse389[,3], y=mouse389[,4], col="brown")
     points(x=mouse389[1,3], y=mouse389[1,4], col="brown", pch=16)
     points(x=mouse389[20,3], y=mouse389[20,4], col="brown", pch=15)
+    
+    #Add legend
+    legend(x=0, y=-0.2, legend=c("Mouse 337", "Mouse 343", "Mouse 361", "Mouse 387", "Mouse 389"), col=c("black", "blue", "red", "green", "brown"), lwd=3)
     ```
 
 
