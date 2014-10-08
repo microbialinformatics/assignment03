@@ -47,6 +47,30 @@ axis(side=1, at=1:25, col="grey", label=F, tck=1)
     lines(x=mouse337[,3], y=mouse337[,4], col="black")
     points(x=mouse337[1,3], y=mouse337[1,4], col="black", pch=16)
     points(x=mouse337[20,3], y=mouse337[20,4], col="black", pch=15)
+    
+    #Plot mouse343
+    mouse343 <- as.matrix(germfree[germfree$mousenum==343,])
+    lines(x=mouse343[,3], y=mouse343[,4], col="blue")
+    points(x=mouse343[1,3], y=mouse343[1,4], col="blue", pch=16)
+    points(x=mouse343[20,3], y=mouse343[20,4], col="blue", pch=15)
+    
+    #Plot mouse361
+    mouse361 <- as.matrix(germfree[germfree$mousenum==361,])
+    lines(x=mouse361[,3], y=mouse361[,4], col="red")
+    points(x=mouse361[1,3], y=mouse361[1,4], col="red", pch=16)
+    points(x=mouse361[20,3], y=mouse361[20,4], col="red", pch=15)
+    
+    #Plot mouse387
+    mouse387 <- as.matrix(germfree[germfree$mousenum==387,])
+    lines(x=mouse387[,3], y=mouse387[,4], col="green")
+    points(x=mouse387[1,3], y=mouse387[1,4], col="green", pch=16)
+    points(x=mouse387[20,3], y=mouse387[20,4], col="green", pch=15)
+    
+    #Plot mouse389
+    mouse389 <- as.matrix(germfree[germfree$mousenum==389,])
+    lines(x=mouse389[,3], y=mouse389[,4], col="brown")
+    points(x=mouse389[1,3], y=mouse389[1,4], col="brown", pch=16)
+    points(x=mouse389[20,3], y=mouse389[20,4], col="brown", pch=15)
     ```
 
 
