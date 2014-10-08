@@ -59,7 +59,7 @@ sortedgermfree
 #renaming factor mouse name
 names(sortedgermfree)<-c("mouse","day","axis1","axis2","mouse.f")
 #creating plot
-plot(sortedgermfree[sortedgermfree$mouse.f=="337", "axis2"]~sortedgermfree[sortedgermfree$mouse.f=="337", "axis1"], type="l", col="black", xlim = c(-.2,.6), ylim =c(-.4,0.4), ylab= "NMDS Axis 2", xlab="NMDS Axis 1", par(mar=c(4,4,1,1)))
+plot(sortedgermfree[sortedgermfree$mouse.f=="337", "axis2"]~sortedgermfree[sortedgermfree$mouse.f=="337", "axis1"], type="l", col="black", xlim = c(-.2,.6), ylim =c(-.4,0.4), ylab= "NMDS Axis 2", xlab="NMDS Axis 1", asp=2, par(mar=c(4,5,4,2)))
 #adding mouse 343
 lines(sortedgermfree[sortedgermfree$mouse.f=="343", "axis2"]~sortedgermfree[sortedgermfree$mouse.f=="343", "axis1"], type="l", col="blue")
 #adding mouse 361
