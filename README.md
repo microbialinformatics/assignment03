@@ -294,7 +294,7 @@ sortedgermfree
 #renaming factor mouse name
 names(sortedgermfree)<-c("mouse","day","axis1","axis2","mouse.f")
 #creating plot
-plot(sortedgermfree[sortedgermfree$mouse.f=="337", "axis2"]~sortedgermfree[sortedgermfree$mouse.f=="337", "axis1"], type="l", col="black", xlim = c(-.2,.6), ylim =c(-.4,0.4), ylab= "NMDS Axis 2", xlab="NMDS Axis 1", asp=2, par(mar=c(4,5,4,2)))
+plot(sortedgermfree[sortedgermfree$mouse.f=="337", "axis2"]~sortedgermfree[sortedgermfree$mouse.f=="337", "axis1"], type="l", col="black", xlim = c(-.2,.6), ylim =c(-.55,0.4), ylab= "NMDS Axis 2", xlab="NMDS Axis 1", asp=.6, )
 #adding mouse 343
 lines(sortedgermfree[sortedgermfree$mouse.f=="343", "axis2"]~sortedgermfree[sortedgermfree$mouse.f=="343", "axis1"], type="l", col="blue")
 #adding mouse 361
@@ -304,22 +304,22 @@ lines(sortedgermfree[sortedgermfree$mouse.f=="387", "axis2"]~sortedgermfree[sort
 #adding mouse 389
 lines(sortedgermfree[sortedgermfree$mouse.f=="389", "axis2"]~sortedgermfree[sortedgermfree$mouse.f=="389", "axis1"], type="l", col="brown")
 #adding points 337
-points(-0.364076,0.477973, col="black", pch=15)
-points(-0.281808,-0.283736, col="black", pch=16)
+points(0.477973,-0.364076, col="black", pch=16)
+points(-0.281808,-0.283736, col="black", pch=15)
 #adding points 343
-points(-0.313138,0.500614, col="blue", pch=15)
-points(-0.173750,-0.160445, col="blue", pch=16)
+points(0.500614,-0.313138, col="blue", pch=16)
+points(-0.160445,-0.173750, col="blue", pch=15)
 #adding points 361
-points(-0.288620,0.492443, col="red", pch=15)
-points(-0.179001,-0.140312, col="red", pch=16)
+points(0.492443,-0.288620, col="red", pch=16)
+points(-0.140312,-0.179001, col="red", pch=15)
 #adding points 387
-points(-0.233758 ,0.333411, col="green", pch=15)
-points(-0.233758,-0.212042, col="green", pch=16)
+points(0.576080,-0.345484, col="green", pch=16)
+points(-0.212042,-0.233758  , col="green", pch=15)
 #adding points 389
-points(-0.175003,0.333411, col="brown", pch=15)
-points(-0.221247,-0.266423, col="brown", pch=16)
+points(0.333411,-0.175003, col="brown", pch=16)
+points(-0.266423,-0.221247, col="brown", pch=15)
 #adding legend
-legend(0,0,c("Mouse 337","Mouse 343","Mouse 361","Mouse 387","Mouse 389"), lty=1, col=c("black","blue", "red","green","brown"))
+legend(-0.08318786,-0.2380925 ,c("Mouse 337","Mouse 343","Mouse 361","Mouse 387","Mouse 389"), lty=1, col=c("black","blue", "red","green","brown"), cex=.8)
 ```
 
 ![plot of chunk unnamed-chunk-3](./README_files/figure-html/unnamed-chunk-3.png) 

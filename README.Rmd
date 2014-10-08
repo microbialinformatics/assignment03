@@ -59,7 +59,7 @@ sortedgermfree
 #renaming factor mouse name
 names(sortedgermfree)<-c("mouse","day","axis1","axis2","mouse.f")
 #creating plot
-plot(sortedgermfree[sortedgermfree$mouse.f=="337", "axis2"]~sortedgermfree[sortedgermfree$mouse.f=="337", "axis1"], type="l", col="black", xlim = c(-.2,.6), ylim =c(-.55,0.4), ylab= "NMDS Axis 2", xlab="NMDS Axis 1", asp=1.5, )
+plot(sortedgermfree[sortedgermfree$mouse.f=="337", "axis2"]~sortedgermfree[sortedgermfree$mouse.f=="337", "axis1"], type="l", col="black", xlim = c(-.2,.6), ylim =c(-.55,0.4), ylab= "NMDS Axis 2", xlab="NMDS Axis 1", asp=.6, )
 #adding mouse 343
 lines(sortedgermfree[sortedgermfree$mouse.f=="343", "axis2"]~sortedgermfree[sortedgermfree$mouse.f=="343", "axis1"], type="l", col="blue")
 #adding mouse 361
@@ -84,8 +84,7 @@ points(-0.212042,-0.233758  , col="green", pch=15)
 points(0.333411,-0.175003, col="brown", pch=16)
 points(-0.266423,-0.221247, col="brown", pch=15)
 #adding legend
-location<-locator(1)
-legend(location,c("Mouse 337","Mouse 343","Mouse 361","Mouse 387","Mouse 389"), lty=1, col=c("black","blue", "red","green","brown"), cex=.5)
+legend(-0.08318786,-0.2380925 ,c("Mouse 337","Mouse 343","Mouse 361","Mouse 387","Mouse 389"), lty=1, col=c("black","blue", "red","green","brown"), cex=.8)
 
 
 ```
