@@ -41,6 +41,8 @@ axis(side=1, at=1:25, col="grey", label=F, tck=1)
     ```r
     germfree <- read.table(file="germfree.nmds.axes", header=T)
     plot(x=germfree$axis1, y=germfree$axis2, xlab="NMDS Axis 1", ylab="NMDS Axis 2", type="n")
+    mousenum <- as.factor(germfree$mouse)
+    germfree$mousenum <- mousenum
     
     #Plot mouse337
     mouse337 <- as.matrix(germfree[germfree$mousenum==337,])
@@ -73,7 +75,7 @@ axis(side=1, at=1:25, col="grey", label=F, tck=1)
     points(x=mouse389[20,3], y=mouse389[20,4], col="brown", pch=15)
     
     #Add legend
-    legend(x=0, y=-0.2, legend=c("Mouse 337", "Mouse 343", "Mouse 361", "Mouse 387", "Mouse 389"), col=c("black", "blue", "red", "green", "brown"), lwd=3)
+    legend(x=c(0,0.2), y=c(-0.2,0), legend=c("Mouse 337", "Mouse 343", "Mouse 361", "Mouse 387", "Mouse 389"), col=c("black", "blue", "red", "green", "brown"), lwd=3)
     ```
 
 
