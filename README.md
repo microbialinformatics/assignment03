@@ -26,9 +26,55 @@ abline(v=1:25,col="grey")
 
     <img src="beta.png", style="margin:0px auto;display:block" width="700">
 
+```r
+germfree<-read.table(file="germfree.nmds.axes",header=T)
+mouse337<-subset(germfree,mouse==337)
+mouse343<-subset(germfree,mouse==343)
+mouse361<-subset(germfree,mouse==361)
+mouse387<-subset(germfree,mouse==387)
+mouse389<-subset(germfree,mouse==389)
+plot(mouse337$axis1,mouse337$axis2,type="l",lwd=1.5,ylim=c(-0.55,0.4),xlim=c(-0.3,0.7),xlab="NMDS Axis 1",ylab="NMDS Axis 2")
+lines(mouse343$axis1,mouse343$axis2,type="l",col="blue",lwd=1.5)
+lines(mouse343$axis1,mouse343$axis2,type="l",col="blue",lwd=1.5)
+lines(mouse361$axis1,mouse361$axis2,type="l",col="red",lwd=1.5)
+lines(mouse387$axis1,mouse387$axis2,type="l",col="green",lwd=1.5)
+lines(mouse389$axis1,mouse389$axis2,type="l",col="brown",lwd=1.5)
+init337<-head(mouse337,n=1)
+end337<-tail(mouse337,n=1)
+points(init337$axis1,init337$axis2,pch=16,col="black")
+points(end337$axis1,end337$axis2,pch=15,col="black")
+init343<-head(mouse343,n=1)
+end343<-tail(mouse343,n=1)
+points(init343$axis1,init343$axis2,pch=16,col="blue")
+points(end343$axis1,end343$axis2,pch=15,col="blue")
+init361<-head(mouse361,n=1)
+end361<-tail(mouse361,n=1)
+points(init361$axis1,init361$axis2,pch=16,col="red")
+points(end361$axis1,end361$axis2,pch=15,col="red")
+init387<-head(mouse387,n=1)
+end387<-tail(mouse387,n=1)
+points(init387$axis1,init387$axis2,pch=16,col="green")
+points(end387$axis1,end387$axis2,pch=15,col="green")
+init389<-head(mouse389,n=1)
+end389<-tail(mouse389,n=1)
+points(init389$axis1,init389$axis2,pch=16,col="brown")
+points(end389$axis1,end389$axis2,pch=15,col="brown")
+legend(0,-0.2,c("Mouse 337","Mouse 343","Mouse 361","Mouse 387","Mouse 389"),lty=1,col=c("black","blue","red","green","brown"),cex=0.7)
+```
 
 3.  On pg. 57 there is a formula for the probability of making x observations after n trials when there is a probability p of the observation.  For this exercise, assume x=2, n=10, and p=0.5.  Using R, calculate the probability of x using this formula and the appropriate built in function. Compare it to the results we obtained in class when discussing the sex ratios of mice.
 
+```r
+x<-2
+n<-10
+p<-0.5
+((n/x)*(p^x)*((1-p)^(n-x)))
+```
+gives `r((n/x)*(p^x)*((1-p)^(n-x)))`.
+
+Or using the dbinom function in r:
+```
+dbinom()
 
 4.  On pg. 59 there is a formula for the probability of observing a value, x, when there is a mean, mu, and standard deviation, sigma.  For this exercise, assume x=10.3, mu=5, and sigma=3.  Using R, calculate the probability of x using this formula and the appropriate built in function
 
