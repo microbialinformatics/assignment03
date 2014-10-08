@@ -121,6 +121,22 @@ dnorm(x,m,sd)
 
 5.  One of my previous students, Joe Zackular, obtained stool samples from 89 people that underwent colonoscopies.  30 of these individuals had no signs of disease, 30 had non-cancerous ademonas, and 29 had cancer.  It was previously suggested that the bacterium *Fusobacterium nucleatum* was associated with cancer.  In these three pools of subjects, Joe determined that 4, 1, and 14 individuals harbored *F. nucleatum*, respectively. Create a matrix table to represent the number of individuals with and without _F. nucleatum_ as a function of disease state.  Then do the following:
 
+**Answer:**
+
+```r
+Fnuc <- matrix(c(26,29,15,4,1,14), nrow=2, ncol=3,byrow=T)
+colnames(Fnuc)<-c("Healthy", "Benign", "Cancer")
+rownames(Fnuc)<-c("No F. nucleatum", "F.nucleatum")
+```
+
+
+```r
+                Healthy Benign Cancer
+No F. nucleatum      26     29     15
+F.nucleatum           4      1     14
+```
+
+
     * Run the three tests of proportions you learned about in class using built in R  functions to the 2x2 study design where normals and adenomas are pooled and compared to carcinomas.
     * Without using the built in chi-squared test function, replicate the 2x2 study design in the last problem for the Chi-Squared Test...
       * Calculate the expected count matrix and calculate the Chi-Squared test statistics. Figure out how to get your test statistic to match Rs default statistic.
