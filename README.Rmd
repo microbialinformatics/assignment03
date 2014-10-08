@@ -15,32 +15,276 @@ This assignment is due on October 10th.
 
 ------
 
-1.  Generate a plot that contains the different pch symbols. Investigate the knitr code chunk options to see whether you can have a pdf version of the image produced so you can print it off for yoru reference. It should look like this:
+1.  Generate a plot that contains the different pch symbols. Investigate the knitr code chunk options to see whether you can have a pdf version of the image produced so you can print it off for your reference. It should look like this:
 
     <img src="pch.png", style="margin:0px auto;display:block" width="500">
+```{r}
+#creating vectors for PCH value positioning.
+xaxis<-seq(1:25)
+yaxis<-rep(c(.5),25)
+#creating plot with PCH types by their number. This PDF statement makes a PDF file of the plot.
+pdf("PCHplot.PDF")
+plot(xaxis,yaxis, pch=c(1:25),col="black", lwd=1, main="PCH Symbols", ylab=" ", xlab="PCH Value", axes=F, pin=c(1,4))
+#formatting axis
+axis(1, at= seq(1,25, by= 1), las=1, tck=.7,col="grey", ylab="n", ps=12,)
+axis(1, at=seq(1,25, by=1), col="black")
+#adding darker x axis
+```{r}
+# repeating my code so that I can produce a visible graph on this assignment
+plot(xaxis,yaxis, pch=c(1:25),col="black", lwd=1, main="PCH Symbols", ylab=" ", xlab="PCH Value", axes=F, pin=c(1,4))
+#formatting axis
+axis(1, at= seq(1,25, by= 1), las=1, tck=.7,col="grey", ylab="n", ps=12,)
+axis(1, at=seq(1,25, by=1), col="black")
+```
 
-
-2.  Using the `germfree.nmds.axes` data file available in this respositry, generate a plot that looks like this. The points are connected in the order they were sampled with the circle representing the beginning ad the square the end of the time course:
+```
+2.  Using the `germfree.nmds.axes` data file available in this respositry, generate a plot that looks like this. The points are connected in the order they were sampled with the circle representing the beginning and the square the end of the time course:
 
     <img src="beta.png", style="margin:0px auto;display:block" width="700">
 
+```{r}
+#making germfree file a variable.
+germfree<- read.table(file="germfree.nmds.axes", header=T)
+#check that germfree has all values and variables
+germfree
+#sorting by mouse and then day
+attach(germfree)
+sortedgermfree<-germfree[order(mouse,day),]
+detach(germfree)
+#making mouse a factor
+mousefactor<-as.factor(sortedgermfree$mouse)
+mousefactor
+sortedgermfree$new.col<-mousefactor
+sortedgermfree
+#renaming factor mouse name
+names(sortedgermfree)<-c("mouse","day","axis1","axis2","mouse.f")
+#creating plot
+plot(sortedgermfree[sortedgermfree$mouse.f=="337", "axis2"]~sortedgermfree[sortedgermfree$mouse.f=="337", "axis1"], type="l", col="black", xlim = c(-.2,.6), ylim =c(-.55,0.4), ylab= "NMDS Axis 2", xlab="NMDS Axis 1", asp=.6, )
+#adding mouse 343
+lines(sortedgermfree[sortedgermfree$mouse.f=="343", "axis2"]~sortedgermfree[sortedgermfree$mouse.f=="343", "axis1"], type="l", col="blue")
+#adding mouse 361
+lines(sortedgermfree[sortedgermfree$mouse.f=="361", "axis2"]~sortedgermfree[sortedgermfree$mouse.f=="361", "axis1"], type="l", col="red")
+#adding mouse 387
+lines(sortedgermfree[sortedgermfree$mouse.f=="387", "axis2"]~sortedgermfree[sortedgermfree$mouse.f=="387", "axis1"], type="l", col="green")
+#adding mouse 389
+lines(sortedgermfree[sortedgermfree$mouse.f=="389", "axis2"]~sortedgermfree[sortedgermfree$mouse.f=="389", "axis1"], type="l", col="brown")
+#adding points 337
+points(0.477973,-0.364076, col="black", pch=16)
+points(-0.281808,-0.283736, col="black", pch=15)
+#adding points 343
+points(0.500614,-0.313138, col="blue", pch=16)
+points(-0.160445,-0.173750, col="blue", pch=15)
+#adding points 361
+points(0.492443,-0.288620, col="red", pch=16)
+points(-0.140312,-0.179001, col="red", pch=15)
+#adding points 387
+points(0.576080,-0.345484, col="green", pch=16)
+points(-0.212042,-0.233758  , col="green", pch=15)
+#adding points 389
+points(0.333411,-0.175003, col="brown", pch=16)
+points(-0.266423,-0.221247, col="brown", pch=15)
+#adding legend
+legend(-0.08318786,-0.2380925 ,c("Mouse 337","Mouse 343","Mouse 361","Mouse 387","Mouse 389"), lty=1, col=c("black","blue", "red","green","brown"), cex=.8)
+
+
+```
 
 3.  On pg. 57 there is a formula for the probability of making x observations after n trials when there is a probability p of the observation.  For this exercise, assume x=2, n=10, and p=0.5.  Using R, calculate the probability of x using this formula and the appropriate built in function. Compare it to the results we obtained in class when discussing the sex ratios of mice.
+```{r}
+#by hand
+n<-factorial(10)
+x<-(factorial(2)*factorial(8))
+book<-n/x*(.5)^2*(1-.5)^8
+book
+#with r
+withrdbinom<-dbinom(2, 10,.5)
+withrdbinom
 
+```
+Answer: with the formula on pg 57, the probability was `r book`, with the dbinom function in r the probability was also `r withrdbinom`. When we discussed sex ratios in mice in class, we also calculated this exact probability, as we had the same parameters as in this question (2 males in a litter of 10 mice, with a probability of male = 0.5.)
 
 4.  On pg. 59 there is a formula for the probability of observing a value, x, when there is a mean, mu, and standard deviation, sigma.  For this exercise, assume x=10.3, mu=5, and sigma=3.  Using R, calculate the probability of x using this formula and the appropriate built in function
 
 
+```{r}
+#fraction part
+rt<- sqrt(2*pi)
+three.rt<-3*rt
+check.fx<-((1/three.rt)*exp(-((10.3-5)^2/(2*3^2))))
+check.fx
+#second part of the question using the built in function for the normal distribution.
+builtin<-dnorm(x = 10.3, mean = 5, sd = 3)
+builtin
+```
+Answer: the probability is `r check.fx`
+
+Using the built in function dnorm, the probability is `r builtin` 
+
 5.  One of my previous students, Joe Zackular, obtained stool samples from 89 people that underwent colonoscopies.  30 of these individuals had no signs of disease, 30 had non-cancerous ademonas, and 29 had cancer.  It was previously suggested that the bacterium *Fusobacterium nucleatum* was associated with cancer.  In these three pools of subjects, Joe determined that 4, 1, and 14 individuals harbored *F. nucleatum*, respectively. Create a matrix table to represent the number of individuals with and without _F. nucleatum_ as a function of disease state.  Then do the following:
 
+
+```{r}
+#creating matrix
+cancer<- matrix(c(26,29,15,4,1,14), nrow=2, ncol=3, byrow=T)
+#adding row and column names
+colnames(cancer)<-c("no disease", "cancerous adenomas", "cancer")
+rownames(cancer)<-c("no F. nucleatum", "F. nucleatum")
+cancer
+```
+Answer: `r cancer`
+
     * Run the three tests of proportions you learned about in class using built in R  functions to the 2x2 study design where normals and adenomas are pooled and compared to carcinomas.
-    * Without using the built in chi-squared test function, replicate the 2x2 study design in the last problem for the Chi-Squared Test...
-      * Calculate the expected count matrix and calculate the Chi-Squared test statistics. Figure out how to get your test statistic to match Rs default statistic.
-      *	Generate a Chi-Squared distributions with approporiate degrees of freedom by the method that was discussed in class (hint: you may consider using the `replicate` command)
-      * Compare your Chi-Squared distributions to what you might get from the appropriate built in R functions
-      * Based on your distribution calculate p-values
+
+```{r}
+#creating pooled table for normals + adenomas vs carcinomas
+pooled<- matrix(c(55,5,15,14), nrow=2, ncol=2)
+#adding row and column names
+#want to compare colonization status  by cancer status
+colnames(pooled)<-c("no cancer", "cancer")
+rownames(pooled)<-c("no F.nucleatum", "F.nucleatum")
+pooled
+#generating test output
+proportion.test<-prop.test(pooled)
+proportion.test
+fisher.test<-fisher.test(pooled)
+fisher.test
+chisquare.test<-chisq.test(pooled)
+chisquare.test
+```
+Answer: With all three tests there appears to be a significant difference in the proportion of patients with *F. nucleatum* by cancer status.  
+
+     * Without using the built in chi-squared test function, replicate the 2x2 study design in the last problem for the Chi-Squared Test...
+
+```{r}
+#generating the observed r by c table:
+pooled
+#generating the expected table
+colonization.sums<- margin.table(pooled,1)
+colonization.sums
+fract.fnuc<-colonization.sums["F.nucleatum"]/sum(colonization.sums)
+fract.nofnuc<- 1-fract.fnuc
+fract.bac<-c(noFnuc= fract.nofnuc, Fnuc = fract.fnuc)
+fract.bac
+cancer.sums<-margin.table(pooled,2)
+cancer.sums
+fract.nocancer<-cancer.sums["no cancer"]/sum(cancer.sums)
+fract.cancer<-1-fract.nocancer
+fract.disease<-c(healthy= fract.nocancer, cancer= fract.cancer)
+fract.disease
+expected<-fract.bac %*% t(fract.disease)
+expected<-expected*sum(pooled)
+expected
+#chisquare test to match r, add yates continuity correction
+regchisq<- sum((expected-pooled)^2/expected)
+regchisq
+uncorrected<-sum((abs(expected-pooled)-0.5)^2/(expected))
+uncorrected
+```
+     * Calculate the expected count matrix and calculate the Chi-Squared test statistics. Figure out how to get your test statistic to match Rs default statistic.     
+      
+Answer: without the continuity correction, my chi suqare test statistic was `r regchisq` ,  After deleting the correction for continuity, my chi square value is `r uncorrected`, this is identical to r's default parameter chisquare test statistic.
+ 
+      *	Generate a Chi-Squared distribution with approporiate degrees of freedom by the method that was discussed in class (hint: you may consider using the `replicate` command)
+      
+```{r}
+#pick k=df=1 random variable from the normal dist
+#replicate this 1000 times
+repchisqplot<-replicate(1000,(sum(rnorm(1))^2))
+summary(repchisqplot)
+#find numbers that are greater than our test statistic
+larger<-which(repchisqplot>16.2738)
+#there are no instances where we sampled values greater than the test statistic.
+```
+ 
+* Compare your Chi-Squared distributions to what you might get      from the appropriate built in R functions
+
+Answer: there are no instances where a test statistic drawn from the chi squared df=1 distribution were larger than the test statistic that I calculated with the built in functions.
+
+ * Based on your distribution calculate p-values
+ 
+```{r}
+df<-(nrow(pooled)-1)*(ncol(pooled)-1)
+my.chi.sq<-uncorrected
+my.chi.sq
+plot(seq(0,20,0.05), dchisq(seq(0,20,0.05), df=df), type="l", xlab="chisquared test statistic", ylab="probability with 1 defree of freedom")
+#adding arrows for my chi square test statistic
+arrows(x0=my.chi.sq, x1=my.chi.sq, y0=0.4, y1=0.05, lwd=2, col="red")
+
+#calculate p values based on my distribution
+pvalchisq<-pnorm(repchisqplot)
+#compare to p value from r chi squared calculations
+many<-which(pvalchisq<5.482e-05)
+manyone<-which(pvalchisq<0.05)
+#plot p values to observe their distribution
+hist(pnorm(repchisqplot), main="p-values obvserved,Chisquared df=1", xlab="p value")
+
+```
+
       * How does your p-value compare to what you saw using the built in functions? Explain your observations.
+  
+Answer: With the built in chisquared test with yates continuity correction, the p-values were highly significant at 5.482e-05, and without the yates continuity correction, 1.632e-05. This indicates that on repeat sampling, there is a very very small chance that these differences between groups would be ovserved by change or random variation alone. When I replicated choosing 1000 samples from the chisquared distribution with DF=1, the Chisquare values I sampled were all smaller than the chisquared test statistic I calculated with r's built in functions. The corresponding p values I observed were in no instances equal to or smaller than the built in function p values or 0.05. This failure to detect significance on repeat sampling makes sense given the highly significant p values calculated from the data with the built in r functions. 
+      
+```{r}
+```
 
 
 6\.  Get a bag of Skittles or M&Ms.  Are the candies evenly distributed amongst the different colors?  Justify your conclusion.
+```{r}
+#creating matrix with my peanut m&m data
+peanut<-matrix(c(3,8,2,8,5,12), nrow=1)
+colnames(peanut)<-c("brown", "green","red","blue","yellow","orange")
+#calculating proportion of each color observed
+propPeanut<-(peanut/38)
+propPeanut
+#calculating expected null proportions if the colors were distributed evenly
+expectedprop<-6/38
+expectedprop
+peanutexp<-matrix(c(0.1578947,0.1578947,0.1578947,0.1578947,0.1578947,0.1578947), nrow=1)
+colnames(peanutexp)<-c("brown", "green","red","blue","yellow","orange")
+#plotting both observed and expected distributions
+barplot((propPeanut), ylab= "color frequency", xlab="M&M color")
+barplot((peanutexp),col="gray",ylab= " Expected color frequency", xlab="M&M color")
+#now my question is if these proportions differ significantly from 0.1578947
+#I am gong to do multiple binomial tests to see if each individual color could come from the binomial distribution with .1578947 probability
+#brown
+brown<-binom.test(3,38,0.16)
+brown
+green<-binom.test(8,38,0.16)
+green
+red<-binom.test(2,38,0.16)
+red
+blue<-binom.test(8,38,0.16)
+blue
+yellow<-binom.test(8,38,0.16)
+yellow
+orange<-binom.test(12, 38, 0.16)
+orange
+# these tests are a mixture of significant and non significant
+chisqpeanut<-chisq.test(peanut)
+chisqpeanut
+answerpeanut<-chisqpeanut$statistic
+pvaluepeanut<-chisqpeanut$p.value
 
+```
+Answer: 
+The null hypothesis of this test is that all colors are evenly distributed in this bag of M&Ms and that the proportion of all colors is .1578947 (observed) or 1/6th of the sample (population).
+
+The alternative hypothesis is that one of the color proportions is different. 
+
+My tests failed to reject the null hypothesis.
+the chisquared test was `r answerpeanut`  with a p value of `r pvaluepeanut`
+
+This test is not significant at the 0.05 level of significance. However, it is close to 0.05. 
+
+Graphic comparison of the poportions of each color in the bag with a uniform distribution of colors suggests that the distributions could be uneven.  
+
+I also did binomial tests for each color against the uniform distribution. Orange was significantly different from the expected porportion. This means that I would reject the null hypothesis in favor of the alternative by this testing method. If there was 10 orange instead of 12, this would not have been significant.
+
+The conclusions of my tests disagree; chi square I failed to reject the null, binomial, I rejected the null. This is an example of how you can misuse multiple tests to get the answer you want. 
+
+Since there is a trend towards nonsignificant in the bionomial tests, and the chisquare test gave non-significance, and I have to answer the question for the assignment, I am going to go with the chisquared results and say that the colors are not distributed significantly differently from the uniform distirubtion in this sample... but if this were real life, I would want to eat more M&Ms to increase my power, and repeat the tests.
+
+
+sources:
+[prob 2](https://stat.ethz.ch/pipermail/r-help/2007-September/141332.html)
+[prob 2](http://www.statmethods.net/management/variables.html)
