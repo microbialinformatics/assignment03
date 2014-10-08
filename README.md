@@ -1,3 +1,6 @@
+---
+output: html_document
+---
 # Assignment 3
 Edna Chiang
 October 1, 2014  
@@ -29,9 +32,22 @@ axis(side=1, at=1:25, col="grey", label=F, tck=1)
 
 ```
 
-2.  Using the `germfree.nmds.axes` data file available in this respositry, generate a plot that looks like this. The points are connected in the order they were sampled with the circle representing the beginning ad the square the end of the time course:
+
+2.  Using the `germfree.nmds.axes` data file available in this respositry, generate a plot that looks like this. The points are connected in the order they were sampled with the circle representing the beginning and the square the end of the time course:
 
     <img src="beta.png", style="margin:0px auto;display:block" width="700">
+    
+    
+    ```r
+    germfree <- read.table(file="germfree.nmds.axes", header=T)
+    plot(x=germfree$axis1, y=germfree$axis2, xlab="NMDS Axis 1", ylab="NMDS Axis 2", type="n")
+    
+    #Plot mouse337
+    mouse337 <- as.matrix(germfree[germfree$mousenum==337,])
+    lines(x=mouse337[,3], y=mouse337[,4], col="black")
+    points(x=mouse337[1,3], y=mouse337[1,4], col="black", pch=16)
+    points(x=mouse337[20,3], y=mouse337[20,4], col="black", pch=15)
+    ```
 
 
 3.  On pg. 57 there is a formula for the probability of making x observations after n trials when there is a probability p of the observation.  For this exercise, assume x=2, n=10, and p=0.5.  Using R, calculate the probability of x using this formula and the appropriate built in function. Compare it to the results we obtained in class when discussing the sex ratios of mice.pc
@@ -44,7 +60,7 @@ p <- 0.5
 
 choose(n,x) * p^x * (1-p)^(n-x)
 
-OR
+#OR
 
 dbinom(2,10,0.5)
 ```
@@ -65,7 +81,7 @@ sd <- 3
 
 (1/((sqrt(2*3.14159))*sd)) * exp(-((x-m)^2)/(2*(sd^2)))
 
-OR
+#OR
 
 dnorm(x,m,sd)
 ```
