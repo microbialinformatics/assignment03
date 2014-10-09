@@ -217,3 +217,53 @@ X-squared = 16.2736, df = 1, p-value = 5.482e-05
 
 6\.  Get a bag of Skittles or M&Ms.  Are the candies evenly distributed amongst the different colors?  Justify your conclusion.
 
+
+```r
+#Make matrix of M&M colors
+mm <- matrix(c(2,7,5,1,3,2), nrow=1)
+colnames(mm) <- c("Red", "Orange", "Yellow", "Green", "Blue", "Brown")
+
+#Proportion of colors
+prop.mm <- prop.table(mm)
+prop.mm
+
+     Red Orange Yellow Green Blue Brown
+[1,] 0.1   0.35   0.25  0.05 0.15   0.1
+
+#Expected proportion if evenly distributed
+2+7+5+1+3+2
+[1] 20
+a <- 20/6
+a
+[1] 3.333333
+a/20
+[1] 0.1666667
+
+#Prepare for prop.test
+count <- c(2,7,5,1,3,2)
+trials <- rep(20,6)
+exp <- rep(0.1666667,6)
+
+#What is the probability that the proportion of M&M colors is the same?
+#Null hypothesis = M&M colors are evenly distributed
+prop.test(count, trials, exp)
+
+  6-sample test for given proportions without continuity
+	correction
+
+data:  count out of trials, null probabilities exp
+X-squared = 9.12, df = 6, p-value = 0.1669
+alternative hypothesis: two.sided
+null values:
+   prop 1    prop 2    prop 3    prop 4    prop 5    prop 6 
+0.1666667 0.1666667 0.1666667 0.1666667 0.1666667 0.1666667 
+sample estimates:
+prop 1 prop 2 prop 3 prop 4 prop 5 prop 6 
+  0.10   0.35   0.25   0.05   0.15   0.10 
+
+Warning message:
+In prop.test(count, trials, exp) :
+  Chi-squared approximation may be incorrect
+```
+
+**Answer:** The p-value is 0.1669. I do not reject the null hypothesis: the M&Ms are evenly distributed among the different colors.
