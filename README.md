@@ -139,16 +139,15 @@ F.nucleatum           4      1     14
 
     * Run the three tests of proportions you learned about in class using built in R  functions to the 2x2 study design where normals and adenomas are pooled and compared to carcinomas.
     
-    
-    ```r
+```r
     #Make pooled matrix
     pooled.Fnuc <- matrix(c(55, 15, 5, 14), nrow=2,ncol=2)
     colnames(pooled.Fnuc)<-c("No Cancer", "Cancer")
     rownames(pooled.Fnuc) <- c("No F. nucleatum", "F. nucleatum")
-    ```
+```
     
     
-    ```r
+```r
                     No Cancer Cancer
 No F. nucleatum        55      5
 F. nucleatum           15     14
@@ -157,9 +156,9 @@ F. nucleatum           15     14
 
 **Answer: Test of Proportions**
 
-  ```r
-  prop.test.pooled.Fnuc <- prop.test(pooled.Fnuc)
-  prop.test.pooled.Fnuc
+```r
+prop.test.pooled.Fnuc <- prop.test(pooled.Fnuc)
+prop.test.pooled.Fnuc
   
   2-sample test for equality of proportions with continuity
 	correction
@@ -176,9 +175,9 @@ sample estimates:
     
     
      **Answer: Fisher's Test**
-    ```r
-    fisher.test.pooled.Fnuc <- fisher.test(pooled.Fnuc)
-    fisher.test.pooled.Fnuc
+```r
+fisher.test.pooled.Fnuc <- fisher.test(pooled.Fnuc)
+fisher.test.pooled.Fnuc
     
     Fisher's Exact Test for Count Data
 
@@ -190,13 +189,13 @@ alternative hypothesis: true odds ratio is not equal to 1
 sample estimates:
 odds ratio 
   9.926223 
-  ```
+```
   
   
   **Answer: Chi-Squared Test**
-  ```r
-  chi.test.pooled.Fnuc <- chisq.test(pooled.Fnuc)
-  chi.test.pooled.Fnuc
+```r
+chi.test.pooled.Fnuc <- chisq.test(pooled.Fnuc)
+chi.test.pooled.Fnuc
 
   Pearson's Chi-squared test with Yates' continuity correction
 
@@ -210,7 +209,7 @@ X-squared = 16.2736, df = 1, p-value = 5.482e-05
       
       
       **Answer:**
-      ```r
+```r
       #Fnuc or No Fnuc
       sum.pooled.Fnuc <- margin.table(pooled.Fnuc,1)
       sum.pooled.Fnuc
@@ -260,14 +259,14 @@ X-squared = 16.2736, df = 1, p-value = 5.482e-05
       chisq
       [1] 16.2736
       #This matches the R-generated Chi-squared statistic generated.
-      ```
+```
       
       
       *	Generate a Chi-Squared distributions with approporiate degrees of freedom by the method that was discussed in class (hint: you may consider using the `replicate` command)
       
       
       **Answer:**
-      ```r
+```r
       #Calculate df
       df <- (nrow(pooled.Fnuc) - 1) * (ncol(pooled.Fnuc) - 1)
       df
@@ -284,16 +283,16 @@ X-squared = 16.2736, df = 1, p-value = 5.482e-05
       #0 of the distribution is larger than Chi-squared (16.2736)
       
       hist(dist,breaks=500)
-      ```
+```
       
       
       * Compare your Chi-Squared distributions to what you might get from the appropriate built in R functions
       
       **Answer:**
-      ```r
+```r
       plot(seq(0, 20, 0.05), dchisq(seq(0, 20, 0.05), df = df), type = "l", xlab = "ChiSquared Statistic", ylab = "Probability with 1 degree of freedom")
       arrows(x0 = chisq, x1 = chisq, y0 = 0.4, y1 = 0.05, lwd = 2, col = "red")
-      ```
+```
       My Chi-Squared distribution looks quite similar to the R-generated distribution. Both exponentially decrease as the x-axis value increases. My distribution begins to level out when X = 2, whereas the R-generated distribution begins to level out when X = 4. The R-generated distribution is also similar to my distribution because there are no values larger than my Chi-Squared statistic.
       
       
@@ -338,7 +337,7 @@ trials <- rep(20,6)
 exp <- rep(0.1666667,6)
 
 #What is the probability that the proportion of M&M colors is the same?
-#Null hypothesis = M&M colors are evenly distributed
+#H0 = M&M colors are evenly distributed
 prop.test(count, trials, exp)
 
   6-sample test for given proportions without continuity
