@@ -299,12 +299,13 @@ X-squared = 16.2736, df = 1, p-value = 5.482e-05
       
       * Based on your distribution calculate p-values
       
-      **Answer:**
-      ```r
-      ```
+      **Answer:** p-value=0. The p-value is the sum of the probability that the Chi-Squared distribution is larger than my Chi-Squared Statistic. Because my distribution has 0 values which are larger than my Chi-Squared Statistic, my p-value is 0.
       
       
       * How does your p-value compare to what you saw using the built in functions? Explain your observations.
+      
+      **Answer:**
+      My p-value (0) is smaller than the R-generated p-value (5.482e-05).
 
 
 6\.  Get a bag of Skittles or M&Ms.  Are the candies evenly distributed amongst the different colors?  Justify your conclusion.
