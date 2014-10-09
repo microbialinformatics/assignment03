@@ -1,6 +1,6 @@
 # Assignment 3
-Patrick D. Schloss  
-September 26, 2014  
+Isaiah Song  
+October 10, 2014  
 
 Complete the exercises listed below and submit as a pull request to the [Assignment 3 repository](http://www.github.com/microbialinformatics/assignment03).  Format this document approapriately using R markdown and knitr. For those cases where there are multiple outputs, make it clear in how you format the text and interweave the solution, what the solution is.
 
@@ -13,8 +13,15 @@ This assignment is due on October 10th.
 1.  Generate a plot that contains the different pch symbols. Investigate the knitr code chunk options to see whether you can have a pdf version of the image produced so you can print it off for yoru reference. It should look like this:
 
     <img src="pch.png", style="margin:0px auto;display:block" width="500">
+    
 
+```r
+plot(1:25,rep(15,25),pch=1:25,cex=2,axes=F,main="PCH Symbols",xlab="PCH value",ylab="") #Formed a chart of PCH symbols without axes
+axis(1,at=1:25) #Added numbered x-axis
+segments(x0=1:25,x1=1:25,y0=0,y1=30,col="gray") #Drew x-axis lines with line segments
+```
 
+![plot of chunk unnamed-chunk-1](./README_files/figure-html/unnamed-chunk-1.png) 
 2.  Using the `germfree.nmds.axes` data file available in this respositry, generate a plot that looks like this. The points are connected in the order they were sampled with the circle representing the beginning ad the square the end of the time course:
 
     <img src="beta.png", style="margin:0px auto;display:block" width="700">

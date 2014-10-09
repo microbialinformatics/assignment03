@@ -1,7 +1,7 @@
 ---
 title: "Assignment 3"
-author: "Patrick D. Schloss"
-date: "September 26, 2014"
+author: "Isaiah Song"
+date: "October 10, 2014"
 output:
   html_document:
     keep_md: yes
@@ -18,8 +18,12 @@ This assignment is due on October 10th.
 1.  Generate a plot that contains the different pch symbols. Investigate the knitr code chunk options to see whether you can have a pdf version of the image produced so you can print it off for yoru reference. It should look like this:
 
     <img src="pch.png", style="margin:0px auto;display:block" width="500">
-
-
+    
+```{r}
+plot(1:25,rep(15,25),pch=1:25,cex=2,axes=F,main="PCH Symbols",xlab="PCH value",ylab="") #Formed a chart of PCH symbols without axes
+axis(1,at=1:25) #Added numbered x-axis
+segments(x0=1:25,x1=1:25,y0=0,y1=30,col="gray") #Drew x-axis lines with line segments
+```
 2.  Using the `germfree.nmds.axes` data file available in this respositry, generate a plot that looks like this. The points are connected in the order they were sampled with the circle representing the beginning ad the square the end of the time course:
 
     <img src="beta.png", style="margin:0px auto;display:block" width="700">
