@@ -282,11 +282,28 @@ X-squared = 16.2736, df = 1, p-value = 5.482e-05
       sum(dist.Xsq==TRUE)
       [1] 0
       #0 of the distribution is larger than Chi-squared (16.2736)
+      
+      hist(dist,breaks=500)
       ```
       
       
       * Compare your Chi-Squared distributions to what you might get from the appropriate built in R functions
+      
+      **Answer:**
+      ```r
+      plot(seq(0, 20, 0.05), dchisq(seq(0, 20, 0.05), df = df), type = "l", xlab = "ChiSquared Statistic", ylab = "Probability with 1 degree of freedom")
+      arrows(x0 = chisq, x1 = chisq, y0 = 0.4, y1 = 0.05, lwd = 2, col = "red")
+      ```
+      My Chi-Squared distribution looks quite similar to the R-generated distribution. Both exponentially decrease as the x-axis value increases. My distribution begins to level out when X = 2, whereas the R-generated distribution begins to level out when X = 4. The R-generated distribution is also similar to my distribution because there are no values larger than my Chi-Squared statistic.
+      
+      
       * Based on your distribution calculate p-values
+      
+      **Answer:**
+      ```r
+      ```
+      
+      
       * How does your p-value compare to what you saw using the built in functions? Explain your observations.
 
 
