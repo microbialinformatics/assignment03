@@ -70,14 +70,22 @@ n<-10
 p<-0.5
 ((n/x)*(p^x)*((1-p)^(n-x)))
 ```
-gives `r((n/x)*(p^x)*((1-p)^(n-x)))`.
 
 Or using the dbinom function in r:
+
+```r
+dbinom(x,n,p)
 ```
-dbinom()
 
 4.  On pg. 59 there is a formula for the probability of observing a value, x, when there is a mean, mu, and standard deviation, sigma.  For this exercise, assume x=10.3, mu=5, and sigma=3.  Using R, calculate the probability of x using this formula and the appropriate built in function
 
+```r
+x<-10.3
+mu<-5
+sigma<-3
+e <- exp(1) 
+((1/(sqrt(2*pi*sigma)))*e^(-((x-mu)^2)/((2*sigma)^2)))
+```
 
 5.  One of my previous students, Joe Zackular, obtained stool samples from 89 people that underwent colonoscopies.  30 of these individuals had no signs of disease, 30 had non-cancerous ademonas, and 29 had cancer.  It was previously suggested that the bacterium *Fusobacterium nucleatum* was associated with cancer.  In these three pools of subjects, Joe determined that 4, 1, and 14 individuals harbored *F. nucleatum*, respectively. Create a matrix table to represent the number of individuals with and without _F. nucleatum_ as a function of disease state.  Then do the following:
 
