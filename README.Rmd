@@ -5,6 +5,7 @@ date: "October 10, 2014"
 output:
   html_document:
     keep_md: yes
+  pdf_document: default
 ---
 
 Complete the exercises listed below and submit as a pull request to the [Assignment 3 repository](http://www.github.com/microbialinformatics/assignment03).  Format this document approapriately using R markdown and knitr. For those cases where there are multiple outputs, make it clear in how you format the text and interweave the solution, what the solution is.
@@ -24,10 +25,44 @@ plot(1:25,rep(15,25),pch=1:25,cex=2,axes=F,main="PCH Symbols",xlab="PCH value",y
 axis(1,at=1:25) #Added numbered x-axis
 segments(x0=1:25,x1=1:25,y0=0,y1=30,col="gray") #Drew x-axis lines with line segments
 ```
+
 2.  Using the `germfree.nmds.axes` data file available in this respositry, generate a plot that looks like this. The points are connected in the order they were sampled with the circle representing the beginning ad the square the end of the time course:
 
     <img src="beta.png", style="margin:0px auto;display:block" width="700">
 
+```{r}
+germfree<-read.table(file="germfree.nmds.axes",header=T) #Read table
+plot(1,type="n",xlim=c(-0.3,0.7),ylim=c(-0.55,0.4),xlab="NMDS Axis 1",ylab="NMDS Axis 2",cex.lab=0.75,cex.axis=0.75) #Blank plot
+
+#Mouse 337 data
+lines(germfree$axis2[germfree$mouse==337]~germfree$axis1[germfree$mouse==337],lwd=2)
+points(0.477973,-0.364076,pch=19,cex=2)
+points(-0.281808,-0.283736,pch=15,cex=2)
+
+#Mouse 343 data
+lines(germfree$axis2[germfree$mouse==343]~germfree$axis1[germfree$mouse==343],lwd=2,col="blue")
+points(0.500614,-0.313138,pch=19,cex=2,col="blue")
+points(-0.160445,-0.173750,pch=15,cex=2,col="blue")
+
+#Mouse 361 data
+lines(germfree$axis2[germfree$mouse==361]~germfree$axis1[germfree$mouse==361],lwd=2,col="red")
+points(0.492443,-0.288620,pch=19,cex=2,col="red")
+points(-0.140312,-0.179001,pch=15,cex=2,col="red")
+
+#Mouse 387 data
+lines(germfree$axis2[germfree$mouse==387]~germfree$axis1[germfree$mouse==387],lwd=2,col="green")
+points(0.576080,-0.345484,pch=19,cex=2,col="green")
+points(-0.212042,-0.233758,pch=15,cex=2,col="green")
+
+#Mouse 389 data
+lines(germfree$axis2[germfree$mouse==389]~germfree$axis1[germfree$mouse==389],lwd=2,col="brown")
+points(0.333411,-0.175003,pch=19,cex=2,col="brown")
+points(-0.266423,-0.221247,pch=15,cex=2,col="brown")
+
+#Legend
+legend(x=0,y=-0.2,legend=c("Mouse 337","Mouse 343","Mouse 361","Mouse 387","Mouse 389"),col=c("black","blue","red","green","brown"),lty=1,lwd=2,cex=0.75)
+
+```
 
 3.  On pg. 57 there is a formula for the probability of making x observations after n trials when there is a probability p of the observation.  For this exercise, assume x=2, n=10, and p=0.5.  Using R, calculate the probability of x using this formula and the appropriate built in function. Compare it to the results we obtained in class when discussing the sex ratios of mice.
 
