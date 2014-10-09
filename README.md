@@ -138,6 +138,75 @@ F.nucleatum           4      1     14
 
 
     * Run the three tests of proportions you learned about in class using built in R  functions to the 2x2 study design where normals and adenomas are pooled and compared to carcinomas.
+    
+    
+    ```r
+    #Make pooled matrix
+    pooled.Fnuc <- matrix(c(55, 15, 5, 14), nrow=2,ncol=2)
+    colnames(pooled.Fnuc)<-c("No Cancer", "Cancer")
+    rownames(pooled.Fnuc) <- c("No F. nucleatum", "F. nucleatum")
+    ```
+    
+    
+    ```r
+                    No Cancer Cancer
+No F. nucleatum        55      5
+F. nucleatum           15     14
+```
+
+
+**Answer: Test of Proportions**
+
+  ```r
+  prop.test.pooled.Fnuc <- prop.test(pooled.Fnuc)
+  prop.test.pooled.Fnuc
+  
+  2-sample test for equality of proportions with continuity
+	correction
+
+data:  pooled.Fnuc
+X-squared = 16.2736, df = 1, p-value = 5.482e-05
+alternative hypothesis: two.sided
+95 percent confidence interval:
+ 0.1789983 0.6198522
+sample estimates:
+   prop 1    prop 2 
+0.9166667 0.5172414 
+```
+    
+    
+     **Answer: Fisher's Test**
+    ```r
+    fisher.test.pooled.Fnuc <- fisher.test(pooled.Fnuc)
+    fisher.test.pooled.Fnuc
+    
+    Fisher's Exact Test for Count Data
+
+data:  pooled.Fnuc
+p-value = 4.094e-05
+alternative hypothesis: true odds ratio is not equal to 1
+95 percent confidence interval:
+  2.831846 41.154868
+sample estimates:
+odds ratio 
+  9.926223 
+  ```
+  
+  
+  **Answer: Chi-Squared Test**
+  ```r
+  chi.test.pooled.Fnuc <- chisq.test(pooled.Fnuc)
+  chi.test.pooled.Fnuc
+
+  Pearson's Chi-squared test with Yates' continuity correction
+
+data:  pooled.Fnuc
+X-squared = 16.2736, df = 1, p-value = 5.482e-05
+```
+  
+    
+    
+    
     * Without using the built in chi-squared test function, replicate the 2x2 study design in the last problem for the Chi-Squared Test...
       * Calculate the expected count matrix and calculate the Chi-Squared test statistics. Figure out how to get your test statistic to match Rs default statistic.
       *	Generate a Chi-Squared distributions with approporiate degrees of freedom by the method that was discussed in class (hint: you may consider using the `replicate` command)
