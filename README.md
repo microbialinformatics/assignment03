@@ -66,6 +66,14 @@ legend(x=0,y=-0.2,legend=c("Mouse 337","Mouse 343","Mouse 361","Mouse 387","Mous
 3.  On pg. 57 there is a formula for the probability of making x observations after n trials when there is a probability p of the observation.  For this exercise, assume x=2, n=10, and p=0.5.  Using R, calculate the probability of x using this formula and the appropriate built in function. Compare it to the results we obtained in class when discussing the sex ratios of mice.
 
 
+```r
+p.formula<-((factorial(10))/(factorial(2)*factorial(8)))*(0.5^2)*((1-0.5)^(10-2)) #Calculated probability using formula
+
+p.dbinom<-dbinom(2,10,0.5) #Calculated probability using built-in R function
+```
+
+The formula gives a probability of 0.0439, and the R function gives the same result of 0.0439.  The values used in these calculations are identical to the values used to calculate the probability of observing 2 males in a litter of 10 mice (assuming that there is a 50% chance of being either male or female).  Thus, the results obtained in class match the results of this question in the the probability is also 0.0439.
+
 4.  On pg. 59 there is a formula for the probability of observing a value, x, when there is a mean, mu, and standard deviation, sigma.  For this exercise, assume x=10.3, mu=5, and sigma=3.  Using R, calculate the probability of x using this formula and the appropriate built in function
 
 
