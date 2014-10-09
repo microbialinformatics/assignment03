@@ -259,10 +259,32 @@ X-squared = 16.2736, df = 1, p-value = 5.482e-05
       chisq<- sum((((abs(expected-pooled.Fnuc))-0.5)^2)/expected)
       chisq
       [1] 16.2736
+      #This matches the R-generated Chi-squared statistic generated.
       ```
       
       
       *	Generate a Chi-Squared distributions with approporiate degrees of freedom by the method that was discussed in class (hint: you may consider using the `replicate` command)
+      
+      
+      **Answer:**
+      ```r
+      #Calculate df
+      df <- (nrow(pooled.Fnuc) - 1) * (ncol(pooled.Fnuc) - 1)
+      df
+      [1] 1
+      #df = k
+      
+      #Draw k variables from a normal distribution
+      dist <- replicate(1000, sum((rnorm(1,0,1))^2))
+      
+      #Calculate proportion of distribution > Chi-squared
+      dist.Xsq <- (dist > 16.2736)
+      sum(dist.Xsq==TRUE)
+      [1] 0
+      #0 of the distribution is larger than Chi-squared (16.2736)
+      ```
+      
+      
       * Compare your Chi-Squared distributions to what you might get from the appropriate built in R functions
       * Based on your distribution calculate p-values
       * How does your p-value compare to what you saw using the built in functions? Explain your observations.
