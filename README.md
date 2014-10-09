@@ -174,7 +174,7 @@ sample estimates:
 ```
     
     
-     **Answer: Fisher's Test**
+**Answer: Fisher's Test**
 ```r
 fisher.test.pooled.Fnuc <- fisher.test(pooled.Fnuc)
 fisher.test.pooled.Fnuc
@@ -192,7 +192,7 @@ odds ratio
 ```
   
   
-  **Answer: Chi-Squared Test**
+**Answer: Chi-Squared Test**
 ```r
 chi.test.pooled.Fnuc <- chisq.test(pooled.Fnuc)
 chi.test.pooled.Fnuc
@@ -208,7 +208,7 @@ X-squared = 16.2736, df = 1, p-value = 5.482e-05
       * Calculate the expected count matrix and calculate the Chi-Squared test statistics. Figure out how to get your test statistic to match Rs default statistic.
       
       
-      **Answer:**
+**Answer:**
 ```r
       #Fnuc or No Fnuc
       sum.pooled.Fnuc <- margin.table(pooled.Fnuc,1)
@@ -265,7 +265,7 @@ X-squared = 16.2736, df = 1, p-value = 5.482e-05
       *	Generate a Chi-Squared distributions with approporiate degrees of freedom by the method that was discussed in class (hint: you may consider using the `replicate` command)
       
       
-      **Answer:**
+**Answer:**
 ```r
       #Calculate df
       df <- (nrow(pooled.Fnuc) - 1) * (ncol(pooled.Fnuc) - 1)
@@ -288,7 +288,7 @@ X-squared = 16.2736, df = 1, p-value = 5.482e-05
       
       * Compare your Chi-Squared distributions to what you might get from the appropriate built in R functions
       
-      **Answer:**
+**Answer:**
 ```r
       plot(seq(0, 20, 0.05), dchisq(seq(0, 20, 0.05), df = df), type = "l", xlab = "ChiSquared Statistic", ylab = "Probability with 1 degree of freedom")
       arrows(x0 = chisq, x1 = chisq, y0 = 0.4, y1 = 0.05, lwd = 2, col = "red")
@@ -298,13 +298,16 @@ X-squared = 16.2736, df = 1, p-value = 5.482e-05
       
       * Based on your distribution calculate p-values
       
-      **Answer:** p-value=0. The p-value is the sum of the probability that the Chi-Squared distribution is larger than my Chi-Squared Statistic. Because my distribution has 0 values which are larger than my Chi-Squared Statistic, my p-value is 0.
+**Answer:** p-value=0. The p-value is the sum of the probability that the Chi-Squared distribution is larger than my Chi-Squared Statistic. Because my distribution has 0 values which are larger than my Chi-Squared Statistic, my p-value is 0.
       
       
       * How does your p-value compare to what you saw using the built in functions? Explain your observations.
       
-      **Answer:**
-      My p-value (0) is smaller than the R-generated p-value (5.482e-05).
+      
+      
+      
+      
+**Answer:** My p-value (0) is smaller than the R-generated p-value (5.482e-05).
 
 
 6\.  Get a bag of Skittles or M&Ms.  Are the candies evenly distributed amongst the different colors?  Justify your conclusion.
