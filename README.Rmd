@@ -102,14 +102,15 @@ rnames <- c("NoDisease","Cancer")
 cnames <- c("WithFnuc", "WithoutFnuc")
 rownames(colondata) <- rnames
 colnames(colondata) <- cnames
+colondata
 ```
 
     * Run the three tests of proportions you learned about in class using built in R  functions to the 2x2 study design where normals and adenomas are pooled and compared to carcinomas.
 ```{r}
 m <- margin.table(colondata,2)
-binom <- binom.test(m)
-chi <- chisq.test(colondata)
-fish <- fisher.test(colondata)
+binom.test(m)
+chisq.test(colondata)
+fisher.test(colondata)
 ```
 
     * Without using the built in chi-squared test function, replicate the 2x2 study design in the last problem for the Chi-Squared Test...
@@ -129,6 +130,7 @@ frac.Fnuc <- c(WithFnuc = frac.wFnuc, WithoutFnuc = frac.woFnuc)
 expected <- frac.disease %*% t(frac.Fnuc)
 expected <- expected * sum(colondata)
 expected <- expected + 1
+expected
 chi.sq <- sum((expected - colondata)^2/expected)
 ```
 The statistic is `r chi.sq`.
@@ -165,6 +167,7 @@ colors[1,6] <- 97
 colnames <- c("orange","yellow","red","brown","green","blue")
 colnames(colors) <- colnames
 
+colors
 chisq.test(colors)
 ```
 
