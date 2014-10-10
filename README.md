@@ -36,6 +36,18 @@ points(nmds[nmds$mouse==337&nmds$day==20,3],y=nmds[nmds$mouse==337&nmds$day==20,
 lines(nmds$axis2[nmds$mouse==343]~nmds$axis1[nmds$mouse==343],col="blue",type="l")
 points(nmds[nmds$mouse==343&nmds$day==1,3],y=nmds[nmds$mouse==343&nmds$day==1,4],pch=16,col="blue",cex=1.5)
 points(nmds[nmds$mouse==343&nmds$day==21,3],y=nmds[nmds$mouse==343&nmds$day==21,4],pch=15,col="blue",cex=1.5)
+    
+lines(nmds$axis2[nmds$mouse==361]~nmds$axis1[nmds$mouse==361],col="red",type="l")
+points(nmds[nmds$mouse==361&nmds$day==1,3],y=nmds[nmds$mouse==361&nmds$day==1,4],pch=16,col="red",cex=1.5)
+points(nmds[nmds$mouse==361&nmds$day==21,3],y=nmds[nmds$mouse==361&nmds$day==21,4],pch=15,col="red",cex=1.5)
+    
+lines(nmds$axis2[nmds$mouse==387]~nmds$axis1[nmds$mouse==387],col="green",type="l")
+points(nmds[nmds$mouse==387&nmds$day==1,3],y=nmds[nmds$mouse==387&nmds$day==1,4],pch=16,col="green",cex=1.5)
+points(nmds[nmds$mouse==387&nmds$day==21,3],y=nmds[nmds$mouse==387&nmds$day==21,4],pch=15,col="green",cex=1.5)
+   
+lines(nmds$axis2[nmds$mouse==389]~nmds$axis1[nmds$mouse==389],col="brown",type="l")
+points(nmds[nmds$mouse==389&nmds$day==1,3],y=nmds[nmds$mouse==389&nmds$day==1,4],pch=16,col="brown",cex=1.5)
+points(nmds[nmds$mouse==389&nmds$day==21,3],y=nmds[nmds$mouse==389&nmds$day==21,4],pch=15,col="brown",cex=1.5)
 ```
 
 ![plot of chunk unnamed-chunk-2](./README_files/figure-html/unnamed-chunk-2.png) 
