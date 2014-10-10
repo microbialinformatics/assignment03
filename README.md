@@ -61,15 +61,11 @@ x <- 2
 n <- 10
 p <- 0.5
 bin.coef <- choose(n,x)
-result_3 <- bin.coef*(p^x)*((1-p)^(n-x))
+result_3_formula <- bin.coef*(p^x)*((1-p)^(n-x))
 
-dbinom(x,n,p)
+result_3_function <- dbinom(x,n,p)
 ```
-
-```
-## [1] 0.04395
-```
-Probability = 0.0439 
+Probability calculated by formula is 0.0439, and by built in function is 0.0439. 
 
 4.  On pg. 59 there is a formula for the probability of observing a value, x, when there is a mean, mu, and standard deviation, sigma.  For this exercise, assume x=10.3, mu=5, and sigma=3.  Using R, calculate the probability of x using this formula and the appropriate built in function
 
