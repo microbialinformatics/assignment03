@@ -97,19 +97,85 @@ rownames(table_5)=c("no_sign","adenomas","cancer")
 ```r
 table_5_pooled <- matrix(data=c(5,14,55,15),nrow=2,ncol=2)
 colnames(table_5_pooled)=c("w/F","w/oF")
-rownames(table_5_pooled)=c("non_carci","cancinomas")
+rownames(table_5_pooled)=c("non_carci","carci")
 
-result_chisq.test <- chisq.test(table_5_pooled)
-result_fisher.test <- fisher.test(table_5_pooled)
-result_prop.test <- prop.test(table_5_pooled)
+chisq.test(table_5_pooled)
 ```
-    
+
+```
+## 
+## 	Pearson's Chi-squared test with Yates' continuity correction
+## 
+## data:  table_5_pooled
+## X-squared = 16.27, df = 1, p-value = 5.482e-05
+```
+
+```r
+fisher.test(table_5_pooled)
+```
+
+```
+## 
+## 	Fisher's Exact Test for Count Data
+## 
+## data:  table_5_pooled
+## p-value = 4.094e-05
+## alternative hypothesis: true odds ratio is not equal to 1
+## 95 percent confidence interval:
+##  0.0243 0.3531
+## sample estimates:
+## odds ratio 
+##     0.1007
+```
+
+```r
+prop.test(table_5_pooled)
+```
+
+```
+## 
+## 	2-sample test for equality of proportions with continuity
+## 	correction
+## 
+## data:  table_5_pooled
+## X-squared = 16.27, df = 1, p-value = 5.482e-05
+## alternative hypothesis: two.sided
+## 95 percent confidence interval:
+##  -0.6199 -0.1790
+## sample estimates:
+##  prop 1  prop 2 
+## 0.08333 0.48276
+```
+The p value for `chisq.test`,`fisher test`, and `prop.test` are 5.4822 &times; 10<sup>-5</sup>,4.0941 &times; 10<sup>-5</sup>, and 5.4822 &times; 10<sup>-5</sup>.
+
+ 
     * Without using the built in chi-squared test function, replicate the 2x2 study design in the last problem for the Chi-Squared Test...
+    
+ 
+ ```r
+ carci.sums <- margin.table(table_5_pooled,1)
+ frac.non_carci <- carci.sums["non_carci"]/sum(carci.sums)
+ frac.carci <- carci.sums["carci"]/sum(carci.sums)
+ frac.cancer <- c(frac.carci,frac.non_carci)
+ 
+ F.sums <- margin.table(table_5_pooled,2)
+ frac.w <- F.sums["w/F"]/sum(F.sums)
+ frac.wo <- F.sums["w/oF"]/sum(F.sums)
+ frac.F <- c(frac.w,frac.wo)
+ 
+ expected <- frac.cancer%*% t(frac.F)
+ expected<-expected*sum(table_5_pooled)
+ 
+ chi.sq <- sum((expected-table_5_pooled)^2/expected)
+ df <- (nrow(table_5_pooled)-1)*(ncol(table_5_pooled)-1)
+ ```
+    
       * Calculate the expected count matrix and calculate the Chi-Squared test statistics. Figure out how to get your test statistic to match Rs default statistic.
       *	Generate a Chi-Squared distributions with approporiate degrees of freedom by the method that was discussed in class (hint: you may consider using the `replicate` command)
       * Compare your Chi-Squared distributions to what you might get from the appropriate built in R functions
       * Based on your distribution calculate p-values
       * How does your p-value compare to what you saw using the built in functions? Explain your observations.
+
 
 
 
