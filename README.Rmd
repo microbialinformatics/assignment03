@@ -103,14 +103,36 @@ percent <- woot*100
 
 
 ```{r}
-#woot <- rnorm(x=2, n=10, p = 0.5)
+x_observ <- 10.3
+st_dev <- 5
+mean <- 3
+
+
+
 ```
 
 
 5.  One of my previous students, Joe Zackular, obtained stool samples from 89 people that underwent colonoscopies.  30 of these individuals had no signs of disease, 30 had non-cancerous ademonas, and 29 had cancer.  It was previously suggested that the bacterium *Fusobacterium nucleatum* was associated with cancer.  In these three pools of subjects, Joe determined that 4, 1, and 14 individuals harbored *F. nucleatum*, respectively. Create a matrix table to represent the number of individuals with and without _F. nucleatum_ as a function of disease state.  Then do the following:
 
-    * Run the three tests of proportions you learned about in class using built in R  functions to the 2x2 study design where normals and adenomas are pooled and compared to carcinomas.
-    * Without using the built in chi-squared test function, replicate the 2x2 study design in the last problem for the Chi-Squared Test...
+```{r}
+#Make a Matrix with data
+Group <-  c("NoDisease", "Ademonas", "Cancer")
+Num_People <- c(30, 30, 29)
+Nucleatum_Abund <- c(4, 1, 14)
+nuc <- data.frame(Group, Num_People, Nucleatum_Abund)
+rownames(nuc) <- nuc$Group
+nuc$Group = NULL
+data.matrix(nuc, rownames.force = T)
+```
+
+
+
+      * Run the three tests of proportions you learned about in class using built in R  functions to the 2x2 study design where normals and adenomas are pooled and compared to carcinomas.
+    
+    
+      * Without using the built in chi-squared test function, replicate the 2x2 study design in the last problem for the Chi-Squared Test...
+    
+    
       * Calculate the expected count matrix and calculate the Chi-Squared test statistics. Figure out how to get your test statistic to match Rs default statistic.
       *	Generate a Chi-Squared distributions with approporiate degrees of freedom by the method that was discussed in class (hint: you may consider using the `replicate` command)
       * Compare your Chi-Squared distributions to what you might get from the appropriate built in R functions
@@ -119,4 +141,15 @@ percent <- woot*100
 
 
 6\.  Get a bag of Skittles or M&Ms.  Are the candies evenly distributed amongst the different colors?  Justify your conclusion.
+
+```{r}
+
+
+mms <- c(9, 13, 6, 11, 8, 10)
+names(mms) <- c("Green", "Orange", "Red", "Blue", "Yellow", "Brown")
+
+hist(mms)
+
+```
+
 

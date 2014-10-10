@@ -70,7 +70,9 @@ percent <- woot*100
 
 
 ```r
-#woot <- rnorm(x=2, n=10, p = 0.5)
+x_observ <- 10.3
+st_dev <- 5
+mean <- 3
 ```
 
 
