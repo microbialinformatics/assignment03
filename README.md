@@ -146,35 +146,67 @@ prop.test(table_5_pooled)
 ##  prop 1  prop 2 
 ## 0.08333 0.48276
 ```
-The p value for `chisq.test`,`fisher test`, and `prop.test` are 5.4822 &times; 10<sup>-5</sup>,4.0941 &times; 10<sup>-5</sup>, and 5.4822 &times; 10<sup>-5</sup>.
+The p value for `chisq.test`,`fisher.test`, and `prop.test` are 5.4822 &times; 10<sup>-5</sup>,4.0941 &times; 10<sup>-5</sup>, and 5.4822 &times; 10<sup>-5</sup>.
 
  
     * Without using the built in chi-squared test function, replicate the 2x2 study design in the last problem for the Chi-Squared Test...
+    * Calculate the expected count matrix and calculate the Chi-Squared test statistics. Figure out how to get your test statistic to match Rs default statistic.
     
- 
- ```r
- carci.sums <- margin.table(table_5_pooled,1)
- frac.non_carci <- carci.sums["non_carci"]/sum(carci.sums)
- frac.carci <- carci.sums["carci"]/sum(carci.sums)
- frac.cancer <- c(frac.carci,frac.non_carci)
- 
- F.sums <- margin.table(table_5_pooled,2)
- frac.w <- F.sums["w/F"]/sum(F.sums)
- frac.wo <- F.sums["w/oF"]/sum(F.sums)
- frac.F <- c(frac.w,frac.wo)
- 
- expected <- frac.cancer%*% t(frac.F)
- expected<-expected*sum(table_5_pooled)
- 
- chi.sq <- sum((expected-table_5_pooled)^2/expected)
- df <- (nrow(table_5_pooled)-1)*(ncol(table_5_pooled)-1)
- ```
+
+```r
+carci.sums <- margin.table(table_5_pooled,1)
+frac.non_carci <- carci.sums["non_carci"]/sum(carci.sums)
+frac.carci <- carci.sums["carci"]/sum(carci.sums)
+frac.carcinomas <- c(frac.carci,frac.non_carci)
+
+F.sums <- margin.table(table_5_pooled,2)
+frac.w <- F.sums["w/F"]/sum(F.sums)
+frac.wo <- F.sums["w/oF"]/sum(F.sums)
+frac.F <- c(frac.w,frac.wo)
+
+table_5_expected <- frac.carcinomas %*% t(frac.F)
+table_5_expected<-expected*sum(table_5_pooled)
+rownames(table_5_expected)=c("non_carci","carci")
+table_5_expected
+```
+
+```
+##            w/F w/oF
+## non_carci  551 2030
+## carci     1140 4200
+```
+
+```r
+chi.sq <- sum((table_5_expected-table_5_pooled)^2/table_5_expected)
+chi.sq
+```
+
+```
+## [1] 7745
+```
     
-      * Calculate the expected count matrix and calculate the Chi-Squared test statistics. Figure out how to get your test statistic to match Rs default statistic.
+
+  
       *	Generate a Chi-Squared distributions with approporiate degrees of freedom by the method that was discussed in class (hint: you may consider using the `replicate` command)
+
+```r
+df <- (nrow(table_5)-1)*(ncol(table_5)-1)
+plot(seq(0,20,0.05),dchisq(seq(0,20,0.05),df=df),type="l",xlab="ChiSquared Statistic",ylab="Probability with 1 degree of freedom")
+
+
+
+arrows(x0=chi.sq,x1=chi.sq,y0=0.4,y1=0.05,lwd=2,col="red")
+```
+
+![plot of chunk unnamed-chunk-8](./README_files/figure-html/unnamed-chunk-8.png) 
+      
+      
+      
       * Compare your Chi-Squared distributions to what you might get from the appropriate built in R functions
       * Based on your distribution calculate p-values
       * How does your p-value compare to what you saw using the built in functions? Explain your observations.
+
+
 
 
 
