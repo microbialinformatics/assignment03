@@ -28,6 +28,16 @@ plot(x=1:25,y=rep(1,25),xlab="PCH value",ylab="",pch=1:25,type="p", main="PCH Sy
 ```r
 nmds <- read.table(file = "germfree.nmds.axes", header = T)
 plot(nmds$axis2~nmds$axis1,type="l")
+points(x=nmds[nmds$mouse==337 & nmds$day==1,], y=nmds[nmds$mouse==337 & nmds$day==1,], pch=16, col="black")
+points(x=nmds[nmds$mouse==337 & nmds$day==20,], y=nmds[nmds$mouse==337 & nmds$day==20,], pch=15, col="black")
+points(x=nmds[nmds$mouse==343 & nmds$day==1,], y=nmds[nmds$mouse==343 & nmds$day==1,], pch=16, col="blue")
+points(x=nmds[nmds$mouse==343 & nmds$day==21,], y=nmds[nmds$mouse==343 & nmds$day==21,], pch=15, col="blue")
+points(x=nmds[nmds$mouse==361 & nmds$day==1,], y=nmds[nmds$mouse==361 & nmds$day==1,], pch=16, col="red")
+points(x=nmds[nmds$mouse==361 & nmds$day==21,], y=nmds[nmds$mouse==361 & nmds$day==21,], pch=15, col="red")
+points(x=nmds[nmds$mouse==387 & nmds$day==1,], y=nmds[nmds$mouse==387 & nmds$day==1,], pch=16, col="green")
+points(x=nmds[nmds$mouse==387 & nmds$day==21,], y=nmds[nmds$mouse==387 & nmds$day==21,], pch=15, col="green")
+points(x=nmds[nmds$mouse==389 & nmds$day==1,], y=nmds[nmds$mouse==389 & nmds$day==1,], pch=16, col="brown")
+points(x=nmds[nmds$mouse==389 & nmds$day==21,], y=nmds[nmds$mouse==389 & nmds$day==21,], pch=15, col="brown")
 ```
 
 ![plot of chunk unnamed-chunk-2](./README_files/figure-html/unnamed-chunk-2.png) 
@@ -43,11 +53,11 @@ p <- 0.5
 bin.coef <- choose(n,x)
 result_3 <- bin.coef*(p^x)*((1-p)^(n-x))
 
-pbinom(x,n,p)
+dbinom(x,n,p)
 ```
 
 ```
-## [1] 0.05469
+## [1] 0.04395
 ```
 Probability = 0.0439 
 
@@ -58,11 +68,11 @@ mean <- 5
 sd <- 3
 result_4 <- 1/((sqrt(2*pi))*sd)*exp(-((x-mean)^2)/(2*(sd^2)))
 
-pnorm(x,mean, sd)
+dnorm(x,mean, sd)
 ```
 
 ```
-## [1] 0.1587
+## [1] 0.08066
 ```
 Probability = 0.0807 
 
