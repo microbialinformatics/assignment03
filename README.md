@@ -29,17 +29,13 @@ axis(1,at=1:25)
 
 ```r
 nmds <- read.table(file = "germfree.nmds.axes", header = T)
-plot(nmds$axis2~nmds$axis1,type="l")
-points(x=nmds[nmds$mouse==337 & nmds$day==1,], y=nmds[nmds$mouse==337 & nmds$day==1,], pch=16, col="black")
-points(x=nmds[nmds$mouse==337 & nmds$day==20,], y=nmds[nmds$mouse==337 & nmds$day==20,], pch=15, col="black")
-points(x=nmds[nmds$mouse==343 & nmds$day==1,], y=nmds[nmds$mouse==343 & nmds$day==1,], pch=16, col="blue")
-points(x=nmds[nmds$mouse==343 & nmds$day==21,], y=nmds[nmds$mouse==343 & nmds$day==21,], pch=15, col="blue")
-points(x=nmds[nmds$mouse==361 & nmds$day==1,], y=nmds[nmds$mouse==361 & nmds$day==1,], pch=16, col="red")
-points(x=nmds[nmds$mouse==361 & nmds$day==21,], y=nmds[nmds$mouse==361 & nmds$day==21,], pch=15, col="red")
-points(x=nmds[nmds$mouse==387 & nmds$day==1,], y=nmds[nmds$mouse==387 & nmds$day==1,], pch=16, col="green")
-points(x=nmds[nmds$mouse==387 & nmds$day==21,], y=nmds[nmds$mouse==387 & nmds$day==21,], pch=15, col="green")
-points(x=nmds[nmds$mouse==389 & nmds$day==1,], y=nmds[nmds$mouse==389 & nmds$day==1,], pch=16, col="brown")
-points(x=nmds[nmds$mouse==389 & nmds$day==21,], y=nmds[nmds$mouse==389 & nmds$day==21,], pch=15, col="brown")
+plot(nmds$axis2[nmds$mouse==337]~nmds$axis1[nmds$mouse==337],col="black",type="l",xlab="NMDS Axis 1",ylab="NMDS Axis 2",ylim=c(-0.6,0.4),xlim=c(-0.4,0.8))
+points(nmds[nmds$mouse==337&nmds$day==1,3],y=nmds[nmds$mouse==337&nmds$day==1,4],pch=16,col="black",cex=1.5)
+points(nmds[nmds$mouse==337&nmds$day==20,3],y=nmds[nmds$mouse==337&nmds$day==20,4],pch=15,col="black",cex=1.5)
+      
+lines(nmds$axis2[nmds$mouse==343]~nmds$axis1[nmds$mouse==343],col="blue",type="l")
+points(nmds[nmds$mouse==343&nmds$day==1,3],y=nmds[nmds$mouse==343&nmds$day==1,4],pch=16,col="blue",cex=1.5)
+points(nmds[nmds$mouse==343&nmds$day==21,3],y=nmds[nmds$mouse==343&nmds$day==21,4],pch=15,col="blue",cex=1.5)
 ```
 
 ![plot of chunk unnamed-chunk-2](./README_files/figure-html/unnamed-chunk-2.png) 
