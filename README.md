@@ -3,7 +3,6 @@ output: html_document
 ---
 # Assignment 3
 Edna Chiang
-
 October 1, 2014  
 
 Complete the exercises listed below and submit as a pull request to the [Assignment 3 repository](http://www.github.com/microbialinformatics/assignment03).  Format this document approapriately using R markdown and knitr. For those cases where there are multiple outputs, make it clear in how you format the text and interweave the solution, what the solution is.
@@ -291,12 +290,12 @@ X-squared = 16.2736, df = 1, p-value = 5.482e-05
       
       * Compare your Chi-Squared distributions to what you might get from the appropriate built in R functions
       
-**Answer:**
+
 ```r
       plot(seq(0, 20, 0.05), dchisq(seq(0, 20, 0.05), df = df), type = "l", xlab = "ChiSquared Statistic", ylab = "Probability with 1 degree of freedom")
       arrows(x0 = chisq, x1 = chisq, y0 = 0.4, y1 = 0.05, lwd = 2, col = "red")
 ```
-My  χ² distribution looks quite similar to the R-generated distribution. Both exponentially decrease as the x-axis value increases. My distribution begins to level out when X = 2, whereas the R-generated distribution begins to level out when X = 4. However, whereas my distribution is discrete, the R-generated distribution is continuous.
+**Answer:** My  χ² distribution looks quite similar to the R-generated distribution. Both exponentially decrease as the x-axis value increases. My distribution begins to level out when X = 2, whereas the R-generated distribution begins to level out when X = 4. However, whereas my distribution is discrete, the R-generated distribution is continuous.
       
       
       * Based on your distribution calculate p-values
