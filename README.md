@@ -15,7 +15,9 @@ This assignment is due on October 10th.
    
 
 ```r
-plot(x=1:25,y=rep(1,25),xlab="PCH value",ylab="",pch=1:25,type="p", main="PCH Symbols",yaxt="n",panel.first = grid(nx=25,ny=NULL,lty = 1))
+plot(x=1:25,y=rep(1,25),xlab="PCH value",ylab="",pch=1:25,type="p", main="PCH Symbols",axes=F)
+segments(x0=1:25,y0=0,x1=1:25,y1=25,col="grey")
+axis(1,at=1:25)
 ```
 
 ![plot of chunk unnamed-chunk-1](./README_files/figure-html/unnamed-chunk-1.png) 
