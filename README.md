@@ -15,7 +15,7 @@ This assignment is due on October 10th.
    
 
 ```r
-plot(1:25,pch=1:25,type="p",xlab="PCH value", main="PCH Symbols")
+plot(x=1:25,y=rep(1,25),ylab=NULL,pch=1:25,type="p",xlab="PCH value", main="PCH Symbols")
 ```
 
 ![plot of chunk unnamed-chunk-1](./README_files/figure-html/unnamed-chunk-1.png) 
@@ -34,6 +34,8 @@ plot(nmds$axis2~nmds$axis1,type="l")
 
 
 3.  On pg. 57 there is a formula for the probability of making x observations after n trials when there is a probability p of the observation.  For this exercise, assume x=2, n=10, and p=0.5.  Using R, calculate the probability of x using this formula and the appropriate built in function. Compare it to the results we obtained in class when discussing the sex ratios of mice.
+
+
 
 
 4.  On pg. 59 there is a formula for the probability of observing a value, x, when there is a mean, mu, and standard deviation, sigma.  For this exercise, assume x=10.3, mu=5, and sigma=3.  Using R, calculate the probability of x using this formula and the appropriate built in function
