@@ -146,13 +146,8 @@ chi.sq
   
       *	Generate a Chi-Squared distributions with approporiate degrees of freedom by the method that was discussed in class (hint: you may consider using the `replicate` command)
 ```{r}
-df <- (nrow(table_5)-1)*(ncol(table_5)-1)
-plot(seq(0,20,0.05),dchisq(seq(0,20,0.05),df=df),type="l",xlab="ChiSquared Statistic",ylab="Probability with 1 degree of freedom")
-
-
-
-arrows(x0=chi.sq,x1=chi.sq,y0=0.4,y1=0.05,lwd=2,col="red")
-
+distr <-replicate(10000,sum(rnorm(1,0,1))^2)
+hist(distr,breaks=100)
 
 
 ```      
@@ -160,8 +155,34 @@ arrows(x0=chi.sq,x1=chi.sq,y0=0.4,y1=0.05,lwd=2,col="red")
       
       
       * Compare your Chi-Squared distributions to what you might get from the appropriate built in R functions
+```{r}
+df <- (nrow(table_5)-1)*(ncol(table_5)-1)
+plot(seq(0,20,0.05),dchisq(seq(0,20,0.05),df=df),type="l",xlab="ChiSquared Statistic",ylab="Probability with 1 degree of freedom")
+
+
+
+arrows(x0=chi.sq,x1=chi.sq,y0=0.4,y1=0.05,lwd=2,col="red")
+```     
+      
+      
+      
+      
+      
+      
       * Based on your distribution calculate p-values
+```{r}
+
+```      
+      
+      
+      
+      
+      
       * How does your p-value compare to what you saw using the built in functions? Explain your observations.
+```{r}
+
+```
+
 
 
 
@@ -171,4 +192,19 @@ arrows(x0=chi.sq,x1=chi.sq,y0=0.4,y1=0.05,lwd=2,col="red")
 
 
 6\.  Get a bag of Skittles or M&Ms.  Are the candies evenly distributed amongst the different colors?  Justify your conclusion.
+```{r}
+n <- c(10,5,8,3,8,3)
+MMs <- matrix(n,ncol=6,nrow=1)
+colnames(MMs)=c("red","orange","yellow","green","blue","brown")
+rownames(MMs)="counts"
+MMs
+chisq.test(n)
+
+
+
+
+
+
+```
+
 
