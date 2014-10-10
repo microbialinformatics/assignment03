@@ -245,6 +245,8 @@ arrows(x0 = F.nucleatum.chisq2, x1 = F.nucleatum.chisq2, y0 = 0.4, y1 = 0.05, lw
 
 ![plot of chunk unnamed-chunk-9](./README_files/figure-html/unnamed-chunk-9.png) 
 
+The shape and values of the distributions are very similar except for the fact that the R-generated distribution is continuous while the user-generated distribution is discrete.
+
       * Based on your distribution calculate p-values
       
 
@@ -270,4 +272,6 @@ The p-value found using the generated chi-squared distribution is very slightly 
 
 
 6\.  Get a bag of Skittles or M&Ms.  Are the candies evenly distributed amongst the different colors?  Justify your conclusion.
+
+
 
