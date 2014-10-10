@@ -274,4 +274,23 @@ The p-value found using the generated chi-squared distribution is very slightly 
 6\.  Get a bag of Skittles or M&Ms.  Are the candies evenly distributed amongst the different colors?  Justify your conclusion.
 
 
+```r
+#Matrix of M&M color distribution
+MMcolors<-matrix(c(10,4,8,4,3,9),ncol=6,nrow=1)
+rownames(MMcolors)=""
+colnames(MMcolors)=c("Blue","Yellow","Orange","Brown","Red","Green")
+
+MMnumbers<-c(10,4,8,4,3,9) #Number of each color
+chisq.test(MMnumbers)
+```
+
+```
+## 
+## 	Chi-squared test for given probabilities
+## 
+## data:  MMnumbers
+## X-squared = 7.158, df = 5, p-value = 0.2092
+```
+
+
 

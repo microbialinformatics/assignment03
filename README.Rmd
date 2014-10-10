@@ -174,5 +174,14 @@ The p-value found using the generated chi-squared distribution is very slightly 
 
 6\.  Get a bag of Skittles or M&Ms.  Are the candies evenly distributed amongst the different colors?  Justify your conclusion.
 
+```{r}
+#Matrix of M&M color distribution
+MMcolors<-matrix(c(10,4,8,4,3,9),ncol=6,nrow=1)
+rownames(MMcolors)=""
+colnames(MMcolors)=c("Blue","Yellow","Orange","Brown","Red","Green")
 
+MMnumbers<-c(10,4,8,4,3,9) #Number of each color
+chisq.test(MMnumbers)
+```
 
+The null hypothesis is that there is no significant difference in the distribution of the M&M colors.  The calculated p-value in the chi-squared test is far above the threshold of 0.05.  Therefore, the difference in color distribution is not significant and the null hypothesis cannot be rejected.
