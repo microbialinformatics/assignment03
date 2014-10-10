@@ -14,28 +14,271 @@ This assignment is due on October 10th.
 
     <img src="pch.png", style="margin:0px auto;display:block" width="500">
 
+Here is the code for creating the PCH Plot and the plot output.
+
+```r
+x <- 1:25
+y <- rep(1,25)
+pch.plot <- plot(x, y, pch=x, xlab="PCH value", main="PCH Symbols", ylab="", grid(nx=26, ny=1, col="grey", lty="solid"), axes=F, cex=1.5)
+axis(side=1, at=seq(1,25,1), label=x)
+```
+
+![plot of chunk unnamed-chunk-1](./README_files/figure-html/unnamed-chunk-1.png) 
+
+```r
+pdf(pch.plot,"/Users/daniellegoodman/assignment03/PCH Symbols Plot.pdf")
+```
+
+```
+## Warning: 'mode(width)' differs between new and previous
+## 	 ==> NOT changing 'width'
+```
+
 
 2.  Using the `germfree.nmds.axes` data file available in this respositry, generate a plot that looks like this. The points are connected in the order they were sampled with the circle representing the beginning ad the square the end of the time course:
 
     <img src="beta.png", style="margin:0px auto;display:block" width="700">
 
 
+```r
+germfree <- read.table(file="germfree.nmds.axes", header=T)
+as.factor(germfree$mouse) -> factor
+levmouse <- levels(factor)
+a <- subset(germfree, mouse==levmouse[1])
+b <- subset(germfree, mouse==levmouse[2])
+c <- subset(germfree, mouse==levmouse[3])
+d <- subset(germfree, mouse==levmouse[4])
+e <- subset(germfree, mouse==levmouse[5])
+plot(a$axis1,a$axis2,type="l",lwd=c(2.5,2.5),col="black", xlab="NMDS Axis 1", ylab="NMDS Axis 2",ylim=c(-0.55,0.4),xlim=c(-0.3,0.7))
+lines(b$axis1,b$axis2,type="l",lwd=c(2.5,2.5),col="blue")
+lines(c$axis1,c$axis2,type="l",lwd=c(2.5,2.5),col="red")
+lines(d$axis1,d$axis2,type="l",lwd=c(2.5,2.5),col="green")
+lines(e$axis1,e$axis2,type="l",lwd=c(2.5,2.5),col="sienna")
+legend(x=0.0,y=-0.2, c("Mouse 337","Mouse 343","Mouse 361","Mouse 387","Mouse 389"), lty=c(1,1), lwd=c(2.5,2.5),col=c("black","blue","red","green","sienna"),cex=0.7)
+points(x=a$axis1[1],y=a$axis2[1],type="p",pch=16,col="black",cex=2)
+points(x=b$axis1[1],y=b$axis2[1],type="p",pch=16,col="blue",cex=2)
+points(x=c$axis1[1],y=c$axis2[1],type="p",pch=16,col="red",cex=2)
+points(x=d$axis1[1],y=d$axis2[1],type="p",pch=16,col="green",cex=2)
+points(x=e$axis1[1],y=e$axis2[1],type="p",pch=16,col="sienna",cex=2)
+points(x=a$axis1[20],y=a$axis2[20],type="p",pch=15,col="black",cex=2)
+points(x=b$axis1[21],y=b$axis2[21],type="p",pch=15,col="blue",cex=2)
+points(x=c$axis1[20],y=c$axis2[20],type="p",pch=15,col="red",cex=2)
+points(x=d$axis1[21],y=d$axis2[21],type="p",pch=15,col="green",cex=2)
+points(x=e$axis1[21],y=e$axis2[21],type="p",pch=15,col="sienna",cex=2)
+```
+
+![plot of chunk unnamed-chunk-2](./README_files/figure-html/unnamed-chunk-2.png) 
+
+
 3.  On pg. 57 there is a formula for the probability of making x observations after n trials when there is a probability p of the observation.  For this exercise, assume x=2, n=10, and p=0.5.  Using R, calculate the probability of x using this formula and the appropriate built in function. Compare it to the results we obtained in class when discussing the sex ratios of mice.
 
+Below is the code and output to calculate the probability of x using the formula listed on page 57 and the appropriate built in function.
+
+```r
+x <- 2
+n <- 10
+p <- 0.5
+formula <- choose(10,2)*p^x*(1-p)^(n-x)
+builtin <- dbinom(2, 10, 0.5)
+```
+
+The probability as calculated by the formula is 0.0439.
+The probability as calculated by the built in function is 0.0439.
+This result is similar to when we were looking at sex ratios in mice and we considered the outcome of having 2 males born out of every 10 births. Since the probability of a male being born is 0.5, the formula and function both yield the same probability of the number of times we would expect to observe the outcome of 2 out of 10 trials when the probability of 2 is 0.5.
 
 4.  On pg. 59 there is a formula for the probability of observing a value, x, when there is a mean, mu, and standard deviation, sigma.  For this exercise, assume x=10.3, mu=5, and sigma=3.  Using R, calculate the probability of x using this formula and the appropriate built in function
 
 
+```r
+x <- 10.3
+mu <- 5
+sigma <- 3
+formula <- (1/(sqrt(2*pi)*sigma))*exp(-((x-mu)^2)/(2*sigma^2))
+builtin <- dnorm(x,mean=mu,sd=sigma,log=FALSE)
+```
+
+The probability of x using the formula is 0.0279.
+The probability of x using the built in function is 0.0279.
+
 5.  One of my previous students, Joe Zackular, obtained stool samples from 89 people that underwent colonoscopies.  30 of these individuals had no signs of disease, 30 had non-cancerous ademonas, and 29 had cancer.  It was previously suggested that the bacterium *Fusobacterium nucleatum* was associated with cancer.  In these three pools of subjects, Joe determined that 4, 1, and 14 individuals harbored *F. nucleatum*, respectively. Create a matrix table to represent the number of individuals with and without _F. nucleatum_ as a function of disease state.  Then do the following:
 
+
+```r
+colondata <- matrix(data = NA,nrow=2,ncol=2)
+colondata[1,1] <- 5
+colondata[1,2] <- 55
+colondata[2,1] <- 14
+colondata[2,2] <- 15
+rnames <- c("NoDisease","Cancer")
+cnames <- c("WithFnuc", "WithoutFnuc")
+rownames(colondata) <- rnames
+colnames(colondata) <- cnames
+colondata
+```
+
+```
+##           WithFnuc WithoutFnuc
+## NoDisease        5          55
+## Cancer          14          15
+```
+
     * Run the three tests of proportions you learned about in class using built in R  functions to the 2x2 study design where normals and adenomas are pooled and compared to carcinomas.
+
+```r
+m <- margin.table(colondata,2)
+binom.test(m)
+```
+
+```
+## 
+## 	Exact binomial test
+## 
+## data:  m
+## number of successes = 19, number of trials = 89, p-value =
+## 4.957e-08
+## alternative hypothesis: true probability of success is not equal to 0.5
+## 95 percent confidence interval:
+##  0.1337 0.3131
+## sample estimates:
+## probability of success 
+##                 0.2135
+```
+
+```r
+chisq.test(colondata)
+```
+
+```
+## 
+## 	Pearson's Chi-squared test with Yates' continuity correction
+## 
+## data:  colondata
+## X-squared = 16.27, df = 1, p-value = 5.482e-05
+```
+
+```r
+fisher.test(colondata)
+```
+
+```
+## 
+## 	Fisher's Exact Test for Count Data
+## 
+## data:  colondata
+## p-value = 4.094e-05
+## alternative hypothesis: true odds ratio is not equal to 1
+## 95 percent confidence interval:
+##  0.0243 0.3531
+## sample estimates:
+## odds ratio 
+##     0.1007
+```
+
     * Without using the built in chi-squared test function, replicate the 2x2 study design in the last problem for the Chi-Squared Test...
       * Calculate the expected count matrix and calculate the Chi-Squared test statistics. Figure out how to get your test statistic to match Rs default statistic.
+
+```r
+disease.sums <- margin.table(colondata, 1)
+Fnuc.sums <- margin.table(colondata, 2)
+
+frac.nocancer <- disease.sums["NoDisease"]/sum(disease.sums)
+frac.cancer <- 1 - frac.nocancer
+frac.disease <- c(NoDisease = frac.nocancer, Cancer = frac.cancer)
+
+frac.wFnuc <- Fnuc.sums["WithFnuc"]/sum(Fnuc.sums)
+frac.woFnuc <- 1 - frac.wFnuc
+frac.Fnuc <- c(WithFnuc = frac.wFnuc, WithoutFnuc = frac.woFnuc)
+
+expected <- frac.disease %*% t(frac.Fnuc)
+expected <- expected * sum(colondata)
+expected <- expected + 1
+expected
+```
+
+```
+##      WithFnuc.WithFnuc WithoutFnuc.WithFnuc
+## [1,]            13.809                48.19
+## [2,]             7.191                23.81
+```
+
+```r
+chi.sq <- sum((expected - colondata)^2/expected)
+```
+The statistic is 16.2879.
+
       *	Generate a Chi-Squared distributions with approporiate degrees of freedom by the method that was discussed in class (hint: you may consider using the `replicate` command)
+      
+
+```r
+df <- (nrow(colondata) - 1) * (ncol(colondata) - 1)
+dist <- replicate(401,(rnorm(df, mean = 0, sd = 1))^2)
+sdist <- sort(dist, decreasing = TRUE)
+plot(seq(0, 20, 0.05), sdist, type = "l", xlab = "ChiSquared Statistic", ylab = "Probability with 1 degree of freedom")
+```
+
+![plot of chunk unnamed-chunk-8](./README_files/figure-html/unnamed-chunk-8.png) 
+
       * Compare your Chi-Squared distributions to what you might get from the appropriate built in R functions
+      
+
+```r
+df <- (nrow(sex.sp) - 1) * (ncol(sex.sp) - 1)
+plot(seq(0, 20, 0.05), dchisq(seq(0, 20, 0.05), df = df), type = "l", xlab = "ChiSquared Statistic", 
+    ylab = "Probability with 1 degree of freedom")
+```
+
+![plot of chunk unnamed-chunk-9](./README_files/figure-html/unnamed-chunk-9.png) 
+
+My Chi-Squared distribution looks very similar to what is generated by the dchisq function, although my actual values are higher.
+
       * Based on your distribution calculate p-values
+
+```r
+pdist <- sum(sdist[327:401])/sum(sdist)
+```
+
+The p value based on my distribution is 0.0034.
+
       * How does your p-value compare to what you saw using the built in functions? Explain your observations.
 
+```r
+d <- dchisq(seq(0,20,0.05), df = df)
+pbuiltin <- sum(d[327:401])/sum(d[2:401])
+```
+
+The p value based on the built in function is 5.4169 &times; 10<sup>-5</sup>. The actual Chi-Squared function p value output was nearly identical to the value of the builit in function. Judging by the graphs, I can see how the p value from my distribution could be slightly higher since my distribution is not as uniform and as evenly distributed as the dchisq function is. Additionally, the values in my distribution are larger.
 
 6\.  Get a bag of Skittles or M&Ms.  Are the candies evenly distributed amongst the different colors?  Justify your conclusion.
 
+```r
+colors <- matrix(data = NA,nrow=1,ncol=6)
+colors[1,1] <- 94
+colors[1,2] <- 68
+colors[1,3] <- 61
+colors[1,4] <- 56
+colors[1,5] <- 66
+colors[1,6] <- 97
+colnames <- c("orange","yellow","red","brown","green","blue")
+colnames(colors) <- colnames
+
+colors
+```
+
+```
+##      orange yellow red brown green blue
+## [1,]     94     68  61    56    66   97
+```
+
+```r
+chisq.test(colors)
+```
+
+```
+## 
+## 	Chi-squared test for given probabilities
+## 
+## data:  colors
+## X-squared = 20.65, df = 5, p-value = 0.0009425
+```
+
+No, I do not think the colors are evenly distributed amongst the bag. When a Chi-Squared test was performed on the observed distribution of M&Ms, the p-value was 0.0009425. This p-value says that there is a very small chance that this observed distribution would happen by chance if all colors were added to the bags equally.
