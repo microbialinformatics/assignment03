@@ -25,7 +25,12 @@ plot(1:25,pch=1:25,type="p",xlab="PCH value", main="PCH Symbols")
 
 2.  Using the `germfree.nmds.axes` data file available in this respositry, generate a plot that looks like this. The points are connected in the order they were sampled with the circle representing the beginning ad the square the end of the time course:
 
-    <img src="beta.png", style="margin:0px auto;display:block" width="700">
+    
+```{r}
+nmds <- read.table(file = "germfree.nmds.axes", header = T)
+plot(nmds$axis2~nmds$axis1,type="l")
+
+```
 
 
 3.  On pg. 57 there is a formula for the probability of making x observations after n trials when there is a probability p of the observation.  For this exercise, assume x=2, n=10, and p=0.5.  Using R, calculate the probability of x using this formula and the appropriate built in function. Compare it to the results we obtained in class when discussing the sex ratios of mice.
