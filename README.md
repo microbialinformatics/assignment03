@@ -84,13 +84,35 @@ Probability is 0.0807, and built in function is `dnorm`.
 
 5.  One of my previous students, Joe Zackular, obtained stool samples from 89 people that underwent colonoscopies.  30 of these individuals had no signs of disease, 30 had non-cancerous ademonas, and 29 had cancer.  It was previously suggested that the bacterium *Fusobacterium nucleatum* was associated with cancer.  In these three pools of subjects, Joe determined that 4, 1, and 14 individuals harbored *F. nucleatum*, respectively. Create a matrix table to represent the number of individuals with and without _F. nucleatum_ as a function of disease state.  Then do the following:
 
+
+```r
+table_5 <- matrix(data=c(4,1,14,26,29,15),nrow=3,ncol=2)
+colnames(table_5) = c("w/F","w/oF")
+rownames(table_5)=c("no_sign","adenomas","cancer")
+```
+
     * Run the three tests of proportions you learned about in class using built in R  functions to the 2x2 study design where normals and adenomas are pooled and compared to carcinomas.
+    
+
+```r
+table_5_pooled <- matrix(data=c(5,14,55,15),nrow=2,ncol=2)
+colnames(table_5_pooled)=c("w/F","w/oF")
+rownames(table_5_pooled)=c("non_carci","cancinomas")
+
+result_chisq.test <- chisq.test(table_5_pooled)
+result_fisher.test <- fisher.test(table_5_pooled)
+result_prop.test <- prop.test(table_5_pooled)
+```
+    
     * Without using the built in chi-squared test function, replicate the 2x2 study design in the last problem for the Chi-Squared Test...
       * Calculate the expected count matrix and calculate the Chi-Squared test statistics. Figure out how to get your test statistic to match Rs default statistic.
       *	Generate a Chi-Squared distributions with approporiate degrees of freedom by the method that was discussed in class (hint: you may consider using the `replicate` command)
       * Compare your Chi-Squared distributions to what you might get from the appropriate built in R functions
       * Based on your distribution calculate p-values
       * How does your p-value compare to what you saw using the built in functions? Explain your observations.
+
+
+
 
 
 6\.  Get a bag of Skittles or M&Ms.  Are the candies evenly distributed amongst the different colors?  Justify your conclusion.
