@@ -42,6 +42,12 @@ n <- 10
 p <- 0.5
 bin.coef <- choose(n,x)
 result_3 <- bin.coef*(p^x)*((1-p)^(n-x))
+
+pbinom(x,n,p)
+```
+
+```
+## [1] 0.05469
 ```
 Probability = 0.0439 
 
@@ -51,6 +57,12 @@ Probability = 0.0439
 mean <- 5
 sd <- 3
 result_4 <- 1/((sqrt(2*pi))*sd)*exp(-((x-mean)^2)/(2*(sd^2)))
+
+pnorm(x,mean, sd)
+```
+
+```
+## [1] 0.1587
 ```
 Probability = 0.0807 
 
