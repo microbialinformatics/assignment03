@@ -99,7 +99,7 @@ colondata[1,2] <- 55
 colondata[2,1] <- 14
 colondata[2,2] <- 15
 rnames <- c("No Disease","Cancer")
-cnames <- c("With F. nucleatum", "Without F. nucleatum")
+cnames <- c("WithFnuc", "WithoutFnuc")
 rownames(colondata) <- rnames
 colnames(colondata) <- cnames
 ```
@@ -114,6 +114,25 @@ fish <- fisher.test(colondata)
 
     * Without using the built in chi-squared test function, replicate the 2x2 study design in the last problem for the Chi-Squared Test...
       * Calculate the expected count matrix and calculate the Chi-Squared test statistics. Figure out how to get your test statistic to match Rs default statistic.
+```{r}
+disease.sums <- margin.table(colondata, 1)
+Fnuc.sums <- margin.table(colondata, 2)
+
+frac.nocancer <- disease.sums["NoDisease"]/sum(disease.sums)
+frac.cancer <- 1 - frac.nocancer
+frac.disease <- c(NoDisease = frac.nocancer, Cancer = frac.cancer)
+
+frac.wFnuc <- Fnuc.sums["WithFnuc"]/sum(Fnuc.sums)
+frac.woFnuc <- 1 - frac.wFnuc
+frac.Fnuc <- c(WithFnuc = frac.wFnuc, WithoutFnuc = frac.woFnuc)
+
+expected <- frac.disease %*% t(frac.Fnuc)
+expected <- expected * sum(colondata)
+
+chi.sq <- sum((expected - colondata)^2/expected)
+```
+The statistic is `r chi.sq`.
+
       *	Generate a Chi-Squared distributions with approporiate degrees of freedom by the method that was discussed in class (hint: you may consider using the `replicate` command)
       * Compare your Chi-Squared distributions to what you might get from the appropriate built in R functions
       * Based on your distribution calculate p-values
