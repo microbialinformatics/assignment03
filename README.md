@@ -360,4 +360,4 @@ In prop.test(count, trials, exp) :
   Chi-squared approximation may be incorrect
 ```
 
-**Answer:** The p-value is 0.1669. I do not reject the null hypothesis: the M&Ms are evenly distributed among the different colors.
+**Answer:** The p-value is 0.1669, so I fail to reject the statement that M&M's colors are evenly distributed. The results are not statistically significant at the level 0.05.
