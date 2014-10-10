@@ -21,7 +21,6 @@ This assignment is due on October 10th.
 ```r
 x <- 1:25
 y <- rep(1,25)
-pdf("PCHSymbols.pdf")
 plot(x,y,pch=1:25, main="PCH Symbols", xlab="PCH Value", ylab="", axes=F)
 
 #Add x-axis
@@ -29,6 +28,9 @@ axis(side=1,at=1:25)
 
 #Add y-axis
 axis(side=1, at=1:25, col="grey", label=F, tck=1)
+
+#To save plot as pdf, click "Export" and "Save plot as PDF"
+
 
 ```
 
