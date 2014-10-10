@@ -194,7 +194,7 @@ odds ratio
 ```
   
   
-**Answer: Chi-Squared Test**
+**Answer:  χ² Test**
 ```r
 chi.test.pooled.Fnuc <- chisq.test(pooled.Fnuc)
 chi.test.pooled.Fnuc
@@ -295,24 +295,21 @@ X-squared = 16.2736, df = 1, p-value = 5.482e-05
       plot(seq(0, 20, 0.05), dchisq(seq(0, 20, 0.05), df = df), type = "l", xlab = "ChiSquared Statistic", ylab = "Probability with 1 degree of freedom")
       arrows(x0 = chisq, x1 = chisq, y0 = 0.4, y1 = 0.05, lwd = 2, col = "red")
 ```
-      My Chi-Squared distribution looks quite similar to the R-generated distribution. Both exponentially decrease as the x-axis value increases. My distribution begins to level out when X = 2, whereas the R-generated distribution begins to level out when X = 4. The R-generated distribution is also similar to my distribution because there are no values larger than my Chi-Squared statistic.
+      My  χ² distribution looks quite similar to the R-generated distribution. Both exponentially decrease as the x-axis value increases. My distribution begins to level out when X = 2, whereas the R-generated distribution begins to level out when X = 4. However, whereas my distribution is discrete, the R-generated distribution is continuous.
       
       
       * Based on your distribution calculate p-values
       
-**Answer:** p-value=0. The p-value is the sum of the probability that the Chi-Squared distribution is larger than my Chi-Squared Statistic. Because my distribution has 0 values which are larger than my Chi-Squared Statistic, my p-value is 0.
+**Answer:** p-value=0. The p-value is the probability that the  χ² distribution is larger than my  χ² Statistic. In regards to my distribution, the p-value is equivalent to the integral of the graph when dist > X, or dist > 16.2736. Because my distribution has 0 values which are larger than my  χ² Statistic, my p-value is 0.
       
       
       * How does your p-value compare to what you saw using the built in functions? Explain your observations.
       
       
-      
-      
-      
-**Answer:** My p-value (0) is smaller than the R-generated p-value (5.482e-05).
+**Answer:** My p-value (0) is smaller than the R-generated p-value (5.482e-05). The two are not equal because my  χ² distribution is not equivalent to the R-generated distribution. My distribution is created from 1000 replicates & is discrete, whereas the R-generated  χ² distribution is continuous.
 
 
-6\.  Get a bag of Skittles or M&Ms.  Are the candies evenly distributed amongst the different colors?  Justify your conclusion.
+6.  Get a bag of Skittles or M&Ms.  Are the candies evenly distributed amongst the different colors?  Justify your conclusion.
 
 
 ```r
