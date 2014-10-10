@@ -103,7 +103,7 @@ rnorm(x,mu,sigma)
 5.  One of my previous students, Joe Zackular, obtained stool samples from 89 people that underwent colonoscopies.  30 of these individuals had no signs of disease, 30 had non-cancerous ademonas, and 29 had cancer.  It was previously suggested that the bacterium *Fusobacterium nucleatum* was associated with cancer.  In these three pools of subjects, Joe determined that 4, 1, and 14 individuals harbored *F. nucleatum*, respectively. Create a matrix table to represent the number of individuals with and without _F. nucleatum_ as a function of disease state.  Then do the following:
 
 ```r
-colon<-c(55,15,5,14)
+colon<-c(15,14,55,5)
 colon<-matrix(data=colon,nrow=2,ncol=2,dimnames=list(c("non-cancer","cancer"),c("neg","pos")))
 as.data.frame(colon)
 ```
