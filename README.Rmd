@@ -19,7 +19,7 @@ This assignment is due on October 10th.
 
    
 ```{r}
-plot(x=1:25,y=rep(1,25),xlab="PCH value",ylab="",pch=1:25,cex=2,type="p", main="PCH Symbols",axes=F)
+plot(x=1:25,y=rep(1,25),xlab="PCH value",ylab="",pch=1:25,cex=2,col="black",type="p", main="PCH Symbols",axes=F)
 segments(x0=1:25,y0=0,x1=1:25,y1=25,col="grey")
 axis(1,at=1:25)
 
