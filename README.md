@@ -251,24 +251,27 @@ The shape and values of the distributions are very similar except for the fact t
       
 
 ```r
-chisq.dist[chisq.dist>F.nucleatum.chisq2] #Returns number of randomly generated values (out of 100,000) from normal distribution that are greater than the calculated chi-squared value
+chisq.p<-table(chisq.dist[chisq.dist>F.nucleatum.chisq2]) #Returns number of randomly generated values (out of 100,000) from normal distribution that are greater than the calculated chi-squared value
+chisq.p
 ```
 
 ```
-## [1] 16.31 17.66 17.50 20.10 17.44 16.40
+## 
+## 17.7512549630815 21.1254994154457 
+##                1                1
 ```
 
 ```r
-pvalue<-6/100000 #The proportion of the distribution greater than the chi-squared value is the p-value
+pvalue<-nrow(chisq.p)/100000 #The proportion of the distribution greater than the chi-squared value is the p-value
 pvalue
 ```
 
 ```
-## [1] 6e-05
+## [1] 2e-05
 ```
       * How does your p-value compare to what you saw using the built in functions? Explain your observations.
 
-The p-value found using the generated chi-squared distribution is very slightly different from the p-value calculated using the functions in R.  This difference can be accounted for by the fact that R uses a continuous distribution to calculate the p-value rather than the manually generated discrete distribution.  Not even 100,000 replications are enough to perfectly simulate the continuous distribution functions used in R.
+The p-value found using the generated chi-squared distribution is slightly different from the p-value calculated using the functions in R.  This difference can be accounted for by the fact that R uses a continuous distribution to calculate the p-value rather than the manually generated discrete distribution.  Not even 100,000 replications are enough to perfectly simulate the continuous distribution functions used in R.
 
 
 6\.  Get a bag of Skittles or M&Ms.  Are the candies evenly distributed amongst the different colors?  Justify your conclusion.
@@ -292,5 +295,4 @@ chisq.test(MMnumbers)
 ## X-squared = 7.158, df = 5, p-value = 0.2092
 ```
 
-
-
+The null hypothesis is that there is no significant difference in the distribution of the M&M colors.  The calculated p-value in the chi-squared test is far above the threshold of 0.05.  Therefore, the difference in color distribution is not significant and the null hypothesis cannot be rejected.
