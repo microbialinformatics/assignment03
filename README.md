@@ -95,10 +95,9 @@ x
 ```r
 #Make the same matrix with the normal and adenoma patients pooled
 x<- matrix(c(55,5,15,14), nrow=2,ncol=2)
-colnames(x) <- c("No cancer","Carcinoma")
-rownames(x) <- c("Negative","Fuso")
+colnames(x) <- c("None","Carcinoma")
+rownames(x) <- c("Negative","Positive")
 #Run the three tests we learned in class: binomial test, fisher test, and chi squared test  
-
 prop.test(x)
 ```
 
@@ -146,8 +145,60 @@ fisher.test(x)
 ## odds ratio 
 ##      9.926
 ```
+**Answer: **Using all three tests, we can conclude that there is a significant difference between cancer groups in the proportion of patients that have *F. nucleatum*.
+
  
        * Without using the built in chi-squared test function, replicate the 2x2 study design in the last problem for the Chi-Squared Test...
+
+```r
+#Make the same matrix with the normal and adenoma patients pooled
+x<- matrix(c(55,5,15,14), nrow=2,ncol=2)
+colnames(x) <- c("None","Carcinoma")
+rownames(x) <- c("Negative","Positive")
+#generate another matrix with the expected values. These are found from the (row total * column total)/overall total. I adapted this code from Lecture 10 with comments to show I understand.
+Fuso.sums <- margin.table(x, 1) #Make table with fuso totals 
+
+disease.sums <- margin.table(x, 2) #make table with disease totals 
+
+
+#generate a vector called frac.Fuso that has the fraction of total patients that have fuso and the fraction that don't.
+frac.negative <- Fuso.sums["Negative"]/sum(Fuso.sums) 
+frac.positive <- 1 - frac.negative
+frac.Fuso <- c(Negative=frac.negative, Positive=frac.positive)
+frac.Fuso
+```
+
+```
+## Negative.Negative Positive.Negative 
+##            0.7865            0.2135
+```
+
+```r
+#generate a vector called frac.disease that has the fraction of total patients that have cancer and the fraction that don't
+frac.healthy <- disease.sums["None"]/sum(disease.sums) #total fraction of people that are healthy in the data set
+frac.cancer <- 1 - frac.healthy
+frac.disease <- c( None=frac.healthy, Carcinoma=frac.cancer)
+
+expected <- frac.Fuso %*% t(frac.disease) #vector multiplication to generate a matrix with all of the expected proportions in the same positions as the real values in the original table
+expected <- expected * sum(x) #multiply the proportions by the total value to get the expected number of observations for each condition
+expected #print the table
+```
+
+```
+##      None.None Carcinoma.None
+## [1,]     47.19         22.809
+## [2,]     12.81          6.191
+```
+
+```r
+#The chi-squared test statistic is calculated by summing the squares of the difference between observed and expected and dividing by expected.
+chisq<- sum((x-expected)^2/expected)
+
+#including Yates continuitiy correction
+yateschisq <- sum((abs(x-expected)-.5)^2/expected)
+```
+**Answer: ** By creating an table of expected values and using the chisquared statistic formula, the test statistic came out to be 18.5763. However, the R built-in function includes Yates continuity correction. By using the corrected equation found on [Wikipedia](http://en.wikipedia.org/wiki/Yates's_correction_for_continuity), I got the same statistic as the built-in function (16.2736).
+       
       * Calculate the expected count matrix and calculate the Chi-Squared test statistics. Figure out how to get your test statistic to match Rs default statistic.
       *  Generate a Chi-Squared distributions with approporiate degrees of freedom by the method that was discussed in class (hint: you may consider using the `replicate` command)
       * Compare your Chi-Squared distributions to what you might get from the appropriate built in R functions
