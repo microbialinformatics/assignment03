@@ -181,33 +181,71 @@ frac.disease <- c( None=frac.healthy, Carcinoma=frac.cancer)
 
 expected <- frac.Fuso %*% t(frac.disease) #vector multiplication to generate a matrix with all of the expected proportions in the same positions as the real values in the original table
 expected <- expected * sum(x) #multiply the proportions by the total value to get the expected number of observations for each condition
-expected #print the table
-```
 
-```
-##      None.None Carcinoma.None
-## [1,]     47.19         22.809
-## [2,]     12.81          6.191
-```
-
-```r
 #The chi-squared test statistic is calculated by summing the squares of the difference between observed and expected and dividing by expected.
 chisq<- sum((x-expected)^2/expected)
 
 #including Yates continuitiy correction
 yateschisq <- sum((abs(x-expected)-.5)^2/expected)
 ```
-**Answer: ** By creating an table of expected values and using the chisquared statistic formula, the test statistic came out to be 18.5763. However, the R built-in function includes Yates continuity correction. By using the corrected equation found on [Wikipedia](http://en.wikipedia.org/wiki/Yates's_correction_for_continuity), I got the same statistic as the built-in function (16.2736).
+
        
       * Calculate the expected count matrix and calculate the Chi-Squared test statistics. Figure out how to get your test statistic to match Rs default statistic.
+
+**Answer: ** By creating an table of expected values and using the chisquared statistic formula, the test statistic came out to be 18.5763. However, the R built-in function includes Yates continuity correction. By using the corrected equation found on [Wikipedia](http://en.wikipedia.org/wiki/Yates's_correction_for_continuity), I got the same statistic as the built-in function (16.2736).
+      
       *  Generate a Chi-Squared distributions with approporiate degrees of freedom by the method that was discussed in class (hint: you may consider using the `replicate` command)
+
+      
+      
       * Compare your Chi-Squared distributions to what you might get from the appropriate built in R functions
+
+```r
+#from lecture 10
+df <- (nrow(x) - 1) * (ncol(x) - 1)
+plot(seq(0, 20, 0.05), dchisq(seq(0, 20, 0.05), df = df), type = "l", xlab = "ChiSquared Statistic", 
+    ylab = "Probability with 1 degree of freedom")
+arrows(x0 = yateschisq, x1 = yateschisq, y0 = 0.4, y1 = 0.05, lwd = 2, col = "red")
+```
+
+![plot of chunk unnamed-chunk-8](./README_files/figure-html/unnamed-chunk-8.png) 
       * Based on your distribution calculate p-values
- 
+
+```r
+#p-value is the proportion greater than the test statistic
+dist<- dchisq(seq(0,20,0.05), df=df) #we only need to sample to 20 because the values get very small
+yateschisq<- as.integer(yateschisq*20) #do this to find the index of the chisq value in the distribution
+sum(dist[yateschisq:400])
+```
+
+```
+## [1] 0.0009981
+```
+
+```r
+p
+```
+
+```
+## [1] 0.5
+```
 
 
       * How does your p-value compare to what you saw using the built in functions? Explain your observations.
-
+**Answer: ** The p-value with yates continuity correction using the built-in distribution is 0.5. 
 
 6\.  Get a bag of Skittles or M&Ms.  Are the candies evenly distributed amongst the different colors?  Justify your conclusion.
+
+```r
+s<- matrix(c(20, 22, 14, 30, 18), nrow=1,ncol=5)
+colnames(s)<- c("green", "yellow","orange","red","purple")
+chi<- chisq.test(s)
+```
+**Answer: ** The Chi-squared test evaluates how likely it is that the observed differences between the values happened by chance. The null hypothesis is that the differences between the number of Skittles in the bag happened by chance and that the candies are evenly distributed. If the p-value is very small, it would suggest that the null hypothesis is not true and there is a true difference between the candies. In my bag of skittles there were 20 green, 22 yellow, 14 orange, 30 red, and 18 purple candies. The chi-squared test gives a p-value of 0.1486 which is not significant. This suggests that the candies are evenly distributed.
+
+
+
+
+
+
 
