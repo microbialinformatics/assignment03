@@ -72,7 +72,11 @@ legend(0.009816558,-0.169702, c("Mouse 337", "Mouse 343", "Mouse 361", "Mouse 38
 **On pg. 57 there is a formula for the probability of making x observations after n trials when there is a probability p of the observation.  For this exercise, assume x=2, n=10, and p=0.5.  Using R, calculate the probability of x using this formula and the appropriate built in function. Compare it to the results we obtained in class when discussing the sex ratios of mice.**
 
 ```{r}
+prob.choose<-1/choose(10,2)
 ```
+
+The probability of making 2 observations after 10 trials is `r prob.choose`. 
+
 
 
 ####4.  
@@ -81,6 +85,8 @@ legend(0.009816558,-0.169702, c("Mouse 337", "Mouse 343", "Mouse 361", "Mouse 38
 dnorm.prob<-dnorm(10.3,5,3)
 ```
 The probability of observing 10.3 in a normal distribution is `r dnorm.prob`.
+
+
 
 ####5.  
 **One of my previous students, Joe Zackular, obtained stool samples from 89 people that underwent colonoscopies.  30 of these individuals had no signs of disease, 30 had non-cancerous ademonas, and 29 had cancer.  It was previously suggested that the bacterium *Fusobacterium nucleatum* was associated with cancer.  In these three pools of subjects, Joe determined that 4, 1, and 14 individuals harbored *F. nucleatum*, respectively. Create a matrix table to represent the number of individuals with and without _F. nucleatum_ as a function of disease state.**  
@@ -105,8 +111,18 @@ rownames(mat2)=c("Normal", "Cancer")
 colnames(mat2)=c("Disease State", "F. nucleatum")
 mat2
 
-prop.test(mat2)
+prop.mat<-prop.test(mat2)
+fisher.mat<-fisher.test(mat2)
+chi.mat<-chisq.test(mat2)
 ```    
+ 
+ 
+ 
+ The probability value for the prop.test is `r prop.mat$p.value`.
+ The probability value for the fisher test is `r fisher.mat$p.value`.
+ The probability value for the chi-squared test is `r chi.mat$p.value`.
+ 
+    
     
     
 **Without using the built in chi-squared test function, replicate the 2x2 study design in the last problem for the Chi-Squared Test...**

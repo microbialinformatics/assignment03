@@ -11,27 +11,17 @@ This assignment is due on October 10th.
 ------
 
 ####1.  
-**Generate a plot that contains the different pch symbols. Investigate the knitr code chunk options to see whether you can have a pdf version of the image produced so you can print it off for yoru reference. It should look like this:**
- <img src="pch.png", style="margin:0px auto;display:block" width="500">
-
-
-```r
-plot(x=1:25,y=rep(1,25), pch = 1:25, cex=1.5, yaxt='n', ann=FALSE, bty='n', xaxt='n', panel.first=c(abline(v=1:25, col="light gray",lty=1)))
-axis(1,at=c(1,3,5,7,9,11,13,15,17,19,21,23,25), lty=1)
-title(main="PCH Symbol",xlab="PCH Value")
-```
+**Generate a plot that contains the different pch symbols. Investigate the knitr code chunk options to see whether you can have a pdf version of the image produced so you can print it off for yoru reference.**
 
 ![plot of chunk unnamed-chunk-1](./README_files/figure-html/unnamed-chunk-1.png) 
 
    
     
-
-
 ####2.  
 **Using the `germfree.nmds.axes` data file available in this respositry, generate a plot that looks like this. The points are connected in the order they were sampled with the circle representing the beginning ad the square the end of the time course:**
 
-    <img src="beta.png", style="margin:0px auto;display:block" width="700">
-    
+   Note:   
+    Iris helped me figure out how to get mice points.
     
 ![plot of chunk unnamed-chunk-2](./README_files/figure-html/unnamed-chunk-2.png) 
 
@@ -41,8 +31,22 @@ title(main="PCH Symbol",xlab="PCH Value")
 **On pg. 57 there is a formula for the probability of making x observations after n trials when there is a probability p of the observation.  For this exercise, assume x=2, n=10, and p=0.5.  Using R, calculate the probability of x using this formula and the appropriate built in function. Compare it to the results we obtained in class when discussing the sex ratios of mice.**
 
 
+```r
+prob.choose<-1/choose(10,2)
+```
+
+The probability of making 2 observations after 10 trials is 0.0222. 
+
+
+
 ####4.  
 **On pg. 59 there is a formula for the probability of observing a value, x, when there is a mean, mu, and standard deviation, sigma.  For this exercise, assume x=10.3, mu=5, and sigma=3.  Using R, calculate the probability of x using this formula and the appropriate built in function**
+
+```r
+dnorm.prob<-dnorm(10.3,5,3)
+```
+The probability of observing 10.3 in a normal distribution is 0.0279.
+
 
 
 ####5.  
@@ -69,21 +73,14 @@ title(main="PCH Symbol",xlab="PCH Value")
 ## Normal            60            5
 ## Cancer            29           14
 ```
-
-```
-## 
-## 	2-sample test for equality of proportions with continuity
-## 	correction
-## 
-## data:  mat2
-## X-squared = 9.389, df = 1, p-value = 0.002183
-## alternative hypothesis: two.sided
-## 95 percent confidence interval:
-##  0.07502 0.42229
-## sample estimates:
-## prop 1 prop 2 
-## 0.9231 0.6744
-```
+ 
+ 
+ 
+ The probability value for the prop.test is 0.0022.
+ The probability value for the fisher test is 0.0015.
+ The probability value for the chi-squared test is 0.0022.
+ 
+    
     
     
 **Without using the built in chi-squared test function, replicate the 2x2 study design in the last problem for the Chi-Squared Test...**
