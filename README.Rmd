@@ -129,7 +129,7 @@ chi.mat<-chisq.test(mat2)
 ```{r, echo=FALSE}
 mat3<-matrix(c(60,5,29,14), nrow=2, ncol=2, byrow=TRUE)
 rownames(mat3)=c("normal", "cancer")
-colnames(mat3)=c("disease.state", "f.nucleatum")
+colnames(mat3)=c("no.fn", "f.nucleatum")
 mat3
 
 table1<-as.table(mat3)
@@ -141,6 +141,8 @@ prop.table(table1)
 prop.table(table1, 1)
 prop.table(table1, 2)
 
+disease.sum <- margin.table(table1, 1)
+fnuc.sum<-margin.table(table1)
 
 
 ```
