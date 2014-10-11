@@ -167,22 +167,18 @@ arrows(x0=chi.sq_test,x1=chi.sq_test,y0=0.4,y1=0.05,lwd=2,col="red")
       
       * Based on your distribution calculate p-values
 ```{r}
+pchisq(chi.sq_test,df)
+p_5 <- 1-pchisq(chi.sq_test,df)
 
 ```      
+Calculated p-value is `r p_5`.      
       
       
       
       
-      
-      * How does your p-value compare to what you saw using the built in functions? Explain your observations.
-```{r}
+      * How does your p-value compare to what you saw using the built in functions? Explain your observations.     
 
-```
-
-
-
-
-
+p-values using built in function is `r chisq.test(table_5_pooled)$p.value`. My calculated p-value is `r p_5`, which is smaller than built in function p-value.
 
 
 

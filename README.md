@@ -228,14 +228,25 @@ arrows(x0=chi.sq_test,x1=chi.sq_test,y0=0.4,y1=0.05,lwd=2,col="red")
       
       * Based on your distribution calculate p-values
 
-      
-      
-      
-      
-      
-      * How does your p-value compare to what you saw using the built in functions? Explain your observations.
+```r
+pchisq(chi.sq_test,df)
+```
 
+```
+## [1] 1
+```
 
+```r
+p_5 <- 1-pchisq(chi.sq_test,df)
+```
+Calculated p-value is 1.6324 &times; 10<sup>-5</sup>.      
+      
+      
+      
+      
+      * How does your p-value compare to what you saw using the built in functions? Explain your observations.     
+
+p-values using built in function is 5.4822 &times; 10<sup>-5</sup>. My calculated p-value is 1.6324 &times; 10<sup>-5</sup>, which is smaller than built in function p-value.
 
 
 
