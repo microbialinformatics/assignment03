@@ -64,6 +64,16 @@ binomial.builtin <- dbinom(x,n,p) #function built in to R that gives the probabi
 4.  On pg. 59 there is a formula for the probability of observing a value, x, when there is a mean, mu, and standard deviation, sigma.  For this exercise, assume x=10.3, mu=5, and sigma=3.  Using R, calculate the probability of x using this formula and the appropriate built in function
 
 
+```r
+x<-10.3
+mu<-5
+sigma <- 3
+formula <- 1/(sqrt(2*pi)*sigma)*exp(-(x-mu)^2/(2*sigma^2))
+builtin <- dnorm(x,mu,sigma)
+```
+**Answer: ** The probability of observing the value 10.3 when thre is a mean 5 and standard deviation 3 is the same using the normal distribution formula (0.0279) and the R built in normal distribution function (0.0279).
+
+
 5.  One of my previous students, Joe Zackular, obtained stool samples from 89 people that underwent colonoscopies.  30 of these individuals had no signs of disease, 30 had non-cancerous ademonas, and 29 had cancer.  It was previously suggested that the bacterium *Fusobacterium nucleatum* was associated with cancer.  In these three pools of subjects, Joe determined that 4, 1, and 14 individuals harbored *F. nucleatum*, respectively. Create a matrix table to represent the number of individuals with and without _F. nucleatum_ as a function of disease state.  Then do the following:
 
     * Run the three tests of proportions you learned about in class using built in R  functions to the 2x2 study design where normals and adenomas are pooled and compared to carcinomas.
