@@ -12,30 +12,277 @@ This assignment is due on October 10th.
 
 1.  Generate a plot that contains the different pch symbols. Investigate the knitr code chunk options to see whether you can have a pdf version of the image produced so you can print it off for yoru reference. It should look like this:
 
-    <img src="pch.png", style="margin:0px auto;display:block" width="500">
+   
+
+```r
+plot(x=1:25,y=rep(1,25),xlab="PCH value",ylab="",pch=1:25,cex=2,col="black",type="p", main="PCH Symbols",axes=F)
+segments(x0=1:25,y0=0,x1=1:25,y1=25,col="grey")
+axis(1,at=1:25)
+```
+
+![plot of chunk unnamed-chunk-1](./README_files/figure-html/unnamed-chunk-1.png) 
 
 
 2.  Using the `germfree.nmds.axes` data file available in this respositry, generate a plot that looks like this. The points are connected in the order they were sampled with the circle representing the beginning ad the square the end of the time course:
 
-    <img src="beta.png", style="margin:0px auto;display:block" width="700">
+    
+
+```r
+nmds <- read.table(file = "germfree.nmds.axes", header = T)
+plot(nmds$axis2[nmds$mouse==337]~nmds$axis1[nmds$mouse==337],col="black",type="l",xlab="NMDS Axis 1",ylab="NMDS Axis 2",ylim=c(-0.6,0.4),xlim=c(-0.4,0.8),lwd=2)
+points(nmds[nmds$mouse==337&nmds$day==1,3],y=nmds[nmds$mouse==337&nmds$day==1,4],pch=16,col="black",cex=1.5)
+points(nmds[nmds$mouse==337&nmds$day==20,3],y=nmds[nmds$mouse==337&nmds$day==20,4],pch=15,col="black",cex=1.5)
+      
+lines(nmds$axis2[nmds$mouse==343]~nmds$axis1[nmds$mouse==343],col="blue",type="l",lwd=2)
+points(nmds[nmds$mouse==343&nmds$day==1,3],y=nmds[nmds$mouse==343&nmds$day==1,4],pch=16,col="blue",cex=1.5)
+points(nmds[nmds$mouse==343&nmds$day==21,3],y=nmds[nmds$mouse==343&nmds$day==21,4],pch=15,col="blue",cex=1.5)
+    
+lines(nmds$axis2[nmds$mouse==361]~nmds$axis1[nmds$mouse==361],col="red",type="l",lwd=2)
+points(nmds[nmds$mouse==361&nmds$day==1,3],y=nmds[nmds$mouse==361&nmds$day==1,4],pch=16,col="red",cex=1.5)
+points(nmds[nmds$mouse==361&nmds$day==21,3],y=nmds[nmds$mouse==361&nmds$day==21,4],pch=15,col="red",cex=1.5)
+    
+lines(nmds$axis2[nmds$mouse==387]~nmds$axis1[nmds$mouse==387],col="green",type="l",lwd=2)
+points(nmds[nmds$mouse==387&nmds$day==1,3],y=nmds[nmds$mouse==387&nmds$day==1,4],pch=16,col="green",cex=1.5)
+points(nmds[nmds$mouse==387&nmds$day==21,3],y=nmds[nmds$mouse==387&nmds$day==21,4],pch=15,col="green",cex=1.5)
+   
+lines(nmds$axis2[nmds$mouse==389]~nmds$axis1[nmds$mouse==389],col="brown",type="l",lwd=2)
+points(nmds[nmds$mouse==389&nmds$day==1,3],y=nmds[nmds$mouse==389&nmds$day==1,4],pch=16,col="brown",cex=1.5)
+points(nmds[nmds$mouse==389&nmds$day==21,3],y=nmds[nmds$mouse==389&nmds$day==21,4],pch=15,col="brown",cex=1.5)
+
+legend(0,-0.2,legend=c("Mouse 337","Mouse 343","Mouse 361","Mouse 387","Mouse 389"),col=c("black","blue","red","green","brown"),border="black",lty=1,lwd=2,cex=.75)
+```
+
+![plot of chunk unnamed-chunk-2](./README_files/figure-html/unnamed-chunk-2.png) 
 
 
 3.  On pg. 57 there is a formula for the probability of making x observations after n trials when there is a probability p of the observation.  For this exercise, assume x=2, n=10, and p=0.5.  Using R, calculate the probability of x using this formula and the appropriate built in function. Compare it to the results we obtained in class when discussing the sex ratios of mice.
 
 
+```r
+x <- 2
+n <- 10
+p <- 0.5
+bin.coef <- choose(n,x)
+result_3_formula <- bin.coef*(p^x)*((1-p)^(n-x))
+
+result_3_function <- dbinom(x,n,p)
+```
+Probability is 0.0439, and built in function is `dbinorm`. When we discussing the sex ratios of mice, we used `pbinom(2,10,0.5)`, and the result is 0.0547. These two results are a little different because of different built in function, `dbinom` and `pbinom`.`pbinom` is cumulative probability function, while `dbinom` looks upthe probability of a single outcome. 
+
 4.  On pg. 59 there is a formula for the probability of observing a value, x, when there is a mean, mu, and standard deviation, sigma.  For this exercise, assume x=10.3, mu=5, and sigma=3.  Using R, calculate the probability of x using this formula and the appropriate built in function
+
+```r
+mean <- 5
+sd <- 3
+result_4_formula <- 1/((sqrt(2*pi))*sd)*exp(-((x-mean)^2)/(2*(sd^2)))
+
+result_4_function <- dnorm(x,mean, sd)
+```
+Probability is 0.0807, and built in function is `dnorm`.
+
 
 
 5.  One of my previous students, Joe Zackular, obtained stool samples from 89 people that underwent colonoscopies.  30 of these individuals had no signs of disease, 30 had non-cancerous ademonas, and 29 had cancer.  It was previously suggested that the bacterium *Fusobacterium nucleatum* was associated with cancer.  In these three pools of subjects, Joe determined that 4, 1, and 14 individuals harbored *F. nucleatum*, respectively. Create a matrix table to represent the number of individuals with and without _F. nucleatum_ as a function of disease state.  Then do the following:
 
+
+```r
+table_5 <- matrix(data=c(4,1,14,26,29,15),nrow=3,ncol=2)
+colnames(table_5) = c("w/F","w/oF")
+rownames(table_5)=c("no_sign","adenomas","cancer")
+```
+
     * Run the three tests of proportions you learned about in class using built in R  functions to the 2x2 study design where normals and adenomas are pooled and compared to carcinomas.
+    
+
+```r
+table_5_pooled <- matrix(data=c(5,14,55,15),nrow=2,ncol=2)
+colnames(table_5_pooled)=c("w/F","w/oF")
+rownames(table_5_pooled)=c("non_carci","carci")
+
+chisq.test(table_5_pooled)
+```
+
+```
+## 
+## 	Pearson's Chi-squared test with Yates' continuity correction
+## 
+## data:  table_5_pooled
+## X-squared = 16.27, df = 1, p-value = 5.482e-05
+```
+
+```r
+fisher.test(table_5_pooled)
+```
+
+```
+## 
+## 	Fisher's Exact Test for Count Data
+## 
+## data:  table_5_pooled
+## p-value = 4.094e-05
+## alternative hypothesis: true odds ratio is not equal to 1
+## 95 percent confidence interval:
+##  0.0243 0.3531
+## sample estimates:
+## odds ratio 
+##     0.1007
+```
+
+```r
+prop.test(table_5_pooled)
+```
+
+```
+## 
+## 	2-sample test for equality of proportions with continuity
+## 	correction
+## 
+## data:  table_5_pooled
+## X-squared = 16.27, df = 1, p-value = 5.482e-05
+## alternative hypothesis: two.sided
+## 95 percent confidence interval:
+##  -0.6199 -0.1790
+## sample estimates:
+##  prop 1  prop 2 
+## 0.08333 0.48276
+```
+The p value for `chisq.test`,`fisher.test`, and `prop.test` are 5.4822 &times; 10<sup>-5</sup>,4.0941 &times; 10<sup>-5</sup>, and 5.4822 &times; 10<sup>-5</sup>.
+
+ 
     * Without using the built in chi-squared test function, replicate the 2x2 study design in the last problem for the Chi-Squared Test...
-      * Calculate the expected count matrix and calculate the Chi-Squared test statistics. Figure out how to get your test statistic to match Rs default statistic.
+    * Calculate the expected count matrix and calculate the Chi-Squared test statistics. Figure out how to get your test statistic to match Rs default statistic.
+    
+
+```r
+carci.sums <- margin.table(table_5_pooled,1)
+frac.non_carci <- carci.sums["non_carci"]/sum(carci.sums)
+frac.carci <- carci.sums["carci"]/sum(carci.sums)
+frac.carcinomas <- c(frac.non_carci,frac.carci)
+
+F.sums <- margin.table(table_5_pooled,2)
+frac.w_F <- F.sums["w/F"]/sum(F.sums)
+frac.wo_F <- F.sums["w/oF"]/sum(F.sums)
+frac.F <- c(frac.w_F,frac.wo_F)
+
+table_5_expected <- frac.carcinomas %*% t(frac.F)
+table_5_expected <- table_5_expected*sum(table_5_pooled)
+table_5_expected
+```
+
+```
+##         w/F  w/oF
+## [1,] 12.809 47.19
+## [2,]  6.191 22.81
+```
+
+```r
+chi.sq_test <- sum((table_5_pooled-table_5_expected)^2/table_5_expected)
+chi.sq_test
+```
+
+```
+## [1] 18.58
+```
+
+```r
+#Rs default statistic
+chisq.test(table_5_pooled)
+```
+
+```
+## 
+## 	Pearson's Chi-squared test with Yates' continuity correction
+## 
+## data:  table_5_pooled
+## X-squared = 16.27, df = 1, p-value = 5.482e-05
+```
+
+```r
+#match test value and default value
+```
+    
+
+  
       *	Generate a Chi-Squared distributions with approporiate degrees of freedom by the method that was discussed in class (hint: you may consider using the `replicate` command)
+
+```r
+distr <-replicate(10000,sum(rnorm(1,0,1))^2)
+hist(distr,breaks=100)
+```
+
+![plot of chunk unnamed-chunk-8](./README_files/figure-html/unnamed-chunk-8.png) 
+      
+      
+      
       * Compare your Chi-Squared distributions to what you might get from the appropriate built in R functions
+
+```r
+df <- (nrow(table_5_pooled)-1)*(ncol(table_5_pooled)-1)
+plot(seq(0,20,0.05),dchisq(seq(0,20,0.05),df=df),type="l",xlab="ChiSquared Statistic",ylab="Probability with 1 degree of freedom")
+arrows(x0=chi.sq_test,x1=chi.sq_test,y0=0.4,y1=0.05,lwd=2,col="red")
+```
+
+![plot of chunk unnamed-chunk-9](./README_files/figure-html/unnamed-chunk-9.png) 
+      
+            
+      
       * Based on your distribution calculate p-values
-      * How does your p-value compare to what you saw using the built in functions? Explain your observations.
+
+```r
+pchisq(chi.sq_test,df)
+```
+
+```
+## [1] 1
+```
+
+```r
+p_5 <- 1-pchisq(chi.sq_test,df)
+```
+Calculated p-value is 1.6324 &times; 10<sup>-5</sup>.      
+      
+      
+      
+      
+      * How does your p-value compare to what you saw using the built in functions? Explain your observations.     
+
+p-values using built in function is 5.4822 &times; 10<sup>-5</sup>. My calculated p-value is 1.6324 &times; 10<sup>-5</sup>, which is smaller than built in function p-value.
+
+
+
+
+
+
 
 
 6\.  Get a bag of Skittles or M&Ms.  Are the candies evenly distributed amongst the different colors?  Justify your conclusion.
+
+```r
+MMs <- matrix(c(4,5,3,7,7,2),ncol=6,nrow=1)
+colnames(MMs)=c("red","orange","yellow","green","blue","brown")
+rownames(MMs)="counts"
+MMs
+```
+
+```
+##        red orange yellow green blue brown
+## counts   4      5      3     7    7     2
+```
+
+```r
+chisq.test(MMs)
+```
+
+```
+## Warning: Chi-squared approximation may be incorrect
+```
+
+```
+## 
+## 	Chi-squared test for given probabilities
+## 
+## data:  MMs
+## X-squared = 4.571, df = 5, p-value = 0.4704
+```
+`p-value` is much more than 0.05, which means no presumption against the null hypothesis. The null hyothesis is there no difference between color distribution.High p value indicates that candies are evenly distributed amongst the different colors.
 
