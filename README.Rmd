@@ -165,6 +165,9 @@ frac.cancer<-c(bn=frac.benign,ca=frac.carcinoma)
 frac.pos<-Fnuc.sums["pos"]/sum(Fnuc.sums)
 frac.neg<-1-frac.pos
 frac.Fnuc<-c(pos=frac.pos,neg=frac.neg)
+expected<-frac.cancer%*%t(frac.Fnuc)
+expected<-expected*sum(colon)
+chi.sq<-sum((expected-colon)^2/expected)
 df<-(nrow(colon)-1)*(ncol(colon)-1)
 ```
 
