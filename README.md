@@ -67,7 +67,7 @@ result_3_formula <- bin.coef*(p^x)*((1-p)^(n-x))
 
 result_3_function <- dbinom(x,n,p)
 ```
-Probability is 0.0439, and built in function is `dbinorm`.
+Probability is 0.0439, and built in function is `dbinorm`. When we discussing the sex ratios of mice, we used `pbinom(2,10,0.5)`, and the result is 0.0547. These two results are a little different because of different built in function, `dbinom` and `pbinom`.`pbinom` is cumulative probability function, while `dbinom` looks upthe probability of a single outcome. 
 
 4.  On pg. 59 there is a formula for the probability of observing a value, x, when there is a mean, mu, and standard deviation, sigma.  For this exercise, assume x=10.3, mu=5, and sigma=3.  Using R, calculate the probability of x using this formula and the appropriate built in function
 
@@ -237,7 +237,7 @@ arrows(x0=chi.sq,x1=chi.sq,y0=0.4,y1=0.05,lwd=2,col="red")
 6\.  Get a bag of Skittles or M&Ms.  Are the candies evenly distributed amongst the different colors?  Justify your conclusion.
 
 ```r
-n <- c(10,5,8,3,8,3)
+n <- c(4,5,3,7,7,2)
 MMs <- matrix(n,ncol=6,nrow=1)
 colnames(MMs)=c("red","orange","yellow","green","blue","brown")
 rownames(MMs)="counts"
@@ -246,7 +246,7 @@ MMs
 
 ```
 ##        red orange yellow green blue brown
-## counts  10      5      8     3    8     3
+## counts   4      5      3     7    7     2
 ```
 
 ```r
@@ -254,11 +254,15 @@ chisq.test(n)
 ```
 
 ```
+## Warning: Chi-squared approximation may be incorrect
+```
+
+```
 ## 
 ## 	Chi-squared test for given probabilities
 ## 
 ## data:  n
-## X-squared = 6.946, df = 5, p-value = 0.2247
+## X-squared = 4.571, df = 5, p-value = 0.4704
 ```
 
 
