@@ -1,7 +1,7 @@
 ---
 title: "Assignment 3"
-author: "Patrick D. Schloss"
-date: "September 26, 2014"
+author: "Amanda Elmore"
+date: "October 11, 2014"
 output:
   html_document:
     keep_md: yes
