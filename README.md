@@ -157,32 +157,48 @@ The p value for `chisq.test`,`fisher.test`, and `prop.test` are 5.4822 &times; 1
 carci.sums <- margin.table(table_5_pooled,1)
 frac.non_carci <- carci.sums["non_carci"]/sum(carci.sums)
 frac.carci <- carci.sums["carci"]/sum(carci.sums)
-frac.carcinomas <- c(frac.carci,frac.non_carci)
+frac.carcinomas <- c(frac.non_carci,frac.carci)
 
 F.sums <- margin.table(table_5_pooled,2)
-frac.w <- F.sums["w/F"]/sum(F.sums)
-frac.wo <- F.sums["w/oF"]/sum(F.sums)
-frac.F <- c(frac.w,frac.wo)
+frac.w_F <- F.sums["w/F"]/sum(F.sums)
+frac.wo_F <- F.sums["w/oF"]/sum(F.sums)
+frac.F <- c(frac.w_F,frac.wo_F)
 
 table_5_expected <- frac.carcinomas %*% t(frac.F)
-table_5_expected<-expected*sum(table_5_pooled)
-rownames(table_5_expected)=c("non_carci","carci")
+table_5_expected <- table_5_expected*sum(table_5_pooled)
 table_5_expected
 ```
 
 ```
-##            w/F w/oF
-## non_carci  551 2030
-## carci     1140 4200
+##         w/F  w/oF
+## [1,] 12.809 47.19
+## [2,]  6.191 22.81
 ```
 
 ```r
-chi.sq <- sum((table_5_expected-table_5_pooled)^2/table_5_expected)
-chi.sq
+chi.sq_test <- sum((table_5_pooled-table_5_expected)^2/table_5_expected)
+chi.sq_test
 ```
 
 ```
-## [1] 7745
+## [1] 18.58
+```
+
+```r
+#Rs default statistic
+chisq.test(table_5_pooled)
+```
+
+```
+## 
+## 	Pearson's Chi-squared test with Yates' continuity correction
+## 
+## data:  table_5_pooled
+## X-squared = 16.27, df = 1, p-value = 5.482e-05
+```
+
+```r
+#match test value and default value
 ```
     
 
@@ -201,20 +217,14 @@ hist(distr,breaks=100)
       * Compare your Chi-Squared distributions to what you might get from the appropriate built in R functions
 
 ```r
-df <- (nrow(table_5)-1)*(ncol(table_5)-1)
+df <- (nrow(table_5_pooled)-1)*(ncol(table_5_pooled)-1)
 plot(seq(0,20,0.05),dchisq(seq(0,20,0.05),df=df),type="l",xlab="ChiSquared Statistic",ylab="Probability with 1 degree of freedom")
-
-
-
-arrows(x0=chi.sq,x1=chi.sq,y0=0.4,y1=0.05,lwd=2,col="red")
+arrows(x0=chi.sq_test,x1=chi.sq_test,y0=0.4,y1=0.05,lwd=2,col="red")
 ```
 
 ![plot of chunk unnamed-chunk-9](./README_files/figure-html/unnamed-chunk-9.png) 
       
-      
-      
-      
-      
+            
       
       * Based on your distribution calculate p-values
 
