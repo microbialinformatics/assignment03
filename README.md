@@ -14,7 +14,7 @@ This assignment is due on October 10th.
 
     <img src="pch.png", style="margin:0px auto;display:block" width="500">
     
-``` r 
+```r
 symbols<-c(1:25)
 y<-rep(0.5,25)
 pch.list<-as.numeric(symbols)
@@ -87,9 +87,60 @@ e <- exp(1)
 ((1/(sqrt(2*pi*sigma)))*e^(-((x-mu)^2)/((2*sigma)^2)))
 ```
 
+or with rnorm function:
+
+```r
+rnorm(x,mu,sigma)
+```
+
+
 5.  One of my previous students, Joe Zackular, obtained stool samples from 89 people that underwent colonoscopies.  30 of these individuals had no signs of disease, 30 had non-cancerous ademonas, and 29 had cancer.  It was previously suggested that the bacterium *Fusobacterium nucleatum* was associated with cancer.  In these three pools of subjects, Joe determined that 4, 1, and 14 individuals harbored *F. nucleatum*, respectively. Create a matrix table to represent the number of individuals with and without _F. nucleatum_ as a function of disease state.  Then do the following:
 
+```r
+colon<-c(15,14,55,5)
+colon<-matrix(data=colon,nrow=2,ncol=2,dimnames=list(c("non-cancer","cancer"),c("neg","pos")))
+as.data.frame(colon)
+```
+Null hypothesis: the prevalence of *F.nulceatum* in non-cancer subjects equals the prevalenve or *F. nucleatum* in cancer subjects.
+Alternative hypothesis: the prevalence of *F.nulceatum* in non-cancer subjects DEOS NOT equal the prevalenve or *F. nucleatum* in cancer subjects.
+
     * Run the three tests of proportions you learned about in class using built in R  functions to the 2x2 study design where normals and adenomas are pooled and compared to carcinomas.
+```r
+prop.test(colon)
+```
+  2-sample test for equality of proportions with continuity
+	correction
+
+data:  colon
+X-squared = 16.2736, df = 1, p-value = 5.482e-05
+alternative hypothesis: two.sided
+95 percent confidence interval:
+ -0.7761149 -0.2689979
+sample estimates:
+   prop 1    prop 2 
+0.2142857 0.7368421 
+```r
+fisher.test(colon)
+```
+  Fisher's Exact Test for Count Data
+
+data:  colon
+p-value = 4.094e-05
+alternative hypothesis: true odds ratio is not equal to 1
+95 percent confidence interval:
+ 0.02429846 0.35312657
+sample estimates:
+odds ratio 
+ 0.1007433 
+```r
+chisq.test(colon)
+```
+Pearson's Chi-squared test with Yates' continuity correction
+
+data:  colon
+X-squared = 16.2736, df = 1, p-value = 5.482e-05
+*p-value is less than 0.05; reject the null hypothesis.*
+
     * Without using the built in chi-squared test function, replicate the 2x2 study design in the last problem for the Chi-Squared Test...
       * Calculate the expected count matrix and calculate the Chi-Squared test statistics. Figure out how to get your test statistic to match Rs default statistic.
       *	Generate a Chi-Squared distributions with approporiate degrees of freedom by the method that was discussed in class (hint: you may consider using the `replicate` command)
