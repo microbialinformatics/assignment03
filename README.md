@@ -1,6 +1,6 @@
 # Assignment 3
-Patrick D. Schloss  
-September 26, 2014  
+Amanda Elmore  
+October 11, 2014  
 
 Complete the exercises listed below and submit as a pull request to the [Assignment 3 repository](http://www.github.com/microbialinformatics/assignment03).  Format this document approapriately using R markdown and knitr. For those cases where there are multiple outputs, make it clear in how you format the text and interweave the solution, what the solution is.
 
@@ -14,6 +14,14 @@ This assignment is due on October 10th.
 
     <img src="pch.png", style="margin:0px auto;display:block" width="500">
 
+
+```r
+pdf("Elmoreplot.pdf") #save the plot to pdf
+x<-c(1:25)
+plot.pdf=plot(x, rep(1,25), axes=FALSE, main="PCH Symbols", xlab="PCH value", ylab="",  pch=c(1:25), cex=2)
+axis(1, at = seq(1,25,1), label=x, tck=1, col.ticks="grey") #add hash marks
+axis(1, at=seq(1,25,1), col.ticks="black") #add smaller black ticks
+```
 
 2.  Using the `germfree.nmds.axes` data file available in this respositry, generate a plot that looks like this. The points are connected in the order they were sampled with the circle representing the beginning ad the square the end of the time course:
 
