@@ -149,6 +149,7 @@ X-squared = 16.2736, df = 1, p-value = 5.482e-05
 *p-value is less than 0.05; reject the null hypothesis.*
 
     * Without using the built in chi-squared test function, replicate the 2x2 study design in the last problem for the Chi-Squared Test...
+
       * Calculate the expected count matrix and calculate the Chi-Squared test statistics. Figure out how to get your test statistic to match Rs default statistic.
       *	Generate a Chi-Squared distributions with approporiate degrees of freedom by the method that was discussed in class (hint: you may consider using the `replicate` command)
       * Compare your Chi-Squared distributions to what you might get from the appropriate built in R functions
@@ -156,5 +157,21 @@ X-squared = 16.2736, df = 1, p-value = 5.482e-05
       * How does your p-value compare to what you saw using the built in functions? Explain your observations.
 
 
-6\.  Get a bag of Skittles or M&Ms.  Are the candies evenly distributed amongst the different colors?  Justify your conclusion.
+6.  Get a bag of Skittles or M&Ms.  Are the candies evenly distributed amongst the different colors?  Justify your conclusion.
+
+From one 11.4 oz bag of M&Ms, the following numbers of each color candy were observed:
+```r
+mm<-c(7,15,20,20,21,29)
+MM<-matrix(data=mm,nrow=6,ncol=1,dimnames=list(c("yellow","blue","brown","orange","green","red"),c("quantity")))
+as.data.frame(MM)
+chisq.test(MM)
+```
+Chi-squared test for given probabilities
+
+data:  MM
+X-squared = 14.2143, df = 5, p-value = 0.0143
+
+The colors are not evenly distributed. This can be gathered from the data (range from 7 yellow candies to 29 red candies) over a small (6) number of different colors. A Chi-squared test gives a p value of 0.0143, which is less than 0.05, which suggests to reject the null hypothesis. In this case, the null hypothesis would be that there is no difference in the number of candies from each color category. Therefore, we must assume that there is a statistically signifigant difference in the number of candies between colors. Fortunately, I don't like the yellow M&Ms. 
+
+
 
