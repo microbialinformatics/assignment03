@@ -76,12 +76,85 @@ builtin <- dnorm(x,mu,sigma)
 
 5.  One of my previous students, Joe Zackular, obtained stool samples from 89 people that underwent colonoscopies.  30 of these individuals had no signs of disease, 30 had non-cancerous ademonas, and 29 had cancer.  It was previously suggested that the bacterium *Fusobacterium nucleatum* was associated with cancer.  In these three pools of subjects, Joe determined that 4, 1, and 14 individuals harbored *F. nucleatum*, respectively. Create a matrix table to represent the number of individuals with and without _F. nucleatum_ as a function of disease state.  Then do the following:
 
+```r
+x<- matrix(c(26,4,29,1,15,14), nrow=2,ncol=3)
+colnames(x) <- c("Healthy", "Adenoma","Carcinoma")
+rownames(x) <- c("Negative","Fuso")
+x
+```
+
+```
+##          Healthy Adenoma Carcinoma
+## Negative      26      29        15
+## Fuso           4       1        14
+```
+
+
     * Run the three tests of proportions you learned about in class using built in R  functions to the 2x2 study design where normals and adenomas are pooled and compared to carcinomas.
-    * Without using the built in chi-squared test function, replicate the 2x2 study design in the last problem for the Chi-Squared Test...
+
+```r
+#Make the same matrix with the normal and adenoma patients pooled
+x<- matrix(c(55,5,15,14), nrow=2,ncol=2)
+colnames(x) <- c("No cancer","Carcinoma")
+rownames(x) <- c("Negative","Fuso")
+#Run the three tests we learned in class: binomial test, fisher test, and chi squared test  
+
+prop.test(x)
+```
+
+```
+## 
+## 	2-sample test for equality of proportions with continuity
+## 	correction
+## 
+## data:  x
+## X-squared = 16.27, df = 1, p-value = 5.482e-05
+## alternative hypothesis: two.sided
+## 95 percent confidence interval:
+##  0.2690 0.7761
+## sample estimates:
+## prop 1 prop 2 
+## 0.7857 0.2632
+```
+
+```r
+chisq.test(x)
+```
+
+```
+## 
+## 	Pearson's Chi-squared test with Yates' continuity correction
+## 
+## data:  x
+## X-squared = 16.27, df = 1, p-value = 5.482e-05
+```
+
+```r
+fisher.test(x)
+```
+
+```
+## 
+## 	Fisher's Exact Test for Count Data
+## 
+## data:  x
+## p-value = 4.094e-05
+## alternative hypothesis: true odds ratio is not equal to 1
+## 95 percent confidence interval:
+##   2.832 41.155
+## sample estimates:
+## odds ratio 
+##      9.926
+```
+ 
+       * Without using the built in chi-squared test function, replicate the 2x2 study design in the last problem for the Chi-Squared Test...
       * Calculate the expected count matrix and calculate the Chi-Squared test statistics. Figure out how to get your test statistic to match Rs default statistic.
-      *	Generate a Chi-Squared distributions with approporiate degrees of freedom by the method that was discussed in class (hint: you may consider using the `replicate` command)
+      *  Generate a Chi-Squared distributions with approporiate degrees of freedom by the method that was discussed in class (hint: you may consider using the `replicate` command)
       * Compare your Chi-Squared distributions to what you might get from the appropriate built in R functions
       * Based on your distribution calculate p-values
+ 
+
+
       * How does your p-value compare to what you saw using the built in functions? Explain your observations.
 
 
