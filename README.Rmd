@@ -16,24 +16,21 @@ This assignment is due on October 10th.
 ------
 
 ####1.  
-**Generate a plot that contains the different pch symbols. Investigate the knitr code chunk options to see whether you can have a pdf version of the image produced so you can print it off for yoru reference. It should look like this:**
- <img src="pch.png", style="margin:0px auto;display:block" width="500">
+**Generate a plot that contains the different pch symbols. Investigate the knitr code chunk options to see whether you can have a pdf version of the image produced so you can print it off for yoru reference.**
 
-```{r}
+```{r, echo=FALSE, fig.height=4, fig.width=8}
 plot(x=1:25,y=rep(1,25), pch = 1:25, cex=1.5, yaxt='n', ann=FALSE, bty='n', xaxt='n', panel.first=c(abline(v=1:25, col="light gray",lty=1)))
 axis(1,at=c(1,3,5,7,9,11,13,15,17,19,21,23,25), lty=1)
-title(main="PCH Symbol",xlab="PCH Value")
+title(main="PCH Symbols",xlab="PCH Value")
 ```
 
    
     
-
-
 ####2.  
 **Using the `germfree.nmds.axes` data file available in this respositry, generate a plot that looks like this. The points are connected in the order they were sampled with the circle representing the beginning ad the square the end of the time course:**
 
-    <img src="beta.png", style="margin:0px auto;display:block" width="700">
-    
+   Note:   
+    Iris helped me figure out how to get mice points.
     
 ```{r, echo=FALSE, fig.width=9, fig.height=9}
 germfree<-read.table(file="germfree.nmds.axes", header=T)
@@ -67,7 +64,6 @@ lines((m389[,3]), (m389[,4]), col="brown", lwd=2, lty=1)
 
 legend(0.009816558,-0.169702, c("Mouse 337", "Mouse 343", "Mouse 361", "Mouse 387", "Mouse 389"), col=c("black", "blue", "red", "green", "brown"), lty=1, lwd=3)
 
-
 ```
 
 
@@ -75,10 +71,16 @@ legend(0.009816558,-0.169702, c("Mouse 337", "Mouse 343", "Mouse 361", "Mouse 38
 ####3.  
 **On pg. 57 there is a formula for the probability of making x observations after n trials when there is a probability p of the observation.  For this exercise, assume x=2, n=10, and p=0.5.  Using R, calculate the probability of x using this formula and the appropriate built in function. Compare it to the results we obtained in class when discussing the sex ratios of mice.**
 
+```{r}
+```
+
 
 ####4.  
 **On pg. 59 there is a formula for the probability of observing a value, x, when there is a mean, mu, and standard deviation, sigma.  For this exercise, assume x=10.3, mu=5, and sigma=3.  Using R, calculate the probability of x using this formula and the appropriate built in function**
-
+```{r}
+dnorm.prob<-dnorm(10.3,5,3)
+```
+The probability of observing 10.3 in a normal distribution is `r dnorm.prob`.
 
 ####5.  
 **One of my previous students, Joe Zackular, obtained stool samples from 89 people that underwent colonoscopies.  30 of these individuals had no signs of disease, 30 had non-cancerous ademonas, and 29 had cancer.  It was previously suggested that the bacterium *Fusobacterium nucleatum* was associated with cancer.  In these three pools of subjects, Joe determined that 4, 1, and 14 individuals harbored *F. nucleatum*, respectively. Create a matrix table to represent the number of individuals with and without _F. nucleatum_ as a function of disease state.**  
