@@ -27,6 +27,25 @@ axis(1, at=seq(1,25,1), col.ticks="black") #add smaller black ticks
 
     <img src="beta.png", style="margin:0px auto;display:block" width="700">
 
+```r
+x<-read.table(file="germfree.nmds.axes", header=T)
+x$mouse<-as.factor(x$mouse)
+mouselevels<-levels(x$mouse)
+plot(x$axis1, x$axis2, type="n", xlab="NMDS Axis 1", ylab="NMDS Axis 2")
+colors<-c("black","blue","red","green","dark red")
+for (i in c(1:5)){ #print lines onto the plot for each of the mice individually with a different color
+y <- subset(x,mouse==mouselevels[i])
+y <- y[order(y$day),] #just in case the days are out of order
+lines(y$axis1, y$axis2, col=colors[i], lwd=1.5)
+day1<- subset(y, y$day==min(y$day))
+day21<- subset(y, y$day==max(y$day))
+points(day1$axis1, day1$axis2, pch=16, cex=2, col=colors[i])
+points(day21$axis1, day21$axis2, pch=15, cex=2, col=colors[i])
+}
+legend(0,-.1, legend=c("Mouse 337", "Mouse 343","Mouse 361","Mouse 387","Mouse 389"), lwd=4,col=colors)
+```
+
+![plot of chunk unnamed-chunk-2](./README_files/figure-html/unnamed-chunk-2.png) 
 
 3.  On pg. 57 there is a formula for the probability of making x observations after n trials when there is a probability p of the observation.  For this exercise, assume x=2, n=10, and p=0.5.  Using R, calculate the probability of x using this formula and the appropriate built in function. Compare it to the results we obtained in class when discussing the sex ratios of mice.
 
