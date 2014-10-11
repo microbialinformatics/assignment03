@@ -189,18 +189,13 @@ arrows(x0=chi.sq_test,x1=chi.sq_test,y0=0.4,y1=0.05,lwd=2,col="red")
 
 6\.  Get a bag of Skittles or M&Ms.  Are the candies evenly distributed amongst the different colors?  Justify your conclusion.
 ```{r}
-n <- c(4,5,3,7,7,2)
-MMs <- matrix(n,ncol=6,nrow=1)
+MMs <- matrix(c(4,5,3,7,7,2),ncol=6,nrow=1)
 colnames(MMs)=c("red","orange","yellow","green","blue","brown")
 rownames(MMs)="counts"
 MMs
-chisq.test(n)
-
-
-
-
+chisq.test(MMs)
 
 
 ```
-
+`p-value` is much more than 0.05, which means no presumption against the null hypothesis. The null hyothesis is there no difference between color distribution.High p value indicates that candies are evenly distributed amongst the different colors.
 
