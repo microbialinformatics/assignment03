@@ -42,9 +42,6 @@ The probability of making 2 observations after 10 trials is 0.0222.
 ####4.  
 **On pg. 59 there is a formula for the probability of observing a value, x, when there is a mean, mu, and standard deviation, sigma.  For this exercise, assume x=10.3, mu=5, and sigma=3.  Using R, calculate the probability of x using this formula and the appropriate built in function**
 
-```r
-dnorm.prob<-dnorm(10.3,5,3)
-```
 The probability of observing 10.3 in a normal distribution is 0.0279.
 
 
@@ -79,11 +76,50 @@ The probability of observing 10.3 in a normal distribution is 0.0279.
  The probability value for the prop.test is 0.0022.
  The probability value for the fisher test is 0.0015.
  The probability value for the chi-squared test is 0.0022.
- 
-    
+     
     
     
 **Without using the built in chi-squared test function, replicate the 2x2 study design in the last problem for the Chi-Squared Test...**
+    
+
+```
+##        no.fn f.nucleatum
+## normal    60           5
+## cancer    29          14
+```
+
+```
+## [1] 108
+```
+
+```
+## normal cancer 
+##     65     43
+```
+
+```
+##       no.fn f.nucleatum 
+##          89          19
+```
+
+```
+##         no.fn f.nucleatum
+## normal 0.5556      0.0463
+## cancer 0.2685      0.1296
+```
+
+```
+##          no.fn f.nucleatum
+## normal 0.92308     0.07692
+## cancer 0.67442     0.32558
+```
+
+```
+##         no.fn f.nucleatum
+## normal 0.6742      0.2632
+## cancer 0.3258      0.7368
+```
+
     
     
 **Calculate the expected count matrix and calculate the Chi-Squared test statistics. Figure out how to get your test statistic to match Rs default statistic.**
@@ -99,6 +135,8 @@ The probability of observing 10.3 in a normal distribution is 0.0279.
       
       
 **How does your p-value compare to what you saw using the built in functions? Explain your observations.**
+
+
 
 
 
