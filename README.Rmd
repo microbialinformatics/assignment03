@@ -180,7 +180,6 @@ arrows(x0 = chi.sq, x1 = chi.sq, y0 = 0.4, y1 = 0.05, lwd = 2, col = "red")
 
 ```{r, echo=FALSE}
 chi.pvalue<-dchisq(chi.sq, df)
-
 ```
 
 Based on my distribution, I got a p-value of `r chi.pvalue`.
@@ -188,9 +187,23 @@ Based on my distribution, I got a p-value of `r chi.pvalue`.
       
 **How does your p-value compare to what you saw using the built in functions? Explain your observations.**
 
-
+With the built in chi-squared function I got a p-value of `r chi.mat$p.value`. The calculated p-value is much much smaller than this. 
 
 
 ####6.
 **Get a bag of Skittles or M&Ms.  Are the candies evenly distributed amongst the different colors?  Justify your conclusion.**
+
+I did this with a 5 oz bag of Sour Patch Kids.
+
+```{r, echo=False}
+
+sour<-matrix(c(19, 13, 6, 11, 10), nrow=5, ncol=1, byrow=TRUE)
+rownames(sour)=c("red", "orange", "yellow", "green", "blue")
+colnames(sour)=c("")
+sour
+
+
+
+```
+
 
