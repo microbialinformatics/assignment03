@@ -195,15 +195,23 @@ With the built in chi-squared function I got a p-value of `r chi.mat$p.value`. T
 
 I did this with a 5 oz bag of Sour Patch Kids.
 
-```{r, echo=False}
+```{r, echo=FALSE}
 
-sour<-matrix(c(19, 13, 6, 11, 10), nrow=5, ncol=1, byrow=TRUE)
+sour<-matrix(c(19, 13, 7, 11, 10), nrow=5, ncol=1, byrow=TRUE)
 rownames(sour)=c("red", "orange", "yellow", "green", "blue")
 colnames(sour)=c("")
 sour
 
+plot(sour, xlab="Candy Color", ylab="N", xaxt='n', ylim=c(1,20), col=c("red", "orange", "yellow", "green","blue"), pch=16, cex=1.5)
+axis(1, at=1:5, labels=c("red", "orange", "yellow", "green", "blue"))
+abline(h=12)
+
+
 
 
 ```
+
+In the first graph, it is clear that the candies are not evenly distributed among the colors. If they were, there would be approximately 12 candies per color, and the graph would show a horizontal line at 12.
+
 
 
