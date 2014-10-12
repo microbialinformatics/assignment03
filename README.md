@@ -120,7 +120,15 @@ The probability of observing 10.3 in a normal distribution is 0.0279.
 ## cancer 0.3258      0.7368
 ```
 
-    
+```
+##      f.f.nucleatum nf.f.nucleatum
+## [1,]         7.565          35.44
+## [2,]        11.435          53.56
+```
+
+![plot of chunk unnamed-chunk-7](./README_files/figure-html/unnamed-chunk-7.png) 
+
+    The hand calculated chi-squared value is 445.797. Which is completely off, so I am not sure where i went wrong..ack! Earlier I got a chi-squared value of  (9.38, not sure how to pull this out).
     
 **Calculate the expected count matrix and calculate the Chi-Squared test statistics. Figure out how to get your test statistic to match Rs default statistic.**
       
@@ -132,14 +140,46 @@ The probability of observing 10.3 in a normal distribution is 0.0279.
       
       
 **Based on your distribution calculate p-values**
+
+
+
+Based on my distribution, I got a p-value of 2.97 &times; 10<sup>-99</sup>.
       
       
 **How does your p-value compare to what you saw using the built in functions? Explain your observations.**
 
-
-
+With the built in chi-squared function I got a p-value of 0.0022. The calculated p-value is much much smaller than this. 
 
 
 ####6.
 **Get a bag of Skittles or M&Ms.  Are the candies evenly distributed amongst the different colors?  Justify your conclusion.**
+
+I did this with a 5 oz bag of Sour Patch Kids.
+
+
+```
+##          
+## red    19
+## orange 13
+## yellow  7
+## green  11
+## blue   10
+```
+
+![plot of chunk unnamed-chunk-9](./README_files/figure-html/unnamed-chunk-9.png) 
+
+```
+##         
+## red    1
+## orange 1
+## yellow 1
+## green  1
+## blue   1
+```
+
+In the first graph, it is clear that the candies are not evenly distributed among the colors. If they were, there would be 12 candies per color, and the candies would form a horizonal line at 12.
+
+
+
+
 

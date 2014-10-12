@@ -206,12 +206,13 @@ plot(sour, xlab="Candy Color", ylab="N", xaxt='n', ylim=c(1,20), col=c("red", "o
 axis(1, at=1:5, labels=c("red", "orange", "yellow", "green", "blue"))
 abline(h=12)
 
-
-
+punif(sour, min=1, max=5)
 
 ```
 
-In the first graph, it is clear that the candies are not evenly distributed among the colors. If they were, there would be approximately 12 candies per color, and the graph would show a horizontal line at 12.
+In the first graph, it is clear that the candies are not evenly distributed among the colors. If they were, there would be 12 candies per color, and the candies would form a horizonal line at 12.
+
+
 
 
 
