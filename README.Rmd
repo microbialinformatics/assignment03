@@ -125,19 +125,65 @@ nuc$Group = NULL
 data.matrix(nuc, rownames.force = T)
 ```
 
+      * Run the three tests of proportions you learned about in class using built in R functions to the 2x2 study design where normals and adenomas are pooled and compared to carcinomas.
+```{r}
+#Generate new matrix
+Group <-  c("Healthy", "Cancer")
+without_nuc <- c(55, 15)
+with_nuc <- c(5, 14)
+non_cancer <- data.frame(Group, without_nuc, with_nuc)
+rownames(non_cancer) <- non_cancer$Group
+non_cancer$Group = NULL
+#data.matrix(non_cancer, rownames.force = T)
+
+#Null Hypothesis:  People with cancer have the same amount of F. nucleatum.
+#Alternative Hypothesis:  People with cancer have a different amount of F. nucleatum.
+
+prop.test(c(15,14),c(70,19))
+x <- c(15,14)
+y <- c(70,19)
+prop.test(x, y)
 
 
-      * Run the three tests of proportions you learned about in class using built in R  functions to the 2x2 study design where normals and adenomas are pooled and compared to carcinomas.
-    
+healthy <- c(5,14)
+cancer <- c(60,29)
+prop.test(healthy, cancer)
+
+
+
+data.frame(non_cancer)
+prop.test(non_cancer)
+#t.test
+#t.test(non_cancer)
+#Fisher
+#fisher.test(non_cancer)
+#Test of Proportions
+#prop.test(non_cancer)
+```
     
       * Without using the built in chi-squared test function, replicate the 2x2 study design in the last problem for the Chi-Squared Test...
-    
+```{r}
+```    
     
       * Calculate the expected count matrix and calculate the Chi-Squared test statistics. Figure out how to get your test statistic to match Rs default statistic.
+```{r}
+```   
+
       *	Generate a Chi-Squared distributions with approporiate degrees of freedom by the method that was discussed in class (hint: you may consider using the `replicate` command)
+```{r}
+```      
+
       * Compare your Chi-Squared distributions to what you might get from the appropriate built in R functions
+```{r}
+```      
+
       * Based on your distribution calculate p-values
+```{r}
+```      
+
       * How does your p-value compare to what you saw using the built in functions? Explain your observations.
+```{r}
+```      
 
 
 6\.  Get a bag of Skittles or M&Ms.  Are the candies evenly distributed amongst the different colors?  Justify your conclusion.

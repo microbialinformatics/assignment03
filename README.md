@@ -78,14 +78,77 @@ mean <- 3
 
 5.  One of my previous students, Joe Zackular, obtained stool samples from 89 people that underwent colonoscopies.  30 of these individuals had no signs of disease, 30 had non-cancerous ademonas, and 29 had cancer.  It was previously suggested that the bacterium *Fusobacterium nucleatum* was associated with cancer.  In these three pools of subjects, Joe determined that 4, 1, and 14 individuals harbored *F. nucleatum*, respectively. Create a matrix table to represent the number of individuals with and without _F. nucleatum_ as a function of disease state.  Then do the following:
 
-    * Run the three tests of proportions you learned about in class using built in R  functions to the 2x2 study design where normals and adenomas are pooled and compared to carcinomas.
-    * Without using the built in chi-squared test function, replicate the 2x2 study design in the last problem for the Chi-Squared Test...
+
+```r
+#Make a Matrix with data
+Group <-  c("NoDisease", "Ademonas", "Cancer")
+Num_People <- c(30, 30, 29)
+Nucleatum_Abund <- c(4, 1, 14)
+nuc <- data.frame(Group, Num_People, Nucleatum_Abund)
+rownames(nuc) <- nuc$Group
+nuc$Group = NULL
+data.matrix(nuc, rownames.force = T)
+```
+
+```
+##           Num_People Nucleatum_Abund
+## NoDisease         30               4
+## Ademonas          30               1
+## Cancer            29              14
+```
+
+      * Run the three tests of proportions you learned about in class using built in R functions to the 2x2 study design where normals and adenomas are pooled and compared to carcinomas.
+
+```r
+#Generate new matrix
+Group <-  c("Healthy", "Cancer")
+without_nuc <- c(55, 15)
+with_nuc <- c(5, 14)
+non_cancer <- data.frame(Group, without_nuc, with_nuc)
+rownames(non_cancer) <- non_cancer$Group
+non_cancer$Group = NULL
+#data.matrix(non_cancer, rownames.force = T)
+
+#Null Hypothesis:  People with cancer have the same amount of F. nucleatum.
+#Alternative Hypothesis:  People with cancer have a different amount of F. nucleatum
+
+#t.test
+#t.test(non_cancer)
+#Fisher
+#fisher.test(non_cancer)
+#Test of Proportions
+#prop.test(non_cancer)
+```
+    
+      * Without using the built in chi-squared test function, replicate the 2x2 study design in the last problem for the Chi-Squared Test...
+
+    
       * Calculate the expected count matrix and calculate the Chi-Squared test statistics. Figure out how to get your test statistic to match Rs default statistic.
+
+
       *	Generate a Chi-Squared distributions with approporiate degrees of freedom by the method that was discussed in class (hint: you may consider using the `replicate` command)
+
+
       * Compare your Chi-Squared distributions to what you might get from the appropriate built in R functions
+
+
       * Based on your distribution calculate p-values
+
+
       * How does your p-value compare to what you saw using the built in functions? Explain your observations.
 
 
+
 6\.  Get a bag of Skittles or M&Ms.  Are the candies evenly distributed amongst the different colors?  Justify your conclusion.
+
+
+```r
+mms <- c(9, 13, 6, 11, 8, 10)
+names(mms) <- c("Green", "Orange", "Red", "Blue", "Yellow", "Brown")
+
+hist(mms)
+```
+
+![plot of chunk unnamed-chunk-13](./README_files/figure-html/unnamed-chunk-13.png) 
+
 
