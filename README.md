@@ -10,7 +10,7 @@ This assignment is due on October 10th.
 
 ------
 
-1.  Generate a plot that contains the different pch symbols. Investigate the knitr code chunk options to see whether you can have a pdf version of the image produced so you can print it off for yoru reference. It should look like this:
+####1.  Generate a plot that contains the different pch symbols. Investigate the knitr code chunk options to see whether you can have a pdf version of the image produced so you can print it off for yoru reference. It should look like this:
 
     <img src="pch.png", style="margin:0px auto;display:block" width="500">
 
@@ -34,7 +34,7 @@ Axes: http://www.statmethods.net/advgraphs/axes.html
 
 
 
-2.  Using the `germfree.nmds.axes` data file available in this respositry, generate a plot that looks like this. The points are connected in the order they were sampled with the circle representing the beginning ad the square the end of the time course:
+####2.  Using the `germfree.nmds.axes` data file available in this respositry, generate a plot that looks like this. The points are connected in the order they were sampled with the circle representing the beginning ad the square the end of the time course:
 
     <img src="beta.png", style="margin:0px auto;display:block" width="700">
 
@@ -43,7 +43,7 @@ Axes: http://www.statmethods.net/advgraphs/axes.html
 
 
 
-3.  On pg. 57 there is a formula for the probability of making x observations after n trials when there is a probability p of the observation.  For this exercise, assume x=2, n=10, and p=0.5.  Using R, calculate the probability of x using this formula and the appropriate built in function. Compare it to the results we obtained in class when discussing the sex ratios of mice.
+####3.  On pg. 57 there is a formula for the probability of making x observations after n trials when there is a probability p of the observation.  For this exercise, assume x=2, n=10, and p=0.5.  Using R, calculate the probability of x using this formula and the appropriate built in function. Compare it to the results we obtained in class when discussing the sex ratios of mice.
 
 
 
@@ -62,10 +62,10 @@ hist(woot, breaks = seq(-0.5, 10.5, 1))
 percent <- woot*100
 ```
 
-***Here, we performed 10 breedings of mice but only observed 2 of the breedings.  The probability of getting a male mouse versus a female mouse was 50/50.  This calculation was the same as what we did in class, with a point probability of 0.0439.  This means that 4.3945% of the time we will get either 2 females or 2 males from our 2 observations.***
+*Here, we performed 10 breedings of mice but only observed 2 of the breedings.  The probability of getting a male mouse versus a female mouse was 50/50.  This calculation was the same as what we did in class, with a point probability of 0.0439.  This means that 4.3945% of the time we will get either 2 females or 2 males from our 2 observations.*
 
 
-4.  On pg. 59 there is a formula for the probability of observing a value, x, when there is a mean, mu, and standard deviation, sigma.  For this exercise, assume x=10.3, mu=5, and sigma=3.  Using R, calculate the probability of x using this formula and the appropriate built in function
+####4.  On pg. 59 there is a formula for the probability of observing a value, x, when there is a mean, mu, and standard deviation, sigma.  For this exercise, assume x=10.3, mu=5, and sigma=3.  Using R, calculate the probability of x using this formula and the appropriate built in function
 
 
 
@@ -76,7 +76,7 @@ mean <- 3
 ```
 
 
-5.  One of my previous students, Joe Zackular, obtained stool samples from 89 people that underwent colonoscopies.  30 of these individuals had no signs of disease, 30 had non-cancerous ademonas, and 29 had cancer.  It was previously suggested that the bacterium *Fusobacterium nucleatum* was associated with cancer.  In these three pools of subjects, Joe determined that 4, 1, and 14 individuals harbored *F. nucleatum*, respectively. Create a matrix table to represent the number of individuals with and without _F. nucleatum_ as a function of disease state.  Then do the following:
+####5.  One of my previous students, Joe Zackular, obtained stool samples from 89 people that underwent colonoscopies.  30 of these individuals had no signs of disease, 30 had non-cancerous ademonas, and 29 had cancer.  It was previously suggested that the bacterium *Fusobacterium nucleatum* was associated with cancer.  In these three pools of subjects, Joe determined that 4, 1, and 14 individuals harbored *F. nucleatum*, respectively. Create a matrix table to represent the number of individuals with and without _F. nucleatum_ as a function of disease state.  Then do the following:
 
 
 ```r
@@ -97,49 +97,81 @@ data.matrix(nuc, rownames.force = T)
 ## Cancer            29              14
 ```
 
-      * Run the three tests of proportions you learned about in class using built in R functions to the 2x2 study design where normals and adenomas are pooled and compared to carcinomas.
+####      * Run the three tests of proportions you learned about in class using built in R functions to the 2x2 study design where normals and adenomas are pooled and compared to carcinomas.
+
+**1.  Test of proportions**:  Give two vectors where the first contains the number of positive outcomes and the second the total number for each group  
+  +  **Null Hypothesis:** The proportion of healthy individuals with _F. nucleatum_ is the same as the proportion of cancerous individuals with *F. nucleatum.* 
+  +  **Alternative Hypothesis:**  The proportion of healthy individuals with _F. nucleatum_ is **not the same** as the proportion of cancerous individuals with *F. nucleatum.* 
 
 ```r
-#Generate new matrix
-Group <-  c("Healthy", "Cancer")
-without_nuc <- c(55, 15)
-with_nuc <- c(5, 14)
-non_cancer <- data.frame(Group, without_nuc, with_nuc)
-rownames(non_cancer) <- non_cancer$Group
-non_cancer$Group = NULL
-#data.matrix(non_cancer, rownames.force = T)
-
-#Null Hypothesis:  People with cancer have the same amount of F. nucleatum.
-#Alternative Hypothesis:  People with cancer have a different amount of F. nucleatum
-
-#t.test
-#t.test(non_cancer)
-#Fisher
-#fisher.test(non_cancer)
-#Test of Proportions
-#prop.test(non_cancer)
+with_nuc <- c(5,14) #Successes
+total <- c(60,29) #Totals
+nuc_proptest <- prop.test(with_nuc, total)
 ```
-    
-      * Without using the built in chi-squared test function, replicate the 2x2 study design in the last problem for the Chi-Squared Test...
+**With a test of proportions, we get a p-value of 5.4822 &times; 10<sup>-5</sup>, which tells us that our null hypothesis is rejected.  Thus, there is a significant difference between the proportion of healthy individuals with _F. nucleatum_ and the proportion of cancerous individuals with _F. nucleatum_.**
 
-    
-      * Calculate the expected count matrix and calculate the Chi-Squared test statistics. Figure out how to get your test statistic to match Rs default statistic.
+***  
+
+**2.  Fisher's Exact Test**:  Requires data to be in matrix form (2X2) where the first column is the number of successes and the second column is the number of failures. (Success = With _F. nucleatum_, Failure = Without _F. nucleatum_)  
+  +  **Null Hypothesis:** Cancer **does not** affect the presence of _F. nucleatum_ in people.  
+  +  **Alternative Hypothesis:**  Cancer **does** affect the presence of _F. nucleatum_ in people.
+
+```r
+#Fisher's Exact Test
+nuc <- matrix(c(5, 14, 55,15), 2)
+nuc_fishertest <- fisher.test(nuc)
+```
+**With Fisher's exact test, we get a p-value of 4.0941 &times; 10<sup>-5</sup>, which tells us that our null hypothesis is rejected.  So, cancer does affect the presence of _F. nucleatum_ in people.**  
+
+***
+
+**3.  Binomial Test**:  Requires data to be in matrix form (2X2) where the first column is the number of successes and the second column is the number of failures. (Success = With _F. nucleatum_, Failure = Without _F. nucleatum_)  
+  +  **Null Hypothesis:** The probability of  _F. nucleatum_ presence in healthy people/people with cancer is **less than 0.5.**    
+  +  **Alternative Hypothesis:**  The probability of _F. nucleatum_ presence in healthy people/people with cancer is **more than 0.5.**    
+
+```r
+cancer_binom <- binom.test(14, 15, 0.5, alternative ="greater")
+healthy_binom <- binom.test(5, 55, 0.5, alternative = "greater")
+```
+**With a binomial test, we get a p-value of 4.8828 &times; 10<sup>-4</sup>, for individuals with cancer which tells us that our null hypothesis is rejected.  So, The probability of _F. nucleatum_ presence in people with cancer is more than 0.5.  For healthy individuals, we get a p-value of 1, which accepts our null hypothesis.  So, the probability of _F. nucleatum_ presence in people with cancer is less than 0.5**  
 
 
-      *	Generate a Chi-Squared distributions with approporiate degrees of freedom by the method that was discussed in class (hint: you may consider using the `replicate` command)
+####      * Without using the built in chi-squared test function, replicate the 2x2 study design in the last problem for the Chi-Squared Test...
+
+```r
+#ChiSquared Test
+chisq.test(non_cancer)
+```
+
+```
+## 
+## 	Pearson's Chi-squared test with Yates' continuity correction
+## 
+## data:  non_cancer
+## X-squared = 9.389, df = 1, p-value = 0.002183
+```
+**Chi-squared test: Test for association between two factors. 
+  **Null Hypothesis:** There is no association between cancer and F. nucleatum presence.
+  **Alternative Hypothesis:**  There is an association between the two factors
 
 
-      * Compare your Chi-Squared distributions to what you might get from the appropriate built in R functions
+####      * Calculate the expected count matrix and calculate the Chi-Squared test statistics. Figure out how to get your test statistic to match Rs default statistic.
 
 
-      * Based on your distribution calculate p-values
+####      *	Generate a Chi-Squared distributions with approporiate degrees of freedom by the method that was discussed in class (hint: you may consider using the `replicate` command)
 
 
-      * How does your p-value compare to what you saw using the built in functions? Explain your observations.
+####      * Compare your Chi-Squared distributions to what you might get from the appropriate built in R functions
+
+
+####      * Based on your distribution calculate p-values
+
+
+####      * How does your p-value compare to what you saw using the built in functions? Explain your observations.
 
 
 
-6\.  Get a bag of Skittles or M&Ms.  Are the candies evenly distributed amongst the different colors?  Justify your conclusion.
+####6.  Get a bag of Skittles or M&Ms.  Are the candies evenly distributed amongst the different colors?  Justify your conclusion.
 
 
 ```r
@@ -149,6 +181,6 @@ names(mms) <- c("Green", "Orange", "Red", "Blue", "Yellow", "Brown")
 hist(mms)
 ```
 
-![plot of chunk unnamed-chunk-13](./README_files/figure-html/unnamed-chunk-13.png) 
+![plot of chunk unnamed-chunk-16](./README_files/figure-html/unnamed-chunk-16.png) 
 
 
