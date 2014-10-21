@@ -139,27 +139,37 @@ healthy_binom <- binom.test(5, 55, 0.5, alternative = "greater")
 
 
 ####      * Without using the built in chi-squared test function, replicate the 2x2 study design in the last problem for the Chi-Squared Test...
+**Chi-squared test: Test if distributions of categorical variables differ from one another.  Needs count data, not proportions.
+  **Null Hypothesis:** There **is no** association between cancer and _F. nucleatum_ presence.
+  **Alternative Hypothesis:**  There **is** an association between cancer and _F. nucleatum_ presence.
 
 ```r
-#ChiSquared Test
-chisq.test(non_cancer)
+#Manual Chi-squared Test
+manual_chisq <- matrix(c(5, 14, 19, 55,15, 70, 60, 29, 89), 3)
+a<-5; b<-55; c<-14; d<-15; 
+sq <- ((a*d-b*c)^2)
+Xsq <- (((sq)*(a+b+c+d))/((a+b)*(c+d)*(a+c)*(b+d)))
+#Calculate the degrees of freedom: df = (ncol-1)*(nrow-1) -> no total columns/rows included
+df <- (2-1)*(2-1)
 ```
-
-```
-## 
-## 	Pearson's Chi-squared test with Yates' continuity correction
-## 
-## data:  non_cancer
-## X-squared = 9.389, df = 1, p-value = 0.002183
-```
-**Chi-squared test: Test for association between two factors. 
-  **Null Hypothesis:** There is no association between cancer and F. nucleatum presence.
-  **Alternative Hypothesis:**  There is an association between the two factors
+**Above I have manually calculated a X-square value of 18.5763 with 1 degree of freedom.**  
+  
+  _Help from [link](http://math.hws.edu/javamath/ryan/ChiSquare.html)._
 
 
 ####      * Calculate the expected count matrix and calculate the Chi-Squared test statistics. Figure out how to get your test statistic to match Rs default statistic.
 
+```r
+#Chi-squared Test
+nuc <- matrix(c(5, 14, 55,15), 2)
+nuc_chisqtest <- chisq.test(nuc)
+```
+**Chi-squared test: Test for association between two factors.  Works with data in matrix form like fisher.test() does.
+  **Null Hypothesis:** There is no association between cancer and F. nucleatum presence.
+  **Alternative Hypothesis:**  There is an association between the two factors
+  
 
+  
 ####      *	Generate a Chi-Squared distributions with approporiate degrees of freedom by the method that was discussed in class (hint: you may consider using the `replicate` command)
 
 
