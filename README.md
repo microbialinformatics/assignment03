@@ -104,6 +104,7 @@ data.matrix(nuc, rownames.force = T)
   +  **Alternative Hypothesis:**  The proportion of healthy individuals with _F. nucleatum_ is **not the same** as the proportion of cancerous individuals with *F. nucleatum.* 
 
 ```r
+#Test of proportions
 with_nuc <- c(5,14) #Successes
 total <- c(60,29) #Totals
 nuc_proptest <- prop.test(with_nuc, total)
@@ -130,6 +131,7 @@ nuc_fishertest <- fisher.test(nuc)
   +  **Alternative Hypothesis:**  The probability of _F. nucleatum_ presence in healthy people/people with cancer is **more than 0.5.**    
 
 ```r
+#Binomial test
 cancer_binom <- binom.test(14, 15, 0.5, alternative ="greater")
 healthy_binom <- binom.test(5, 55, 0.5, alternative = "greater")
 ```
